@@ -7,13 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		39E5F1617E5E31B7CE8E4C2F /* Pods_CartonBoxTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90A2BA3D382C736855257840 /* Pods_CartonBoxTests.framework */; };
 		BA8B83BE1F7D4C0900FC64C6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8B83BD1F7D4C0900FC64C6 /* AppDelegate.swift */; };
-		BA8B83C01F7D4C0900FC64C6 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8B83BF1F7D4C0900FC64C6 /* FirstViewController.swift */; };
-		BA8B83C21F7D4C0900FC64C6 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8B83C11F7D4C0900FC64C6 /* SecondViewController.swift */; };
 		BA8B83C51F7D4C0900FC64C6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA8B83C31F7D4C0900FC64C6 /* Main.storyboard */; };
 		BA8B83C71F7D4C0900FC64C6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA8B83C61F7D4C0900FC64C6 /* Assets.xcassets */; };
 		BA8B83CA1F7D4C0900FC64C6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA8B83C81F7D4C0900FC64C6 /* LaunchScreen.storyboard */; };
 		BA8B83D51F7D4C0900FC64C6 /* CartonBoxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8B83D41F7D4C0900FC64C6 /* CartonBoxTests.swift */; };
+		BAA8D7D91F8145B6008B6FCC /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA8D7D81F8145B6008B6FCC /* ProfileViewController.swift */; };
+		BAA8D7DB1F827E7C008B6FCC /* FacebookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA8D7DA1F827E7C008B6FCC /* FacebookViewController.swift */; };
+		BAA8D7DD1F8284DF008B6FCC /* FacebookUserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA8D7DC1F8284DF008B6FCC /* FacebookUserViewModel.swift */; };
+		BAA8D7E11F834611008B6FCC /* SnackKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAA8D7E01F834611008B6FCC /* SnackKit.framework */; };
+		BAA8D7E31F83484D008B6FCC /* SnackKit.framework in Resources */ = {isa = PBXBuildFile; fileRef = BAA8D7E01F834611008B6FCC /* SnackKit.framework */; };
+		BAA8D7E51F8348A9008B6FCC /* SnackKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BAA8D7E01F834611008B6FCC /* SnackKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BAA8D7E71F83F45F008B6FCC /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA8D7E61F83F45F008B6FCC /* BaseViewController.swift */; };
+		BAA8D7E91F8534E4008B6FCC /* AWSDynamoDBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA8D7E81F8534E4008B6FCC /* AWSDynamoDBHelper.swift */; };
+		BAA8D7ED1F8679E2008B6FCC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA8D7EC1F8679E2008B6FCC /* Constants.swift */; };
+		BAA8D80C1F869129008B6FCC /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = BAA8D80B1F869129008B6FCC /* awsconfiguration.json */; };
+		BAA8D80E1F86FFB3008B6FCC /* CustomIdentityProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA8D80D1F86FFB3008B6FCC /* CustomIdentityProvider.swift */; };
+		BAA8D8101F870601008B6FCC /* AWSCognitoSignInHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA8D80F1F870601008B6FCC /* AWSCognitoSignInHelper.swift */; };
+		F4743ABC6AA2748C958B61FC /* Pods_CartonBox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D854C8DB84BC8B6DDEEB9C5 /* Pods_CartonBox.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,11 +38,27 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		BAA8D7E41F834899008B6FCC /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				BAA8D7E51F8348A9008B6FCC /* SnackKit.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		2D854C8DB84BC8B6DDEEB9C5 /* Pods_CartonBox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CartonBox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3B8377867803C4C94A497B5A /* Pods-CartonBox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CartonBox.release.xcconfig"; path = "Pods/Target Support Files/Pods-CartonBox/Pods-CartonBox.release.xcconfig"; sourceTree = "<group>"; };
+		5C72E9BC7BA9370A23CAC385 /* Pods-CartonBox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CartonBox.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CartonBox/Pods-CartonBox.debug.xcconfig"; sourceTree = "<group>"; };
+		7B6CC8D387D8F08293C6F59C /* Pods-CartonBoxTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CartonBoxTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CartonBoxTests/Pods-CartonBoxTests.release.xcconfig"; sourceTree = "<group>"; };
+		90A2BA3D382C736855257840 /* Pods_CartonBoxTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CartonBoxTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA8B83BA1F7D4C0900FC64C6 /* CartonBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CartonBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA8B83BD1F7D4C0900FC64C6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		BA8B83BF1F7D4C0900FC64C6 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		BA8B83C11F7D4C0900FC64C6 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		BA8B83C41F7D4C0900FC64C6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BA8B83C61F7D4C0900FC64C6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BA8B83C91F7D4C0900FC64C6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -38,6 +66,17 @@
 		BA8B83D01F7D4C0900FC64C6 /* CartonBoxTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CartonBoxTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA8B83D41F7D4C0900FC64C6 /* CartonBoxTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartonBoxTests.swift; sourceTree = "<group>"; };
 		BA8B83D61F7D4C0900FC64C6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BAA8D7D81F8145B6008B6FCC /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		BAA8D7DA1F827E7C008B6FCC /* FacebookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookViewController.swift; sourceTree = "<group>"; };
+		BAA8D7DC1F8284DF008B6FCC /* FacebookUserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookUserViewModel.swift; sourceTree = "<group>"; };
+		BAA8D7E01F834611008B6FCC /* SnackKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnackKit.framework; path = ../../Framework/SnackKit.framework; sourceTree = "<group>"; };
+		BAA8D7E61F83F45F008B6FCC /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		BAA8D7E81F8534E4008B6FCC /* AWSDynamoDBHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AWSDynamoDBHelper.swift; sourceTree = "<group>"; };
+		BAA8D7EC1F8679E2008B6FCC /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		BAA8D80B1F869129008B6FCC /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
+		BAA8D80D1F86FFB3008B6FCC /* CustomIdentityProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomIdentityProvider.swift; sourceTree = "<group>"; };
+		BAA8D80F1F870601008B6FCC /* AWSCognitoSignInHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AWSCognitoSignInHelper.swift; sourceTree = "<group>"; };
+		CD0971BFFFB745BC85D34965 /* Pods-CartonBoxTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CartonBoxTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CartonBoxTests/Pods-CartonBoxTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +84,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BAA8D7E11F834611008B6FCC /* SnackKit.framework in Frameworks */,
+				F4743ABC6AA2748C958B61FC /* Pods_CartonBox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -52,18 +93,32 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				39E5F1617E5E31B7CE8E4C2F /* Pods_CartonBoxTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		638EBA29744C1C3E6360786F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5C72E9BC7BA9370A23CAC385 /* Pods-CartonBox.debug.xcconfig */,
+				3B8377867803C4C94A497B5A /* Pods-CartonBox.release.xcconfig */,
+				CD0971BFFFB745BC85D34965 /* Pods-CartonBoxTests.debug.xcconfig */,
+				7B6CC8D387D8F08293C6F59C /* Pods-CartonBoxTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		BA8B83B11F7D4C0900FC64C6 = {
 			isa = PBXGroup;
 			children = (
 				BA8B83BC1F7D4C0900FC64C6 /* CartonBox */,
 				BA8B83D31F7D4C0900FC64C6 /* CartonBoxTests */,
 				BA8B83BB1F7D4C0900FC64C6 /* Products */,
+				638EBA29744C1C3E6360786F /* Pods */,
+				D6308D9B1A2900E4018E247B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -79,13 +134,15 @@
 		BA8B83BC1F7D4C0900FC64C6 /* CartonBox */ = {
 			isa = PBXGroup;
 			children = (
-				BA8B83BD1F7D4C0900FC64C6 /* AppDelegate.swift */,
-				BA8B83BF1F7D4C0900FC64C6 /* FirstViewController.swift */,
-				BA8B83C11F7D4C0900FC64C6 /* SecondViewController.swift */,
-				BA8B83C31F7D4C0900FC64C6 /* Main.storyboard */,
-				BA8B83C61F7D4C0900FC64C6 /* Assets.xcassets */,
-				BA8B83C81F7D4C0900FC64C6 /* LaunchScreen.storyboard */,
+				BAA8D80B1F869129008B6FCC /* awsconfiguration.json */,
+				BAA8D7D51F800905008B6FCC /* ViewModels */,
 				BA8B83CB1F7D4C0900FC64C6 /* Info.plist */,
+				BA8B83E31F7D4D5400FC64C6 /* Misc */,
+				BA8B83E21F7D4D2700FC64C6 /* Helpers */,
+				BA8B83E11F7D4C5500FC64C6 /* Controllers */,
+				BA8B83E01F7D4C4F00FC64C6 /* Views */,
+				BA8B83DF1F7D4C4000FC64C6 /* Model */,
+				BAA8D7EC1F8679E2008B6FCC /* Constants.swift */,
 			);
 			path = CartonBox;
 			sourceTree = "<group>";
@@ -99,6 +156,69 @@
 			path = CartonBoxTests;
 			sourceTree = "<group>";
 		};
+		BA8B83DF1F7D4C4000FC64C6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		BA8B83E01F7D4C4F00FC64C6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BA8B83C31F7D4C0900FC64C6 /* Main.storyboard */,
+				BA8B83C81F7D4C0900FC64C6 /* LaunchScreen.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		BA8B83E11F7D4C5500FC64C6 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				BA8B83BD1F7D4C0900FC64C6 /* AppDelegate.swift */,
+				BAA8D7D81F8145B6008B6FCC /* ProfileViewController.swift */,
+				BAA8D7DA1F827E7C008B6FCC /* FacebookViewController.swift */,
+				BAA8D7E61F83F45F008B6FCC /* BaseViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		BA8B83E21F7D4D2700FC64C6 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				BAA8D7E81F8534E4008B6FCC /* AWSDynamoDBHelper.swift */,
+				BAA8D80D1F86FFB3008B6FCC /* CustomIdentityProvider.swift */,
+				BAA8D80F1F870601008B6FCC /* AWSCognitoSignInHelper.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		BA8B83E31F7D4D5400FC64C6 /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				BA8B83C61F7D4C0900FC64C6 /* Assets.xcassets */,
+			);
+			path = Misc;
+			sourceTree = "<group>";
+		};
+		BAA8D7D51F800905008B6FCC /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				BAA8D7DC1F8284DF008B6FCC /* FacebookUserViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		D6308D9B1A2900E4018E247B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BAA8D7E01F834611008B6FCC /* SnackKit.framework */,
+				2D854C8DB84BC8B6DDEEB9C5 /* Pods_CartonBox.framework */,
+				90A2BA3D382C736855257840 /* Pods_CartonBoxTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -106,9 +226,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BA8B83D91F7D4C0900FC64C6 /* Build configuration list for PBXNativeTarget "CartonBox" */;
 			buildPhases = (
+				ACF8C2EFF9D7D04BB9925D32 /* [CP] Check Pods Manifest.lock */,
 				BA8B83B61F7D4C0900FC64C6 /* Sources */,
 				BA8B83B71F7D4C0900FC64C6 /* Frameworks */,
 				BA8B83B81F7D4C0900FC64C6 /* Resources */,
+				0464B7D6CD0967F5F1671A7C /* [CP] Embed Pods Frameworks */,
+				9181D66C8329866D5B76D56A /* [CP] Copy Pods Resources */,
+				BAA8D7E41F834899008B6FCC /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -123,9 +247,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BA8B83DC1F7D4C0900FC64C6 /* Build configuration list for PBXNativeTarget "CartonBoxTests" */;
 			buildPhases = (
+				B04A08609B8D9CC0B9205FA2 /* [CP] Check Pods Manifest.lock */,
 				BA8B83CC1F7D4C0900FC64C6 /* Sources */,
 				BA8B83CD1F7D4C0900FC64C6 /* Frameworks */,
 				BA8B83CE1F7D4C0900FC64C6 /* Resources */,
+				49A606E6D568C8B3E2F230A0 /* [CP] Embed Pods Frameworks */,
+				2C5178E57825655B124BDFB2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -182,6 +309,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BAA8D80C1F869129008B6FCC /* awsconfiguration.json in Resources */,
+				BAA8D7E31F83484D008B6FCC /* SnackKit.framework in Resources */,
 				BA8B83CA1F7D4C0900FC64C6 /* LaunchScreen.storyboard in Resources */,
 				BA8B83C71F7D4C0900FC64C6 /* Assets.xcassets in Resources */,
 				BA8B83C51F7D4C0900FC64C6 /* Main.storyboard in Resources */,
@@ -197,14 +326,152 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0464B7D6CD0967F5F1671A7C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-CartonBox/Pods-CartonBox-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AWSAuthCore/AWSAuthCore.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSAuthUI/AWSAuthUI.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSCognito/AWSCognito.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSCognitoIdentityProvider/AWSCognitoIdentityProvider.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSCore/AWSCore.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSDynamoDB/AWSDynamoDB.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSFacebookSignIn/AWSFacebookSignIn.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSLambda/AWSLambda.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSRekognition/AWSRekognition.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSS3/AWSS3.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSSNS/AWSSNS.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSSQS/AWSSQS.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSSimpleDB/AWSSimpleDB.framework",
+				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSAuthCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSAuthUI.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCognito.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCognitoIdentityProvider.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSDynamoDB.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSFacebookSignIn.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSLambda.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSRekognition.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSS3.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSSNS.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSSQS.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSSimpleDB.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CartonBox/Pods-CartonBox-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2C5178E57825655B124BDFB2 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CartonBoxTests/Pods-CartonBoxTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		49A606E6D568C8B3E2F230A0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CartonBoxTests/Pods-CartonBoxTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9181D66C8329866D5B76D56A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CartonBox/Pods-CartonBox-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		ACF8C2EFF9D7D04BB9925D32 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CartonBox-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B04A08609B8D9CC0B9205FA2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CartonBoxTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		BA8B83B61F7D4C0900FC64C6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BA8B83C21F7D4C0900FC64C6 /* SecondViewController.swift in Sources */,
+				BAA8D7E71F83F45F008B6FCC /* BaseViewController.swift in Sources */,
+				BAA8D7E91F8534E4008B6FCC /* AWSDynamoDBHelper.swift in Sources */,
+				BAA8D7D91F8145B6008B6FCC /* ProfileViewController.swift in Sources */,
 				BA8B83BE1F7D4C0900FC64C6 /* AppDelegate.swift in Sources */,
-				BA8B83C01F7D4C0900FC64C6 /* FirstViewController.swift in Sources */,
+				BAA8D7DB1F827E7C008B6FCC /* FacebookViewController.swift in Sources */,
+				BAA8D7DD1F8284DF008B6FCC /* FacebookUserViewModel.swift in Sources */,
+				BAA8D7ED1F8679E2008B6FCC /* Constants.swift in Sources */,
+				BAA8D8101F870601008B6FCC /* AWSCognitoSignInHelper.swift in Sources */,
+				BAA8D80E1F86FFB3008B6FCC /* CustomIdentityProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -355,10 +622,25 @@
 		};
 		BA8B83DA1F7D4C0900FC64C6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5C72E9BC7BA9370A23CAC385 /* Pods-CartonBox.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = V2AXQXNERZ;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/AWSCognito\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/AWSCognitoIdentityProvider\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/AWSCore\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/AWSDynamoDB\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/AWSLambda\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/AWSRekognition\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/AWSS3\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/AWSSNS\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/AWSSQS\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/AWSSimpleDB\"",
+					/Users/kayweng/Documents/Framework,
+				);
 				INFOPLIST_FILE = CartonBox/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ios.kayweng.CartonBox;
@@ -370,10 +652,25 @@
 		};
 		BA8B83DB1F7D4C0900FC64C6 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3B8377867803C4C94A497B5A /* Pods-CartonBox.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = V2AXQXNERZ;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/AWSCognito\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/AWSCognitoIdentityProvider\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/AWSCore\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/AWSDynamoDB\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/AWSLambda\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/AWSRekognition\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/AWSS3\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/AWSSNS\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/AWSSQS\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/AWSSimpleDB\"",
+					/Users/kayweng/Documents/Framework,
+				);
 				INFOPLIST_FILE = CartonBox/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ios.kayweng.CartonBox;
@@ -385,6 +682,7 @@
 		};
 		BA8B83DD1F7D4C0900FC64C6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CD0971BFFFB745BC85D34965 /* Pods-CartonBoxTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -402,6 +700,7 @@
 		};
 		BA8B83DE1F7D4C0900FC64C6 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7B6CC8D387D8F08293C6F59C /* Pods-CartonBoxTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
