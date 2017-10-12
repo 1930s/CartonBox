@@ -10,6 +10,7 @@ import Foundation
 import FBSDKCoreKit
 import FBSDKLoginKit
 import SnackKit
+import AWSCognito
 
 public class FacebookUser{
     
@@ -34,7 +35,10 @@ public class FacebookUser{
         return FBSDKAccessToken.current() != nil
     }
     
+    var cognitoId:String?
+    
     var fbManager:FBSDKLoginManager!
+    var cognitoStore:CognitoStore?
     
     class var sharedInstance: FacebookUser {
         
@@ -51,7 +55,12 @@ public class FacebookUser{
     
     //MARK: - Initialization
     public init() {
+        
         self.fbManager = FBSDKLoginManager()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(FacebookUser.onProfileUpdated(notification:)), name:NSNotification.Name.FBSDKProfileDidChange, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(FacebookUser.onReceiveIdentityId(notification:)), name: NSNotification.Name(rawValue: CognitoStoreReceivedIdentityIdNotification), object: nil)
     }
     
     //MARK: - Actions
@@ -64,22 +73,22 @@ public class FacebookUser{
             if(error != nil){
                 
                 NSLog("An error is occurred !")
-                completion(nil)
                 
             }else if let _ = loginResult, loginResult!.isCancelled{
                 
                 NSLog("Cancelled")
                 self.fbManager.logOut()
-                completion(nil)
+
+            }else if let _ = FBSDKAccessToken.current(), let _ = FBSDKAccessToken.current().tokenString{
                 
-            }else{
-            
-                if let _ = FBSDKAccessToken.current(), let _ = FBSDKAccessToken.current().tokenString{
                     FBSDKProfile.enableUpdates(onAccessTokenChange: true)
-                }
-                
-                completion(loginResult)
+            
+                    completion(loginResult)
+                    
+                    return
             }
+            
+            completion(nil)
         }
     }
     
@@ -87,32 +96,19 @@ public class FacebookUser{
         fbManager.logOut()
     }
 
-//Todo:
-//    func fetchUserFacebookData(param:String = "id, name, first_name, last_name, picture.type(small),email",
-//                               completion:@escaping (_ data:[String:AnyObject]?)->Void){
-//
-//        var dict:[String:AnyObject] = [:]
-//
-//        if((FBSDKAccessToken.current()) != nil){
-//
-//            let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": param])
-//            let arr = (param.characters.split{$0 == ","}.map(String.init))
-//
-//            graphRequest.start(completionHandler: { (connection, result, error) -> Void in
-//
-//                if (error != nil){
-//                    NSLog("An error is occurred !")
-//                    completion(nil)
-//                }else{
-//
-//                    for var p in arr {
-//                        dict[p] = String(result.objectForKey(p)!)
-//                    }
-//
-//                    completion(dict)
-//                }
-//            })
-//        }
-//    }
+    @objc func onProfileUpdated(notification: NSNotification)
+    {
+        cognitoStore = CognitoStore.connectWithFacebook()
+        
+        self.cognitoStore?.requestIdentity()
+    }
     
+    @objc func onReceiveIdentityId(notification: NSNotification)
+    {
+        self.cognitoId = notification.userInfo?["identityId"] as? String
+
+        self.cognitoStore?.saveItem(dataset: "UserInfo", key: "Id", value: self.userID)
+        self.cognitoStore?.saveItem(dataset: "UserInfo", key: "Name", value: self.userName)
+        self.cognitoStore?.saveItem(dataset: "UserInfo", key: "IdentityId", value: self.cognitoId ?? "")
+    }
 }

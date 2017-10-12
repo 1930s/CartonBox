@@ -28,7 +28,7 @@
                                 <color key="textColor" red="0.82745098039215681" green="0.32941176470588235" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100 %" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WoL-6v-0Wb">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Please wait ..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WoL-6v-0Wb">
                                 <rect key="frame" x="150" y="389" width="75" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="75" id="BOb-X7-87D"/>
@@ -38,24 +38,13 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Cardboard Box_75" translatesAutoresizingMaskIntoConstraints="NO" id="pwY-CB-ya2">
-                                <rect key="frame" x="150" y="306" width="75" height="75"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="75" id="uJa-sZ-rQ5"/>
-                                </constraints>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.99215686274509807" green="0.94901960784313721" blue="0.9137254901960784" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="pwY-CB-ya2" firstAttribute="centerX" secondItem="Sx8-8M-IOq" secondAttribute="centerX" id="2CO-nU-igH"/>
                             <constraint firstItem="Sx8-8M-IOq" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="100" id="EKu-3N-T7x"/>
                             <constraint firstItem="Sx8-8M-IOq" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="GrT-Tx-YiO"/>
-                            <constraint firstItem="WoL-6v-0Wb" firstAttribute="top" secondItem="pwY-CB-ya2" secondAttribute="bottom" constant="8" symbolic="YES" id="THx-H1-OrC"/>
                             <constraint firstItem="Sx8-8M-IOq" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="gCm-bq-RXg"/>
-                            <constraint firstItem="pwY-CB-ya2" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="gfN-dW-8A6"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Sx8-8M-IOq" secondAttribute="trailing" constant="16" id="hTZ-tU-4Sb"/>
-                            <constraint firstItem="pwY-CB-ya2" firstAttribute="leading" secondItem="WoL-6v-0Wb" secondAttribute="leading" id="l08-a7-8v4"/>
-                            <constraint firstItem="pwY-CB-ya2" firstAttribute="trailing" secondItem="WoL-6v-0Wb" secondAttribute="trailing" id="yRg-EM-3Ns"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -65,7 +54,4 @@
             <point key="canvasLocation" x="51.5" y="374.5"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="Cardboard Box_75" width="64" height="64"/>
-    </resources>
 </document>

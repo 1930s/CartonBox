@@ -23,10 +23,13 @@ class FacebookViewController: UIViewController {
         super.viewDidLoad()
 
         self.btnLogin.layer.cornerRadius = CGFloat(20.0)
+        self.updateLoginScreenText()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        FBSDKProfile.enableUpdates(onAccessTokenChange: true)
-        
-        self.setLoginScreenText()
+        self.btnClose.isHidden = !FacebookUser.sharedInstance.activeSession
     }
 
     override func didReceiveMemoryWarning() {
@@ -53,11 +56,11 @@ class FacebookViewController: UIViewController {
             })
         }
         
-        self.setLoginScreenText()
+        self.updateLoginScreenText()
     }
     
     // MARK: - Action
-    func setLoginScreenText(){
+    func updateLoginScreenText(){
         
         self.lblLoginInfo.text = FacebookUser.sharedInstance.activeSession ?
             "You already logged in" : "You are not logged in yet"

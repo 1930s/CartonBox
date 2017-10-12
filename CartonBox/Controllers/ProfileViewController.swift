@@ -20,12 +20,10 @@ class ProfileViewController: BaseViewController {
         super.viewDidLoad()
 
         self.vwFBUserProfile.circle()
+        self.lblUserName.text = "Anonymous"
         
-        if FacebookUser.sharedInstance.activeSession{
-            
-            self.vwFBUserProfile.profileID = FacebookUser.sharedInstance.userID
-            self.lblUserName.text = FacebookUser.sharedInstance.userName
-        }
+        self.vwFBUserProfile.profileID = FacebookUser.sharedInstance.userID
+        self.lblUserName.text = FacebookUser.sharedInstance.activeSession ? FacebookUser.sharedInstance.userName : "Anonymous"
         
         NotificationCenter.default.addObserver(self, selector: #selector(ProfileViewController.onProfileUpdated(notification:)),
                                                name:NSNotification.Name.FBSDKProfileDidChange,

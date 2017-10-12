@@ -13,6 +13,12 @@ class BaseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        NotificationCenter.default.addObserver(self, selector: #selector(BaseViewController.UserProfileUpdated(notification:)),
+                                               name:NSNotification.Name.FBSDKProfileDidChange,                                               object: nil)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
         if !FacebookUser.sharedInstance.activeSession{
             
             let modalVC = sb.instantiateViewController(withIdentifier: "FacebookVC") as! FacebookViewController
@@ -20,11 +26,9 @@ class BaseViewController: UIViewController {
             UIView.animate(withDuration: 1.5, animations: {
                 self.present(modalVC, animated: true, completion: nil)
             })
+        }else{
+            
         }
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(BaseViewController.UserProfileUpdated(notification:)),
-                                               name:NSNotification.Name.FBSDKProfileDidChange,
-                                               object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -35,8 +39,6 @@ class BaseViewController: UIViewController {
     //MARK: - Actions
     @objc func UserProfileUpdated(notification: NSNotification)
     {
-        //Update Cognito
         
-        //Update DynamoDB
     }
 }

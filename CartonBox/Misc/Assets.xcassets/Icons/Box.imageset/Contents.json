@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "Cardboard Box@1x.png",
+      "filename" : "Cardboard box@1x.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "Cardboard Box@2x.png",
+      "filename" : "Cardboard box@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "Cardboard Box@3x.png",
+      "filename" : "Cardboard box@3x.png",
       "scale" : "3x"
     }
   ],

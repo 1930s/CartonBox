@@ -31,7 +31,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Open Box_25" translatesAutoresizingMaskIntoConstraints="NO" id="nsw-ai-d5Z">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nsw-ai-d5Z">
                                             <rect key="frame" x="24" y="17" width="25" height="25"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="25" id="lo2-eL-dJp"/>
@@ -211,7 +211,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="Marker_25" translatesAutoresizingMaskIntoConstraints="NO" id="dJ5-p5-HHJ">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dJ5-p5-HHJ">
                                                     <rect key="frame" x="8" y="10" width="25" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="25" id="C77-e4-hFn"/>
@@ -259,7 +259,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="Calendar_25" translatesAutoresizingMaskIntoConstraints="NO" id="p3Q-yQ-naQ">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="p3Q-yQ-naQ">
                                                     <rect key="frame" x="8" y="9" width="25" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="25" id="hF7-jE-ccd"/>
@@ -396,7 +396,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="342" height="59.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="Open Box_25" translatesAutoresizingMaskIntoConstraints="NO" id="9bn-gv-5TK">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9bn-gv-5TK">
                                             <rect key="frame" x="19" y="13" width="32" height="32"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="25" id="5Fv-Fh-oQm"/>
@@ -416,81 +416,6 @@
                                 <connections>
                                     <segue destination="PaJ-A3-P5D" kind="show" id="aSV-HC-Sbm"/>
                                 </connections>
-                            </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="60" id="O9e-CX-OEA">
-                                <rect key="frame" x="0.0" y="88" width="375" height="60"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="O9e-CX-OEA" id="kVx-sP-57c">
-                                    <rect key="frame" x="0.0" y="0.0" width="342" height="59.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="Open Box_25" translatesAutoresizingMaskIntoConstraints="NO" id="jMt-Mw-LOL">
-                                            <rect key="frame" x="19" y="13" width="32" height="32"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="25" id="aPv-Yl-clZ"/>
-                                                <constraint firstAttribute="height" constant="25" id="b0r-PZ-mtJ"/>
-                                            </constraints>
-                                        </imageView>
-                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="4Zc-Tz-zqK">
-                                            <rect key="frame" x="59" y="8" width="275" height="44"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                        </textView>
-                                    </subviews>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="60" id="qUa-nt-aEY">
-                                <rect key="frame" x="0.0" y="148" width="375" height="60"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qUa-nt-aEY" id="35q-wN-pul">
-                                    <rect key="frame" x="0.0" y="0.0" width="342" height="59.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="Open Box_25" translatesAutoresizingMaskIntoConstraints="NO" id="n1J-4M-gg5">
-                                            <rect key="frame" x="19" y="13" width="32" height="32"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="25" id="dij-OU-cWw"/>
-                                                <constraint firstAttribute="height" constant="25" id="iwW-Jr-cDe"/>
-                                            </constraints>
-                                        </imageView>
-                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="wV7-O1-NGe">
-                                            <rect key="frame" x="59" y="8" width="275" height="44"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                        </textView>
-                                    </subviews>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="60" id="TSq-61-Ekz">
-                                <rect key="frame" x="0.0" y="208" width="375" height="60"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TSq-61-Ekz" id="YZ2-5W-YPQ">
-                                    <rect key="frame" x="0.0" y="0.0" width="342" height="59.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="Open Box_25" translatesAutoresizingMaskIntoConstraints="NO" id="gV9-EK-kAg">
-                                            <rect key="frame" x="19" y="13" width="32" height="32"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="25" id="nih-rm-8kH"/>
-                                                <constraint firstAttribute="height" constant="25" id="rVe-1F-Vum"/>
-                                            </constraints>
-                                        </imageView>
-                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="V5H-6w-PE8">
-                                            <rect key="frame" x="59" y="8" width="275" height="44"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                        </textView>
-                                    </subviews>
-                                </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -669,16 +594,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yAu-0R-HJF">
-                                <rect key="frame" x="67" y="173.5" width="240" height="340"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="340" id="VGm-dC-hCO"/>
-                                    <constraint firstAttribute="width" constant="240" id="xbb-kA-MDE"/>
-                                </constraints>
-                                <connections>
-                                    <segue destination="EVR-iY-NVv" kind="embed" id="hdT-Jy-Y5G"/>
-                                </connections>
-                            </containerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Loc-Os-YnI">
                                 <rect key="frame" x="16" y="587" width="343" height="45"/>
                                 <color key="backgroundColor" red="0.23137254901960785" green="0.34901960784313724" blue="0.59607843137254901" alpha="1" colorSpace="calibratedRGB"/>
@@ -701,8 +616,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="4xP-cz-5Lt">
-                                <rect key="frame" x="168" y="473" width="39" height="37"/>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="2" translatesAutoresizingMaskIntoConstraints="NO" id="4xP-cz-5Lt">
+                                <rect key="frame" x="176" y="473" width="23" height="37"/>
                                 <color key="pageIndicatorTintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="currentPageIndicatorTintColor" red="0.23137254900000001" green="0.34901960780000002" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                             </pageControl>
@@ -717,19 +632,29 @@
                                     <action selector="closeFacebookLogin:" destination="5cR-T0-Ir6" eventType="touchUpInside" id="n8R-1B-jrQ"/>
                                 </connections>
                             </button>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OuF-3F-5XK">
+                                <rect key="frame" x="37" y="169" width="300" height="350"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="2Bn-BP-xhL"/>
+                                    <constraint firstAttribute="height" constant="350" id="Sag-B2-1gW"/>
+                                </constraints>
+                                <connections>
+                                    <segue destination="NUS-k6-bfF" kind="embed" id="m0E-WU-LaP"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="pcZ-7P-0N1" firstAttribute="leading" secondItem="Fl2-a6-gPE" secondAttribute="leading" constant="16" id="179-oR-SO6"/>
                             <constraint firstItem="Loc-Os-YnI" firstAttribute="leading" secondItem="Fl2-a6-gPE" secondAttribute="leading" constant="16" id="1fb-Nm-QNE"/>
-                            <constraint firstItem="yAu-0R-HJF" firstAttribute="centerX" secondItem="Fl2-a6-gPE" secondAttribute="centerX" id="7Da-bO-ebz"/>
                             <constraint firstItem="Loc-Os-YnI" firstAttribute="top" secondItem="pcZ-7P-0N1" secondAttribute="bottom" constant="16" id="9s6-OW-8cv"/>
+                            <constraint firstItem="OuF-3F-5XK" firstAttribute="centerY" secondItem="Fl2-a6-gPE" secondAttribute="centerY" id="BJe-Ry-rZM"/>
                             <constraint firstItem="Fl2-a6-gPE" firstAttribute="bottom" secondItem="Loc-Os-YnI" secondAttribute="bottom" constant="35" id="Gpp-al-b2i"/>
                             <constraint firstItem="Dab-Wv-KIl" firstAttribute="top" secondItem="sZG-mk-8D9" secondAttribute="top" constant="30" id="QUa-jW-rTL"/>
                             <constraint firstItem="4xP-cz-5Lt" firstAttribute="centerX" secondItem="Fl2-a6-gPE" secondAttribute="centerX" id="RyK-B7-fU7"/>
                             <constraint firstAttribute="trailing" secondItem="Dab-Wv-KIl" secondAttribute="trailing" constant="10" id="Vyv-Kc-BUT"/>
-                            <constraint firstItem="yAu-0R-HJF" firstAttribute="centerY" secondItem="Fl2-a6-gPE" secondAttribute="centerY" id="bbB-H0-CWe"/>
                             <constraint firstItem="pcZ-7P-0N1" firstAttribute="top" secondItem="4xP-cz-5Lt" secondAttribute="bottom" constant="40" id="eDL-7v-Nca"/>
+                            <constraint firstItem="OuF-3F-5XK" firstAttribute="centerX" secondItem="Fl2-a6-gPE" secondAttribute="centerX" id="gxV-5f-52v"/>
                             <constraint firstItem="Fl2-a6-gPE" firstAttribute="trailing" secondItem="Loc-Os-YnI" secondAttribute="trailing" constant="16" id="t6c-Eg-yLa"/>
                             <constraint firstItem="Fl2-a6-gPE" firstAttribute="trailing" secondItem="pcZ-7P-0N1" secondAttribute="trailing" constant="16" id="xdg-eK-ohC"/>
                         </constraints>
@@ -740,40 +665,95 @@
                         <outlet property="btnLogin" destination="Loc-Os-YnI" id="L9U-gM-tEL"/>
                         <outlet property="lblLoginInfo" destination="pcZ-7P-0N1" id="UDw-lt-zFd"/>
                         <outlet property="pgLoginInfo" destination="4xP-cz-5Lt" id="3FK-gY-juf"/>
-                        <outlet property="vwLoginInfo" destination="yAu-0R-HJF" id="dtm-VS-vzQ"/>
+                        <outlet property="vwLoginInfo" destination="OuF-3F-5XK" id="Z4R-kI-CzV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4H4-Up-ouS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1953" y="856"/>
+            <point key="canvasLocation" x="1952.8" y="855.9220389805098"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="V8o-KR-eQv">
+        <!--FacebookPageContainer-->
+        <scene sceneID="joD-Kh-tB8">
             <objects>
-                <viewController id="EVR-iY-NVv" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="ym2-rK-hx4">
-                        <rect key="frame" x="0.0" y="0.0" width="240" height="340"/>
+                <viewController title="FacebookPageContainer" id="NUS-k6-bfF" customClass="ContainerController" customModule="CartonBox" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="uGJ-gZ-tMC">
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="350"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="9Lr-g1-D6l"/>
                     </view>
+                    <connections>
+                        <segue destination="t1s-s5-v3n" kind="show" identifier="SegueOfPageView" customClass="EmptySegue" id="e1c-7z-ECO"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="y26-2u-QO5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zSO-KP-vcg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2752" y="855"/>
+            <point key="canvasLocation" x="2712" y="855"/>
+        </scene>
+        <!--Facebook Info Pages-->
+        <scene sceneID="o9Z-oH-hBb">
+            <objects>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" title="Facebook Info Pages" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="t1s-s5-v3n" customClass="FacebookInfoPageController" customModule="CartonBox" customModuleProvider="target" sceneMemberID="viewController">
+                    <size key="freeformSize" width="375" height="350"/>
+                </pageViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fRO-Ow-DZ9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3527" y="855"/>
+        </scene>
+        <!--Facebook Page Info1 Controller-->
+        <scene sceneID="NLl-hc-TWK">
+            <objects>
+                <viewController storyboardIdentifier="FacebookInfo1" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Ml2-zd-zKC" customClass="FacebookPageInfo1Controller" customModule="CartonBox" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cEg-bd-wiH">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="350"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Activity" translatesAutoresizingMaskIntoConstraints="NO" id="OLd-YJ-BXn">
+                                <rect key="frame" x="67" y="111" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="cSU-wR-WQr"/>
+                    </view>
+                    <size key="freeformSize" width="375" height="350"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ivU-jX-vdF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4260" y="696"/>
+        </scene>
+        <!--Facebook Page Info2 Controller-->
+        <scene sceneID="G2z-t4-cLW">
+            <objects>
+                <viewController storyboardIdentifier="FacebookInfo2" useStoryboardIdentifierAsRestorationIdentifier="YES" id="LFn-Or-P0F" customClass="FacebookPageInfo2Controller" customModule="CartonBox" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Fcf-xn-AlD">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="350"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Box" translatesAutoresizingMaskIntoConstraints="NO" id="GGu-mY-xbd">
+                                <rect key="frame" x="67" y="111" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="FiX-dq-oI6"/>
+                    </view>
+                    <size key="freeformSize" width="375" height="350"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0Kb-s9-LnU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4260" y="1080"/>
         </scene>
     </scenes>
     <resources>
         <image name="About" width="25" height="25"/>
         <image name="Activity" width="24" height="24"/>
         <image name="Box" width="24" height="24"/>
-        <image name="Calendar_25" width="25" height="25"/>
         <image name="Close" width="25" height="25"/>
         <image name="Facebook" width="24" height="24"/>
         <image name="Home" width="24" height="24"/>
         <image name="Info" width="24" height="24"/>
-        <image name="Marker_25" width="25" height="25"/>
         <image name="More" width="24" height="24"/>
-        <image name="Open Box_25" width="26" height="26"/>
         <image name="User" width="24" height="24"/>
     </resources>
 </document>
