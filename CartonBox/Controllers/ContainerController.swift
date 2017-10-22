@@ -10,9 +10,8 @@ import UIKit
 
 class ContainerController: UIViewController {
 
-    var thisParent:UIViewController!
-    var fbPage1:FacebookPageInfo1Controller!
-    
+    var containerParent:UIViewController!
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         self.performSegue(withIdentifier: "SegueOfPageView", sender: nil)
@@ -26,8 +25,13 @@ class ContainerController: UIViewController {
     // MARK : Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        segue.destination.view.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width,height: self.view.frame.size.height)
-        
-        self.view.addSubview(segue.destination.view)
+        if let destination = segue.destination as? FacebookInfoPageController{
+            
+            destination.pgFacebookInfo = (self.containerParent as? FacebookSignInController)?.pgFacebookInfo
+            
+            segue.destination.view.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width,height: self.view.frame.size.height)
+            
+            self.view.addSubview(destination.view)
+        }
     }
 }

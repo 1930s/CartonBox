@@ -463,10 +463,10 @@
             </objects>
             <point key="canvasLocation" x="326.39999999999998" y="170.91454272863569"/>
         </scene>
-        <!--Profile View Controller-->
+        <!--Profile Controller-->
         <scene sceneID="1Za-Xp-fdU">
             <objects>
-                <viewController id="Gwt-mD-2tK" customClass="ProfileViewController" customModule="CartonBox" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Gwt-mD-2tK" customClass="ProfileController" customModule="CartonBox" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="K8X-cU-DFg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -479,7 +479,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="tgo-u7-Brb"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="15"/>
                                         <color key="textColor" red="0.0" green="0.32852089410000002" blue="0.57488495110000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -586,14 +586,24 @@
             </objects>
             <point key="canvasLocation" x="321.60000000000002" y="856.37181409295363"/>
         </scene>
-        <!--Facebook View Controller-->
+        <!--Facebook Sign In Controller-->
         <scene sceneID="XGd-yx-7K0">
             <objects>
-                <viewController storyboardIdentifier="FacebookVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="5cR-T0-Ir6" customClass="FacebookViewController" customModule="CartonBox" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FacebookVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="5cR-T0-Ir6" customClass="FacebookSignInController" customModule="CartonBox" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sZG-mk-8D9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OuF-3F-5XK">
+                                <rect key="frame" x="37" y="60" width="300" height="450"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="2Bn-BP-xhL"/>
+                                    <constraint firstAttribute="height" constant="450" id="Sag-B2-1gW"/>
+                                </constraints>
+                                <connections>
+                                    <segue destination="NUS-k6-bfF" kind="embed" id="m0E-WU-LaP"/>
+                                </connections>
+                            </containerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Loc-Os-YnI">
                                 <rect key="frame" x="16" y="587" width="343" height="45"/>
                                 <color key="backgroundColor" red="0.23137254901960785" green="0.34901960784313724" blue="0.59607843137254901" alpha="1" colorSpace="calibratedRGB"/>
@@ -617,7 +627,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="2" translatesAutoresizingMaskIntoConstraints="NO" id="4xP-cz-5Lt">
-                                <rect key="frame" x="176" y="473" width="23" height="37"/>
+                                <rect key="frame" x="176" y="503" width="23" height="37"/>
                                 <color key="pageIndicatorTintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="currentPageIndicatorTintColor" red="0.23137254900000001" green="0.34901960780000002" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                             </pageControl>
@@ -632,28 +642,18 @@
                                     <action selector="closeFacebookLogin:" destination="5cR-T0-Ir6" eventType="touchUpInside" id="n8R-1B-jrQ"/>
                                 </connections>
                             </button>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OuF-3F-5XK">
-                                <rect key="frame" x="37" y="169" width="300" height="350"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="300" id="2Bn-BP-xhL"/>
-                                    <constraint firstAttribute="height" constant="350" id="Sag-B2-1gW"/>
-                                </constraints>
-                                <connections>
-                                    <segue destination="NUS-k6-bfF" kind="embed" id="m0E-WU-LaP"/>
-                                </connections>
-                            </containerView>
                         </subviews>
                         <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="pcZ-7P-0N1" firstAttribute="leading" secondItem="Fl2-a6-gPE" secondAttribute="leading" constant="16" id="179-oR-SO6"/>
                             <constraint firstItem="Loc-Os-YnI" firstAttribute="leading" secondItem="Fl2-a6-gPE" secondAttribute="leading" constant="16" id="1fb-Nm-QNE"/>
                             <constraint firstItem="Loc-Os-YnI" firstAttribute="top" secondItem="pcZ-7P-0N1" secondAttribute="bottom" constant="16" id="9s6-OW-8cv"/>
-                            <constraint firstItem="OuF-3F-5XK" firstAttribute="centerY" secondItem="Fl2-a6-gPE" secondAttribute="centerY" id="BJe-Ry-rZM"/>
                             <constraint firstItem="Fl2-a6-gPE" firstAttribute="bottom" secondItem="Loc-Os-YnI" secondAttribute="bottom" constant="35" id="Gpp-al-b2i"/>
                             <constraint firstItem="Dab-Wv-KIl" firstAttribute="top" secondItem="sZG-mk-8D9" secondAttribute="top" constant="30" id="QUa-jW-rTL"/>
                             <constraint firstItem="4xP-cz-5Lt" firstAttribute="centerX" secondItem="Fl2-a6-gPE" secondAttribute="centerX" id="RyK-B7-fU7"/>
                             <constraint firstAttribute="trailing" secondItem="Dab-Wv-KIl" secondAttribute="trailing" constant="10" id="Vyv-Kc-BUT"/>
-                            <constraint firstItem="pcZ-7P-0N1" firstAttribute="top" secondItem="4xP-cz-5Lt" secondAttribute="bottom" constant="40" id="eDL-7v-Nca"/>
+                            <constraint firstItem="pcZ-7P-0N1" firstAttribute="top" secondItem="4xP-cz-5Lt" secondAttribute="bottom" constant="10" id="eDL-7v-Nca"/>
+                            <constraint firstItem="pcZ-7P-0N1" firstAttribute="top" secondItem="OuF-3F-5XK" secondAttribute="bottom" constant="40" id="gtQ-MS-Rzd"/>
                             <constraint firstItem="OuF-3F-5XK" firstAttribute="centerX" secondItem="Fl2-a6-gPE" secondAttribute="centerX" id="gxV-5f-52v"/>
                             <constraint firstItem="Fl2-a6-gPE" firstAttribute="trailing" secondItem="Loc-Os-YnI" secondAttribute="trailing" constant="16" id="t6c-Eg-yLa"/>
                             <constraint firstItem="Fl2-a6-gPE" firstAttribute="trailing" secondItem="pcZ-7P-0N1" secondAttribute="trailing" constant="16" id="xdg-eK-ohC"/>
@@ -664,6 +664,7 @@
                         <outlet property="btnClose" destination="Dab-Wv-KIl" id="RIS-MG-b3x"/>
                         <outlet property="btnLogin" destination="Loc-Os-YnI" id="L9U-gM-tEL"/>
                         <outlet property="lblLoginInfo" destination="pcZ-7P-0N1" id="UDw-lt-zFd"/>
+                        <outlet property="pgFacebookInfo" destination="4xP-cz-5Lt" id="8Qx-hu-W0G"/>
                         <outlet property="pgLoginInfo" destination="4xP-cz-5Lt" id="3FK-gY-juf"/>
                         <outlet property="vwLoginInfo" destination="OuF-3F-5XK" id="Z4R-kI-CzV"/>
                     </connections>
@@ -677,9 +678,9 @@
             <objects>
                 <viewController title="FacebookPageContainer" id="NUS-k6-bfF" customClass="ContainerController" customModule="CartonBox" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="uGJ-gZ-tMC">
-                        <rect key="frame" x="0.0" y="0.0" width="300" height="350"/>
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="450"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="9Lr-g1-D6l"/>
                     </view>
                     <connections>
@@ -708,19 +709,41 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="350"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Activity" translatesAutoresizingMaskIntoConstraints="NO" id="OLd-YJ-BXn">
-                                <rect key="frame" x="67" y="111" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fb_info_1" translatesAutoresizingMaskIntoConstraints="NO" id="auN-Rv-9I1">
+                                <rect key="frame" x="87" y="75" width="200" height="200"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="LOR-Gp-7NF"/>
+                                    <constraint firstAttribute="width" constant="200" id="fTT-bx-wA1"/>
+                                </constraints>
                             </imageView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Authenticate with Facebook Login" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AZX-TG-ra8">
+                                <rect key="frame" x="0.0" y="283" width="375" height="67"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="AZX-TG-ra8" firstAttribute="bottom" secondItem="cSU-wR-WQr" secondAttribute="bottom" id="R5W-xm-xea"/>
+                            <constraint firstItem="auN-Rv-9I1" firstAttribute="centerY" secondItem="cSU-wR-WQr" secondAttribute="centerY" id="Rj3-cm-ymd"/>
+                            <constraint firstItem="AZX-TG-ra8" firstAttribute="trailing" secondItem="cSU-wR-WQr" secondAttribute="trailing" id="ZGx-aJ-5nN"/>
+                            <constraint firstItem="AZX-TG-ra8" firstAttribute="top" secondItem="auN-Rv-9I1" secondAttribute="bottom" constant="8" id="cPS-iy-Ih0"/>
+                            <constraint firstItem="auN-Rv-9I1" firstAttribute="centerX" secondItem="cSU-wR-WQr" secondAttribute="centerX" id="iRZ-ge-JCe"/>
+                            <constraint firstItem="AZX-TG-ra8" firstAttribute="leading" secondItem="cSU-wR-WQr" secondAttribute="leading" id="lyU-fE-Z1d"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="cSU-wR-WQr"/>
                     </view>
                     <size key="freeformSize" width="375" height="350"/>
+                    <connections>
+                        <outlet property="imgFbInfo" destination="auN-Rv-9I1" id="BnQ-Vq-EzC"/>
+                        <outlet property="txtFbInfo" destination="AZX-TG-ra8" id="EZL-Dv-Gje"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ivU-jX-vdF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4260" y="696"/>
+            <point key="canvasLocation" x="4260" y="695.35232383808102"/>
         </scene>
         <!--Facebook Page Info2 Controller-->
         <scene sceneID="G2z-t4-cLW">
@@ -730,19 +753,41 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="350"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Box" translatesAutoresizingMaskIntoConstraints="NO" id="GGu-mY-xbd">
-                                <rect key="frame" x="67" y="111" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fb_info_3" translatesAutoresizingMaskIntoConstraints="NO" id="TUJ-NS-Bbi">
+                                <rect key="frame" x="87.5" y="75" width="200" height="200"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="8x7-c4-QzL"/>
+                                    <constraint firstAttribute="height" constant="200" id="nYB-kT-hC3"/>
+                                </constraints>
                             </imageView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Sharing photos with friends via the cloud" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FKP-aN-qWU">
+                                <rect key="frame" x="0.0" y="283" width="375" height="67"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="FKP-aN-qWU" firstAttribute="trailing" secondItem="FiX-dq-oI6" secondAttribute="trailing" id="PIc-RM-w82"/>
+                            <constraint firstItem="FKP-aN-qWU" firstAttribute="bottom" secondItem="FiX-dq-oI6" secondAttribute="bottom" id="Qkg-MA-4aE"/>
+                            <constraint firstItem="TUJ-NS-Bbi" firstAttribute="centerY" secondItem="FiX-dq-oI6" secondAttribute="centerY" id="ZTq-vz-fP9"/>
+                            <constraint firstItem="FKP-aN-qWU" firstAttribute="top" secondItem="TUJ-NS-Bbi" secondAttribute="bottom" constant="8" id="d0I-5J-aGL"/>
+                            <constraint firstItem="TUJ-NS-Bbi" firstAttribute="centerX" secondItem="FiX-dq-oI6" secondAttribute="centerX" id="ew6-y1-AQG"/>
+                            <constraint firstItem="FKP-aN-qWU" firstAttribute="leading" secondItem="FiX-dq-oI6" secondAttribute="leading" id="lWP-1a-wbF"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="FiX-dq-oI6"/>
                     </view>
                     <size key="freeformSize" width="375" height="350"/>
+                    <connections>
+                        <outlet property="imgFbInfo" destination="TUJ-NS-Bbi" id="XLP-oI-qLo"/>
+                        <outlet property="txtFbInfo" destination="FKP-aN-qWU" id="hdu-X2-74P"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Kb-s9-LnU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4260" y="1080"/>
+            <point key="canvasLocation" x="4260" y="1079.4602698650676"/>
         </scene>
     </scenes>
     <resources>
@@ -755,5 +800,7 @@
         <image name="Info" width="24" height="24"/>
         <image name="More" width="24" height="24"/>
         <image name="User" width="24" height="24"/>
+        <image name="fb_info_1" width="800" height="600"/>
+        <image name="fb_info_3" width="800" height="600"/>
     </resources>
 </document>

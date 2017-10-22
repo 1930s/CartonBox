@@ -11,25 +11,26 @@ import SnackKit
 import FBSDKCoreKit
 import FBSDKLoginKit
 
-class FacebookViewController: UIViewController {
+class FacebookSignInController: UIViewController {
 
     @IBOutlet weak var vwLoginInfo: UIView!
     @IBOutlet weak var pgLoginInfo: UIPageControl!
     @IBOutlet weak var lblLoginInfo: UILabel!
     @IBOutlet weak var btnLogin: UIButton!
     @IBOutlet weak var btnClose: UIButton!
+    @IBOutlet weak var pgFacebookInfo: UIPageControl!
+    
+    var viewModel: FacebookSignInViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.btnLogin.layer.cornerRadius = CGFloat(20.0)
+        self.viewModel = FacebookSignInViewModel()
         self.updateLoginScreenText()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        self.btnClose.isHidden = !FacebookUser.sharedInstance.activeSession
     }
 
     override func didReceiveMemoryWarning() {
@@ -43,29 +44,38 @@ class FacebookViewController: UIViewController {
     
     @IBAction func loginWithFacebook(_ sender: Any) {
         
-        if FacebookUser.sharedInstance.activeSession{
-            FacebookUser.sharedInstance.logoutFacebook()
+        if self.viewModel.activeSession{
+            self.viewModel.logoutFacebook()
+            self.updateLoginScreenText()
         }else{
-            FacebookUser.sharedInstance.loginFacebook(controller: self, completion: { (result) in
-
-                if let _ = result{
-                    self.dismiss(animated: true, completion: nil)
-                }else{
-                    self.alert(title: "Login Failed", message: "Invalid Facebook login")
-                }
+            self.viewModel.loginFacebook(from: self, successBlock: { (result) in
+                self.dismiss(animated: true, completion: nil)
+                self.updateLoginScreenText()
+            }, andFailure: { (error) in
+                self.alert(title: "Login Failed", message: "Please try again")
             })
         }
-        
-        self.updateLoginScreenText()
     }
     
-    // MARK: - Action
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        let destination = segue.destination as! ContainerController
+        
+        destination.containerParent = self
+    }
+    
+}
+
+extension FacebookSignInController{
+    
     func updateLoginScreenText(){
         
-        self.lblLoginInfo.text = FacebookUser.sharedInstance.activeSession ?
+        self.btnLogin.layer.cornerRadius = CGFloat(20.0)
+        
+        self.lblLoginInfo.text = self.viewModel.activeSession ?
             "You already logged in" : "You are not logged in yet"
-
-        self.btnLogin.setTitle(FacebookUser.sharedInstance.activeSession ?
+        
+        self.btnLogin.setTitle(self.viewModel.activeSession ?
             "Logout Facebook" : "Login with Facebook", for: UIControlState.normal)
     }
 }

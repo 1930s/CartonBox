@@ -10,26 +10,17 @@ import UIKit
 
 class FacebookPageInfo2Controller: UIViewController {
 
+    @IBOutlet weak var imgFbInfo: UIImageView!
+    @IBOutlet weak var txtFbInfo: UITextView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        self.imgFbInfo.corner(rounding: UIRectCorner.allCorners, size: CGSize(width: 10, height: 10))
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

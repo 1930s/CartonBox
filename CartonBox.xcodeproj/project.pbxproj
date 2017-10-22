@@ -8,27 +8,34 @@
 
 /* Begin PBXBuildFile section */
 		39E5F1617E5E31B7CE8E4C2F /* Pods_CartonBoxTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90A2BA3D382C736855257840 /* Pods_CartonBoxTests.framework */; };
-		BA30594F1F8B9A47002D6418 /* CognitoStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA30594E1F8B9A47002D6418 /* CognitoStore.swift */; };
+		BA14C4791F9383850017717E /* AmazonEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA14C4781F9383850017717E /* AmazonEnum.swift */; };
 		BA3059521F8D2082002D6418 /* ContainerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3059511F8D2082002D6418 /* ContainerController.swift */; };
 		BA3059541F8D2209002D6418 /* EmptySegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3059531F8D2209002D6418 /* EmptySegue.swift */; };
 		BA3059561F8D2507002D6418 /* FacebookPageInfo1Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3059551F8D2507002D6418 /* FacebookPageInfo1Controller.swift */; };
 		BA3059581F8D2527002D6418 /* FacebookPageInfo2Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3059571F8D2527002D6418 /* FacebookPageInfo2Controller.swift */; };
 		BA30595A1F8D2809002D6418 /* FacebookInfoPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3059591F8D2809002D6418 /* FacebookInfoPageController.swift */; };
+		BA422BFF1F8FB5E900016E8D /* FacebookSignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA422BFE1F8FB5E900016E8D /* FacebookSignInViewModel.swift */; };
+		BA422C011F8FB61600016E8D /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA422C001F8FB61600016E8D /* ProfileViewModel.swift */; };
+		BA422C0C1F8FC2DC00016E8D /* AmazonSessionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA422C091F8FC2DC00016E8D /* AmazonSessionProvider.swift */; };
+		BA422C0D1F8FC2DC00016E8D /* FBSessionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA422C0B1F8FC2DC00016E8D /* FBSessionProvider.swift */; };
+		BA422C0F1F8FC37900016E8D /* CognitoUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA422C0E1F8FC37900016E8D /* CognitoUser.swift */; };
+		BA422C111F8FC95800016E8D /* AmazonCognitoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA422C101F8FC95800016E8D /* AmazonCognitoManager.swift */; };
 		BA4D58771F8E542600E10ECC /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = BA4D58761F8E542600E10ECC /* awsconfiguration.json */; };
-		BA4D58791F8E546F00E10ECC /* AWSConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4D58781F8E546F00E10ECC /* AWSConfiguration.swift */; };
+		BA6125C91F982AF200EB5805 /* CartonBoxUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6125C81F982AF200EB5805 /* CartonBoxUser.swift */; };
+		BA6125CB1F99054C00EB5805 /* DynamoDBErrorEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6125CA1F99054B00EB5805 /* DynamoDBErrorEnum.swift */; };
 		BA8B83BE1F7D4C0900FC64C6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8B83BD1F7D4C0900FC64C6 /* AppDelegate.swift */; };
 		BA8B83C51F7D4C0900FC64C6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA8B83C31F7D4C0900FC64C6 /* Main.storyboard */; };
 		BA8B83C71F7D4C0900FC64C6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA8B83C61F7D4C0900FC64C6 /* Assets.xcassets */; };
 		BA8B83CA1F7D4C0900FC64C6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA8B83C81F7D4C0900FC64C6 /* LaunchScreen.storyboard */; };
 		BA8B83D51F7D4C0900FC64C6 /* CartonBoxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8B83D41F7D4C0900FC64C6 /* CartonBoxTests.swift */; };
-		BAA8D7D91F8145B6008B6FCC /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA8D7D81F8145B6008B6FCC /* ProfileViewController.swift */; };
-		BAA8D7DB1F827E7C008B6FCC /* FacebookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA8D7DA1F827E7C008B6FCC /* FacebookViewController.swift */; };
+		BAA8D7D91F8145B6008B6FCC /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA8D7D81F8145B6008B6FCC /* ProfileController.swift */; };
+		BAA8D7DB1F827E7C008B6FCC /* FacebookSignInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA8D7DA1F827E7C008B6FCC /* FacebookSignInController.swift */; };
 		BAA8D7DD1F8284DF008B6FCC /* FacebookUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA8D7DC1F8284DF008B6FCC /* FacebookUser.swift */; };
 		BAA8D7E11F834611008B6FCC /* SnackKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAA8D7E01F834611008B6FCC /* SnackKit.framework */; };
 		BAA8D7E31F83484D008B6FCC /* SnackKit.framework in Resources */ = {isa = PBXBuildFile; fileRef = BAA8D7E01F834611008B6FCC /* SnackKit.framework */; };
 		BAA8D7E51F8348A9008B6FCC /* SnackKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BAA8D7E01F834611008B6FCC /* SnackKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BAA8D7E71F83F45F008B6FCC /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA8D7E61F83F45F008B6FCC /* BaseViewController.swift */; };
-		BAA8D7E91F8534E4008B6FCC /* AWSDynamoDBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA8D7E81F8534E4008B6FCC /* AWSDynamoDBHelper.swift */; };
+		BAA8D7E91F8534E4008B6FCC /* AmazonDynamoDBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA8D7E81F8534E4008B6FCC /* AmazonDynamoDBManager.swift */; };
 		BAA8D7ED1F8679E2008B6FCC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA8D7EC1F8679E2008B6FCC /* Constants.swift */; };
 		BAA8D80E1F86FFB3008B6FCC /* CustomIdentityProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA8D80D1F86FFB3008B6FCC /* CustomIdentityProvider.swift */; };
 		F4743ABC6AA2748C958B61FC /* Pods_CartonBox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D854C8DB84BC8B6DDEEB9C5 /* Pods_CartonBox.framework */; };
@@ -63,15 +70,22 @@
 		5C72E9BC7BA9370A23CAC385 /* Pods-CartonBox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CartonBox.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CartonBox/Pods-CartonBox.debug.xcconfig"; sourceTree = "<group>"; };
 		7B6CC8D387D8F08293C6F59C /* Pods-CartonBoxTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CartonBoxTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CartonBoxTests/Pods-CartonBoxTests.release.xcconfig"; sourceTree = "<group>"; };
 		90A2BA3D382C736855257840 /* Pods_CartonBoxTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CartonBoxTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BA30594E1F8B9A47002D6418 /* CognitoStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CognitoStore.swift; sourceTree = "<group>"; };
+		BA14C4781F9383850017717E /* AmazonEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmazonEnum.swift; sourceTree = "<group>"; };
 		BA3059501F8BC6FF002D6418 /* CartonBox.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CartonBox.entitlements; sourceTree = "<group>"; };
 		BA3059511F8D2082002D6418 /* ContainerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerController.swift; sourceTree = "<group>"; };
 		BA3059531F8D2209002D6418 /* EmptySegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptySegue.swift; sourceTree = "<group>"; };
 		BA3059551F8D2507002D6418 /* FacebookPageInfo1Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookPageInfo1Controller.swift; sourceTree = "<group>"; };
 		BA3059571F8D2527002D6418 /* FacebookPageInfo2Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookPageInfo2Controller.swift; sourceTree = "<group>"; };
 		BA3059591F8D2809002D6418 /* FacebookInfoPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookInfoPageController.swift; sourceTree = "<group>"; };
+		BA422BFE1F8FB5E900016E8D /* FacebookSignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookSignInViewModel.swift; sourceTree = "<group>"; };
+		BA422C001F8FB61600016E8D /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		BA422C091F8FC2DC00016E8D /* AmazonSessionProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AmazonSessionProvider.swift; path = CartonBox/SessionProvider/AmazonSessionProvider.swift; sourceTree = SOURCE_ROOT; };
+		BA422C0B1F8FC2DC00016E8D /* FBSessionProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBSessionProvider.swift; sourceTree = "<group>"; };
+		BA422C0E1F8FC37900016E8D /* CognitoUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CognitoUser.swift; sourceTree = "<group>"; };
+		BA422C101F8FC95800016E8D /* AmazonCognitoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AmazonCognitoManager.swift; path = CartonBox/Helpers/AmazonCognitoManager.swift; sourceTree = SOURCE_ROOT; };
 		BA4D58761F8E542600E10ECC /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
-		BA4D58781F8E546F00E10ECC /* AWSConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AWSConfiguration.swift; sourceTree = "<group>"; };
+		BA6125C81F982AF200EB5805 /* CartonBoxUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartonBoxUser.swift; sourceTree = "<group>"; };
+		BA6125CA1F99054B00EB5805 /* DynamoDBErrorEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamoDBErrorEnum.swift; sourceTree = "<group>"; };
 		BA8B83BA1F7D4C0900FC64C6 /* CartonBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CartonBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA8B83BD1F7D4C0900FC64C6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BA8B83C41F7D4C0900FC64C6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -81,12 +95,12 @@
 		BA8B83D01F7D4C0900FC64C6 /* CartonBoxTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CartonBoxTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA8B83D41F7D4C0900FC64C6 /* CartonBoxTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartonBoxTests.swift; sourceTree = "<group>"; };
 		BA8B83D61F7D4C0900FC64C6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BAA8D7D81F8145B6008B6FCC /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		BAA8D7DA1F827E7C008B6FCC /* FacebookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookViewController.swift; sourceTree = "<group>"; };
+		BAA8D7D81F8145B6008B6FCC /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
+		BAA8D7DA1F827E7C008B6FCC /* FacebookSignInController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookSignInController.swift; sourceTree = "<group>"; };
 		BAA8D7DC1F8284DF008B6FCC /* FacebookUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookUser.swift; sourceTree = "<group>"; };
 		BAA8D7E01F834611008B6FCC /* SnackKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnackKit.framework; path = ../../Framework/SnackKit.framework; sourceTree = "<group>"; };
 		BAA8D7E61F83F45F008B6FCC /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
-		BAA8D7E81F8534E4008B6FCC /* AWSDynamoDBHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AWSDynamoDBHelper.swift; sourceTree = "<group>"; };
+		BAA8D7E81F8534E4008B6FCC /* AmazonDynamoDBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmazonDynamoDBManager.swift; sourceTree = "<group>"; };
 		BAA8D7EC1F8679E2008B6FCC /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		BAA8D80D1F86FFB3008B6FCC /* CustomIdentityProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomIdentityProvider.swift; sourceTree = "<group>"; };
 		CD0971BFFFB745BC85D34965 /* Pods-CartonBoxTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CartonBoxTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CartonBoxTests/Pods-CartonBoxTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -124,6 +138,43 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		BA14C4771F93836F0017717E /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				BA14C4781F9383850017717E /* AmazonEnum.swift */,
+				BA6125CA1F99054B00EB5805 /* DynamoDBErrorEnum.swift */,
+			);
+			path = Enum;
+			sourceTree = "<group>";
+		};
+		BA422C081F8FC2B100016E8D /* SessionProvider */ = {
+			isa = PBXGroup;
+			children = (
+				BAA8D80D1F86FFB3008B6FCC /* CustomIdentityProvider.swift */,
+				BA422C091F8FC2DC00016E8D /* AmazonSessionProvider.swift */,
+				BA422C0A1F8FC2DC00016E8D /* Facebook */,
+			);
+			name = SessionProvider;
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		BA422C0A1F8FC2DC00016E8D /* Facebook */ = {
+			isa = PBXGroup;
+			children = (
+				BA422C0B1F8FC2DC00016E8D /* FBSessionProvider.swift */,
+			);
+			name = Facebook;
+			path = CartonBox/SessionProvider/Facebook;
+			sourceTree = SOURCE_ROOT;
+		};
+		BA6125C71F9828CB00EB5805 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				BAA8D7EC1F8679E2008B6FCC /* Constants.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
 		BA8B83B11F7D4C0900FC64C6 = {
 			isa = PBXGroup;
 			children = (
@@ -149,12 +200,15 @@
 			children = (
 				BA8B83CB1F7D4C0900FC64C6 /* Info.plist */,
 				BA3059501F8BC6FF002D6418 /* CartonBox.entitlements */,
+				BA6125C71F9828CB00EB5805 /* Constants */,
+				BA14C4771F93836F0017717E /* Enum */,
+				BA422C081F8FC2B100016E8D /* SessionProvider */,
 				BAA8D7D51F800905008B6FCC /* ViewModels */,
-				BA8B83E31F7D4D5400FC64C6 /* Misc */,
+				BA8B83E31F7D4D5400FC64C6 /* Utils */,
 				BA8B83E21F7D4D2700FC64C6 /* Helpers */,
 				BA8B83E11F7D4C5500FC64C6 /* Controllers */,
 				BA8B83E01F7D4C4F00FC64C6 /* Views */,
-				BA8B83DF1F7D4C4000FC64C6 /* Model */,
+				BA8B83DF1F7D4C4000FC64C6 /* DataModel */,
 			);
 			path = CartonBox;
 			sourceTree = "<group>";
@@ -168,12 +222,14 @@
 			path = CartonBoxTests;
 			sourceTree = "<group>";
 		};
-		BA8B83DF1F7D4C4000FC64C6 /* Model */ = {
+		BA8B83DF1F7D4C4000FC64C6 /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
-				BA4D58781F8E546F00E10ECC /* AWSConfiguration.swift */,
+				BAA8D7DC1F8284DF008B6FCC /* FacebookUser.swift */,
+				BA422C0E1F8FC37900016E8D /* CognitoUser.swift */,
+				BA6125C81F982AF200EB5805 /* CartonBoxUser.swift */,
 			);
-			path = Model;
+			path = DataModel;
 			sourceTree = "<group>";
 		};
 		BA8B83E01F7D4C4F00FC64C6 /* Views */ = {
@@ -190,8 +246,8 @@
 			children = (
 				BA8B83BD1F7D4C0900FC64C6 /* AppDelegate.swift */,
 				BA3059511F8D2082002D6418 /* ContainerController.swift */,
-				BAA8D7D81F8145B6008B6FCC /* ProfileViewController.swift */,
-				BAA8D7DA1F827E7C008B6FCC /* FacebookViewController.swift */,
+				BAA8D7D81F8145B6008B6FCC /* ProfileController.swift */,
+				BAA8D7DA1F827E7C008B6FCC /* FacebookSignInController.swift */,
 				BAA8D7E61F83F45F008B6FCC /* BaseViewController.swift */,
 				BA3059551F8D2507002D6418 /* FacebookPageInfo1Controller.swift */,
 				BA3059571F8D2527002D6418 /* FacebookPageInfo2Controller.swift */,
@@ -203,28 +259,27 @@
 		BA8B83E21F7D4D2700FC64C6 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				BAA8D7EC1F8679E2008B6FCC /* Constants.swift */,
-				BAA8D7E81F8534E4008B6FCC /* AWSDynamoDBHelper.swift */,
-				BAA8D80D1F86FFB3008B6FCC /* CustomIdentityProvider.swift */,
-				BA30594E1F8B9A47002D6418 /* CognitoStore.swift */,
+				BA422C101F8FC95800016E8D /* AmazonCognitoManager.swift */,
+				BAA8D7E81F8534E4008B6FCC /* AmazonDynamoDBManager.swift */,
 				BA3059531F8D2209002D6418 /* EmptySegue.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
 		};
-		BA8B83E31F7D4D5400FC64C6 /* Misc */ = {
+		BA8B83E31F7D4D5400FC64C6 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
 				BA4D58761F8E542600E10ECC /* awsconfiguration.json */,
 				BA8B83C61F7D4C0900FC64C6 /* Assets.xcassets */,
 			);
-			path = Misc;
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		BAA8D7D51F800905008B6FCC /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				BAA8D7DC1F8284DF008B6FCC /* FacebookUser.swift */,
+				BA422BFE1F8FB5E900016E8D /* FacebookSignInViewModel.swift */,
+				BA422C001F8FB61600016E8D /* ProfileViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -375,6 +430,7 @@
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/UICKeyChainStore/UICKeyChainStore.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -394,6 +450,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UICKeyChainStore.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -491,18 +548,25 @@
 				BA3059561F8D2507002D6418 /* FacebookPageInfo1Controller.swift in Sources */,
 				BAA8D7E71F83F45F008B6FCC /* BaseViewController.swift in Sources */,
 				BA30595A1F8D2809002D6418 /* FacebookInfoPageController.swift in Sources */,
+				BA422C0F1F8FC37900016E8D /* CognitoUser.swift in Sources */,
 				BA3059521F8D2082002D6418 /* ContainerController.swift in Sources */,
-				BAA8D7E91F8534E4008B6FCC /* AWSDynamoDBHelper.swift in Sources */,
-				BAA8D7D91F8145B6008B6FCC /* ProfileViewController.swift in Sources */,
+				BAA8D7E91F8534E4008B6FCC /* AmazonDynamoDBManager.swift in Sources */,
+				BA14C4791F9383850017717E /* AmazonEnum.swift in Sources */,
+				BAA8D7D91F8145B6008B6FCC /* ProfileController.swift in Sources */,
 				BA8B83BE1F7D4C0900FC64C6 /* AppDelegate.swift in Sources */,
-				BA4D58791F8E546F00E10ECC /* AWSConfiguration.swift in Sources */,
-				BAA8D7DB1F827E7C008B6FCC /* FacebookViewController.swift in Sources */,
+				BA422C0D1F8FC2DC00016E8D /* FBSessionProvider.swift in Sources */,
+				BA422BFF1F8FB5E900016E8D /* FacebookSignInViewModel.swift in Sources */,
+				BAA8D7DB1F827E7C008B6FCC /* FacebookSignInController.swift in Sources */,
 				BA3059541F8D2209002D6418 /* EmptySegue.swift in Sources */,
+				BA422C111F8FC95800016E8D /* AmazonCognitoManager.swift in Sources */,
 				BAA8D7DD1F8284DF008B6FCC /* FacebookUser.swift in Sources */,
 				BAA8D7ED1F8679E2008B6FCC /* Constants.swift in Sources */,
-				BA30594F1F8B9A47002D6418 /* CognitoStore.swift in Sources */,
+				BA6125CB1F99054C00EB5805 /* DynamoDBErrorEnum.swift in Sources */,
+				BA422C0C1F8FC2DC00016E8D /* AmazonSessionProvider.swift in Sources */,
+				BA422C011F8FB61600016E8D /* ProfileViewModel.swift in Sources */,
 				BAA8D80E1F86FFB3008B6FCC /* CustomIdentityProvider.swift in Sources */,
 				BA3059581F8D2527002D6418 /* FacebookPageInfo2Controller.swift in Sources */,
+				BA6125C91F982AF200EB5805 /* CartonBoxUser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
