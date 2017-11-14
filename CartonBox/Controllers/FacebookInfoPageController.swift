@@ -13,7 +13,7 @@ class FacebookInfoPageController: UIPageViewController {
 
     var pages: [UIViewController] = []
     var currentPageIndex:Int = 0
-    var timer:Timer = Timer()
+    lazy var timer:Timer = Timer()
     
     var scrollView: UIScrollView?
     var pgFacebookInfo:UIPageControl?

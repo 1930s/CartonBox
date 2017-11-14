@@ -9,14 +9,16 @@
 import Foundation
 import AWSCore
 import AWSCognito
+import AWSAuthCore
 
 internal let cognitoSyncDataset = "userProfile"
 
 final class CognitoUser {
     
     var userId: String?
-    var name:String?
-    var lastSyncOn:String?
+    var name: String?
+    var lastSyncOn: String?
+    var identityId: String?
     
     init() {
         
@@ -29,9 +31,11 @@ extension CognitoUser {
     func save(completition: AmazonClientCompletition?) {
         // openOrCreateDataset - creates a dataset if it doesn't exists or open existing
         let dataset = AWSCognito(forKey: cognitoSyncKey).openOrCreateDataset(cognitoSyncDataset)
+        
         dataset.setString(userId, forKey: "userId")
         dataset.setString(name, forKey: "name")
         dataset.setString(Date().now.toLocalString("dd/MM/yyyy hh:mm:ss a"), forKey: "lastSyncOn")
+        dataset.setString(AWSIdentityManager.default().identityId!, forKey: "identityId")
         
         CognitoUser.sync(completition: completition)
     }
@@ -43,9 +47,7 @@ extension CognitoUser {
         // 1) Fetch from AWS, if there were any changes
         // 2) Upload local changes to AWS
         dataset.synchronize().continueWith(block: { (task) -> Any? in
-            DispatchQueue.main.async {
-                completition?(task.error)
-            }
+            completition?(task.error)
         })
     }
     
@@ -57,6 +59,7 @@ extension CognitoUser {
         user.userId = dataset.string(forKey: "userId")
         user.name = dataset.string(forKey:"name")
         user.lastSyncOn = dataset.string(forKey: "lastSyncOn")
+        user.identityId = dataset.string(forKey: "identityId")
         
         return user
     }

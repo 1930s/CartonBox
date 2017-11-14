@@ -8,32 +8,64 @@
 
 import Foundation
 
+typealias ProfileCellInfo = (tag:Int, iconName:String, data:String?, placeholder:String?)
+
 class ProfileViewModel{
     
-    var userId:String?
-    var name:String?
-    
-    init() {
-        
+    var user:CartonBoxUser?{
+        return appDelegate.cartonboxUser
     }
     
-    func GetUserDetail(_ userId:String){
+    let arrCell = ["Birthday", "Gender","Email", "Mobile","Nationality"]
+    
+    init() {
+    
+    }
+    
+    func getUserCellInfo(type:String)->ProfileCellInfo{
         
-        if let user = AmazonDynamoDBManager.sharedInstance.GetItem(CartonBoxUser.self, hasKey: userId, rangeKey: nil) as? CartonBoxUser {
-            
-            self.userId = user.UserId
-            self.name = user.Name
+        switch type {
+        case "Email":
+            return (3,"Email", self.user?._email, "Enter your email address")
+        case "Birthday":
+            return (1,"Cake",self.user?._dob, "Select your Birthday date")
+        case "Gender":
+            return (2,"Unknown",self.user?._gender, "Select your Gender")
+        case "Mobile":
+            return (4,"Mobile",self.user?._mobile, "Enter your mobile number")
+        case "Nationality":
+            return (5,"Flag", self.user?._country, "Select your nationality")
+        default:
+            return (0,"none",nil,nil)
         }
     }
     
-    func SaveUserDetail(_ user:CartonBoxUser, completion:@escaping (Bool,String)->()){
+    func getGenderCellInfo(gender:String?) -> ProfileCellInfo{
+        
+        var iconName:String = "Unknown"
+        
+        if let g = gender {
+            switch g {
+            case "Male":
+                iconName = "Male"
+            case "Female":
+                iconName = "Female"
+            default:
+                iconName = "Unknown"
+            }
+        }
+        
+        return (2,iconName,self.user?._gender, "Select your Gender")
+    }
+    
+    func saveUserInfo(_ user:CartonBoxUser, completion:@escaping (Bool,String)->()){
 
-        AmazonDynamoDBManager.sharedInstance.SaveItem(user) { (error:Error?) in
+        AmazonDynamoDBManager.shared.SaveItem(user) { (error:Error?) in
             
             if let _ = error{
                 completion(false, error!.infoMessage!)
             }else{
-                completion(true,"Saved Successful")
+                completion(true,"Profile info have been saved successfully")
             }
         }
     }

@@ -16,4 +16,3 @@ enum AmazonSessionProviderErrors: Error {
 enum AmazonSessionProviderType: String {
     case FB, USERPOOL
 }
-

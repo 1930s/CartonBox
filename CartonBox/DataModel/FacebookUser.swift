@@ -15,7 +15,7 @@ import AWSCognito
 public class FacebookUser{
     
     //MARK: - Property
-    var userID:String {
+    var userId:String {
         return FBSDKProfile.current() == nil ? "" : FBSDKAccessToken.current().userID
     }
     

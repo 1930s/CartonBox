@@ -10,7 +10,7 @@ import UIKit
 import FBSDKCoreKit
 import FBSDKLoginKit
 
-let appDelegate = UIApplication.shared.delegate
+let appDelegate = UIApplication.shared.delegate as! AppDelegate
 let sb: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
 
 @UIApplicationMain
@@ -18,6 +18,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var isInitialized:Bool = false
+    var loadingDisplay = sb.instantiateViewController(withIdentifier: loadingVC) as! LoadingController
+    lazy var timer = Timer()
+    
+    public var facebookUser:FacebookUser?
+    public var cognitoUser:CognitoUser?
+    public var cartonboxUser:CartonBoxUser?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
@@ -45,6 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        applicationLoadFacebookSession()
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
@@ -58,6 +65,88 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationDidBecomeActive(application: UIApplication!) {
         FBSDKAppEvents.activateApp()
+    }
+    
+    //MARK: - Private Action
+    func applicationLoadFacebookSession(){
+        
+        if let _ = FBSDKAccessToken.current() {
+        
+            self.facebookUser = FacebookUser.currentUser()
+                        
+            self.timer = Timer.scheduledTimer(timeInterval: 90, target: self, selector: #selector(AppDelegate.dismissLoading), userInfo: nil, repeats: true)
+            
+            window?.rootViewController?.present(self.loadingDisplay, animated: true, completion: {
+                
+                let group = DispatchGroup()
+                group.enter()
+                
+                DispatchQueue.global().async {
+                    self.loginAmazonCognito(completionHandler: { (error) in
+                        
+                        if let _ = error {
+                            //Todo: log error info
+                        }
+                        
+                        if let _ = self.cartonboxUser {
+                            group.leave()
+                            return
+                        }
+                        
+                        self.loadCartonBoxUser(completionHandler: { (error) in
+                            
+                            if let _ = error {
+                                //Todo: log error info
+                            }
+                            
+                            group.leave()
+                        })
+                    })
+                }
+                
+                group.wait()
+                
+                self.dismissLoading()
+            })
+        }
+    }
+    
+    func loginAmazonCognito(completionHandler:AmazonClientCompletition?){
+        
+        AmazonCognitoManager.shared.loginAmazonCognito(token: self.facebookUser!.tokenString, successBlock: { (result) in
+        
+            completionHandler?(nil)
+        }) { (error) in
+            
+            let _error = NSError(domain: AmazonErrorDomain.AWSCognitoErrorDomain.rawValue, code: CognitoError.cognitoLoginFailed.rawValue, userInfo: nil)
+            
+            completionHandler?(_error)
+        }
+    }
+    
+    func loadCartonBoxUser(completionHandler:AmazonClientCompletition?){
+        
+        AmazonDynamoDBManager.shared.GetItem(CartonBoxUser.self, hasKey: self.facebookUser!.userId, rangeKey: nil) { (result) in
+            
+            if let _ =  result {
+                
+                self.cartonboxUser = result as? CartonBoxUser
+                
+                completionHandler?(nil)
+            }else{
+                let _error = NSError(domain: AmazonErrorDomain.AWSDynamoDBErrorDomain.rawValue, code: DynamoDBError.deleteItemFailed.rawValue, userInfo: nil)
+                
+                completionHandler?(_error)
+            }
+        }
+    }
+    
+    @objc func dismissLoading(){
+        
+        self.loadingDisplay.dismiss(animated: true) {
+            self.timer.invalidate()
+            self.timer = Timer()
+        }
     }
 }
 

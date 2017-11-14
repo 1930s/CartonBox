@@ -29,7 +29,7 @@ final class AmazonCognitoManager {
         return credentialsProvider?.identityId
     }
     
-    class var sharedInstance: AmazonCognitoManager {
+    class var shared: AmazonCognitoManager {
         
         struct Static {
             static var instance: AmazonCognitoManager? = nil
@@ -108,14 +108,14 @@ final class AmazonCognitoManager {
     private func completeLogin(logins: [String : String]?, completition: AmazonClientCompletition?) {
         // Here we setup our default configuration with Credentials Provider, which uses our custom Identity Provider
         customIdentityProvider.tokens = logins
-        self.credentialsProvider = AWSCognitoCredentialsProvider(regionType: Constants.AWS_REGION, identityPoolId: Constants.COGNITO_IDENTITY_POOL, identityProviderManager: customIdentityProvider)
+        self.credentialsProvider = AWSCognitoCredentialsProvider(regionType: AppSetting.AWS_REGION, identityPoolId: AppSetting.COGNITO_IDENTITY_POOL, identityProviderManager: customIdentityProvider)
         
         self.credentialsProvider?.getIdentityId().continueWith(block: { (task) -> Any? in
             
             if(task.error != nil){
                 completition?(task.error)
             }else{
-                let configuration = AWSServiceConfiguration(region: Constants.AWS_REGION, credentialsProvider: self.credentialsProvider)
+                let configuration = AWSServiceConfiguration(region: AppSetting.AWS_REGION, credentialsProvider: self.credentialsProvider)
             
                 AWSServiceManager.default().defaultServiceConfiguration = configuration
                 AWSCognito.register(with: configuration!, forKey: cognitoSyncKey)
@@ -125,5 +125,40 @@ final class AmazonCognitoManager {
             
             return task
         })
+    }
+    
+    func loginAmazonCognito(token:String, successBlock: @escaping SuccessBlock, andFailure failureBlock: @escaping FailureBlock){
+        
+        let fbSession = FBSessionProvider()
+        
+        AmazonCognitoManager.shared.login(sessionProvider: fbSession) { (error) in
+            
+            guard error == nil else{
+                AmazonCognitoManager.shared.clearAll()
+                failureBlock(error! as NSError)
+                return
+            }
+            
+            // Save & Sync user profile from CognitoSync storage
+            CognitoUser.sync(completition: { (error) in
+                
+                guard error == nil else {
+                    failureBlock(nil)
+                    return
+                }
+                
+                appDelegate.cognitoUser = CognitoUser.currentUser()
+                appDelegate.cognitoUser?.userId = appDelegate.facebookUser?.userId
+                appDelegate.cognitoUser?.name = appDelegate.facebookUser?.userName
+                appDelegate.cognitoUser?.save(completition: { (error) in
+                    
+                    if let err = error {
+                        failureBlock(err)
+                    }else{
+                        successBlock(nil)
+                    }
+                })
+            })
+        }
     }
 }

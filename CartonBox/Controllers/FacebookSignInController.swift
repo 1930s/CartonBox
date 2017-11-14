@@ -11,7 +11,7 @@ import SnackKit
 import FBSDKCoreKit
 import FBSDKLoginKit
 
-class FacebookSignInController: UIViewController {
+class FacebookSignInController: BaseViewController {
 
     @IBOutlet weak var vwLoginInfo: UIView!
     @IBOutlet weak var pgLoginInfo: UIPageControl!
@@ -26,11 +26,12 @@ class FacebookSignInController: UIViewController {
         super.viewDidLoad()
 
         self.viewModel = FacebookSignInViewModel()
+        
         self.updateLoginScreenText()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        //super.viewWillAppear(animated)
     }
 
     override func didReceiveMemoryWarning() {
@@ -44,16 +45,22 @@ class FacebookSignInController: UIViewController {
     
     @IBAction func loginWithFacebook(_ sender: Any) {
         
-        if self.viewModel.activeSession{
-            self.viewModel.logoutFacebook()
-            self.updateLoginScreenText()
-        }else{
-            self.viewModel.loginFacebook(from: self, successBlock: { (result) in
-                self.dismiss(animated: true, completion: nil)
+       super.isLoading { () -> Bool in
+         
+            if self.viewModel.activeSession{
+                self.viewModel.logoutFacebook()
                 self.updateLoginScreenText()
-            }, andFailure: { (error) in
-                self.alert(title: "Login Failed", message: "Please try again")
-            })
+                
+            }else{
+                self.viewModel.loginFacebook(from: self, successBlock: { (result) in
+                    self.dismiss(animated: true, completion: nil)
+                    self.updateLoginScreenText()
+                }, andFailure: { (error) in
+                    self.alert(title: "Login Failed", message: "Please try again")
+                })
+            }
+        
+            return true
         }
     }
     
@@ -77,5 +84,11 @@ extension FacebookSignInController{
         
         self.btnLogin.setTitle(self.viewModel.activeSession ?
             "Logout Facebook" : "Login with Facebook", for: UIControlState.normal)
+        
+        if let _ = appDelegate.facebookUser, appDelegate.facebookUser!.activeSession{
+            self.btnClose.isHidden = false
+        }else{
+            self.btnClose.isHidden = true
+        }
     }
 }

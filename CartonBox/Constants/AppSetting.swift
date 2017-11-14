@@ -13,11 +13,17 @@ typealias SuccessBlock = (Any?) -> ()
 typealias FailureBlock = (Error?) -> ()
 typealias CognitoBlock = (Error?) -> ()
 
-public struct Constants{
+public struct AppSetting{
     
     static let AWS_REGION = AWSRegionType.APSoutheast1
     
     static let FACEBOOK_APP_ID:String = "176173076266519"
     
     static let COGNITO_IDENTITY_POOL:String = "ap-southeast-1:1e2d47fd-b934-4509-820b-577648d1fbb5"
+}
+
+public struct DynamoDB{
+    
+    static let CartonBoxUser = "cartonbox-mobilehub-705934583-CartonBoxUser"
+    
 }

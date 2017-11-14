@@ -18,11 +18,8 @@ class FacebookSignInViewModel{
     var onError: ((String) -> ())?
     var onDone: (() -> ())?
     
-    var fb:FBSDKLoginManager!
-    var cognitoUser:CognitoUser?
-    var facebookUser:FacebookUser?
-    
-    var activeSession:Bool{
+    var fb: FBSDKLoginManager!
+    var activeSession: Bool{
         return FBSDKAccessToken.current() != nil
     }
     
@@ -42,77 +39,67 @@ class FacebookSignInViewModel{
                 return
             }
             
-            self.facebookUser = FacebookUser.currentUser()
+            appDelegate.facebookUser = FacebookUser.currentUser()
             
-            self.loginAmazonCognito(token: self.facebookUser!.tokenString, successBlock: { (result) in
+            AmazonCognitoManager.shared.loginAmazonCognito(token: appDelegate.facebookUser!.tokenString, successBlock: { (result) in
                 
-                self.SaveUserDetail(completion: { (error) in
+                AmazonDynamoDBManager.shared.GetItem(CartonBoxUser.self, hasKey: appDelegate.facebookUser!.userId, rangeKey: nil, completionHandler: { (result) in
                     
-                    if let _ = error{
-                        self.logoutFacebook()
-                        failureBlock(error)
-                    }else{
-                        successBlock(self.facebookUser!.tokenString)
+                    if let user = result as? CartonBoxUser {
+                        appDelegate.cartonboxUser = user
                     }
+                    
+                    self.updateCartonBoxUserProfile(completion: { (error) in
+                        
+                        if let _ = error{
+                            self.logoutFacebook()
+                            failureBlock(error)
+                        }else{
+                            successBlock(appDelegate.facebookUser!.tokenString)
+                        }
+                    })
                 })
                 
             }, andFailure: { (error) in
                 self.logoutFacebook()
                 failureBlock(error)
             })
+            
+            UserActivityHelper.CreateFacebookLoginActivity(success: { (activity) in
+                
+            }) { (error) in
+                //Log an error
+            }
         }
     }
     
     func logoutFacebook(){
+        
         self.fb.logOut()
-        self.facebookUser = nil
-        self.cognitoUser = nil
-        
-        //Todo: create fb logout activity
-    }
+        appDelegate.facebookUser = nil
+        appDelegate.cognitoUser = nil
     
-    private func loginAmazonCognito(token:String, successBlock: @escaping SuccessBlock, andFailure failureBlock: @escaping FailureBlock){
-        
-        let fbSession = FBSessionProvider()
-
-        AmazonCognitoManager.sharedInstance.login(sessionProvider: fbSession) { (error) in
-         
-            guard error == nil else{
-                AmazonCognitoManager.sharedInstance.clearAll()
-                failureBlock(error! as NSError)
-                return
-            }
-            // Save & Sync user profile from CognitoSync storage
-            CognitoUser.sync(completition: { (error) in
-                
-                guard error == nil else {
-                    failureBlock(nil)
-                    return
-                }
-                
-                self.cognitoUser = CognitoUser.currentUser()
-                
-                self.cognitoUser?.userId = self.facebookUser?.userID
-                self.cognitoUser?.name = self.facebookUser?.userName
-                self.cognitoUser?.save(completition: { (error) in
-                    
-                    if let err = error {
-                        failureBlock(err)
-                    }else{
-                        successBlock(nil)
-                    }
-                })
-            })
+        UserActivityHelper.CreateFacebookLogoutActivity(success: { (activity) in
+            
+        }) { (error) in
+            //Log an error
         }
     }
     
-    private func SaveUserDetail(completion: AmazonClientCompletition?){
+    private func updateCartonBoxUserProfile(completion: AmazonClientCompletition?){
         
-        let user:CartonBoxUser = CartonBoxUser()
-        user.UserId = self.facebookUser!.userID
-        user.Name = self.facebookUser!.userName
+        if let _ = appDelegate.cartonboxUser, let _ = appDelegate.cartonboxUser!._userId{
+            appDelegate.cartonboxUser?._modifiedOn = Date().now.toLocalString(DateFormat.dateTime)
+        }else{
+            appDelegate.cartonboxUser = CartonBoxUser()
+            appDelegate.cartonboxUser?._createdOn = Date().now.toLocalString(DateFormat.dateTime)
+        }
         
-        AmazonDynamoDBManager.sharedInstance.SaveItem(user) { (error:Error?) in
+        appDelegate.cartonboxUser?._userId = appDelegate.facebookUser!.userId
+        appDelegate.cartonboxUser?._userName = appDelegate.facebookUser!.userName
+        appDelegate.cartonboxUser?._active = NSNumber(value: true)
+        
+        AmazonDynamoDBManager.shared.SaveItem(appDelegate.cartonboxUser!) { (error:Error?) in
             completion?(error)
         }
     }
