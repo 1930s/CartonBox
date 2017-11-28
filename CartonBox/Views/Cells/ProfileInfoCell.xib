@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -20,25 +20,25 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Text Here" textAlignment="natural" minimumFontSize="15" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="vLy-9i-TJp">
-                        <rect key="frame" x="41" y="18" width="271" height="19"/>
+                        <rect key="frame" x="49" y="18" width="255" height="19"/>
                         <nil key="textColor"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
                     </textField>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Cake" translatesAutoresizingMaskIntoConstraints="NO" id="lWb-nf-W8s">
-                        <rect key="frame" x="8" y="15" width="25" height="25"/>
+                        <rect key="frame" x="16" y="15" width="25" height="25"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="25" id="Gwa-M3-vbU"/>
-                            <constraint firstAttribute="width" constant="25" id="OhV-fr-RrO"/>
+                            <constraint firstAttribute="width" constant="25" id="AXs-6i-Zu6"/>
+                            <constraint firstAttribute="height" constant="25" id="LFp-8N-GWP"/>
                         </constraints>
                     </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="vLy-9i-TJp" firstAttribute="leading" secondItem="lWb-nf-W8s" secondAttribute="trailing" constant="8" id="0yw-ii-PjQ"/>
-                    <constraint firstItem="lWb-nf-W8s" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="DD9-5p-VuE"/>
-                    <constraint firstItem="vLy-9i-TJp" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="QGb-QO-SDc"/>
-                    <constraint firstItem="lWb-nf-W8s" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="ujJ-JH-AK6"/>
-                    <constraint firstItem="vLy-9i-TJp" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="xbi-NL-kUV"/>
+                    <constraint firstItem="vLy-9i-TJp" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="73U-pu-Lge"/>
+                    <constraint firstItem="lWb-nf-W8s" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="JQ1-OW-Lst"/>
+                    <constraint firstItem="lWb-nf-W8s" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="Qhv-g2-tz5"/>
+                    <constraint firstItem="vLy-9i-TJp" firstAttribute="leading" secondItem="lWb-nf-W8s" secondAttribute="trailing" constant="8" id="Unf-06-SXx"/>
+                    <constraint firstItem="vLy-9i-TJp" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="aEH-0S-RpM"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

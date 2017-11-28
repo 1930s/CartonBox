@@ -17,9 +17,13 @@ class BaseViewController: UIViewController {
     lazy var facebookSigIn = sb.instantiateViewController(withIdentifier: facebookVC) as! FacebookSignInController
     lazy var loadingDisplay = sb.instantiateViewController(withIdentifier: loadingVC) as! LoadingController
     
+    var tabController:UITabBarController!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.tabController = appDelegate.window!.rootViewController as! UITabBarController
+        
         setNotificationActions()
         
         self.initScreenSetting()
@@ -48,7 +52,7 @@ class BaseViewController: UIViewController {
             self.alert(title: "Error", message: "No internet connection found", style: .alert, actions: [ok,cancel])
         }
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

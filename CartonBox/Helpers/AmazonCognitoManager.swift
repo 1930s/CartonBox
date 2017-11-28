@@ -108,14 +108,14 @@ final class AmazonCognitoManager {
     private func completeLogin(logins: [String : String]?, completition: AmazonClientCompletition?) {
         // Here we setup our default configuration with Credentials Provider, which uses our custom Identity Provider
         customIdentityProvider.tokens = logins
-        self.credentialsProvider = AWSCognitoCredentialsProvider(regionType: AppSetting.AWS_REGION, identityPoolId: AppSetting.COGNITO_IDENTITY_POOL, identityProviderManager: customIdentityProvider)
+        self.credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSConfiguration.AWS_REGION, identityPoolId: AWSConfiguration.CognitoIdentityPoolId, identityProviderManager: customIdentityProvider)
         
         self.credentialsProvider?.getIdentityId().continueWith(block: { (task) -> Any? in
             
             if(task.error != nil){
                 completition?(task.error)
             }else{
-                let configuration = AWSServiceConfiguration(region: AppSetting.AWS_REGION, credentialsProvider: self.credentialsProvider)
+                let configuration = AWSServiceConfiguration(region: AWSConfiguration.AWS_REGION, credentialsProvider: self.credentialsProvider)
             
                 AWSServiceManager.default().defaultServiceConfiguration = configuration
                 AWSCognito.register(with: configuration!, forKey: cognitoSyncKey)

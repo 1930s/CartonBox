@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SnackKit
 
 class LoadingController: UIViewController {
 

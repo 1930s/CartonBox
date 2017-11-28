@@ -11,15 +11,20 @@ import AWSDynamoDB
 
 class ActivityViewModel{
  
-    var allActivities:[CartonBoxUserActivity]!
-    var activityList: Dictionary<String,[CartonBoxUserActivity]>!
+    var allActivities:[UserActivity]!
+    var activityList: Dictionary<String,[UserActivity]>!
     
     init() {
-        self.allActivities = [CartonBoxUserActivity]()
-        self.activityList = Dictionary<String,[CartonBoxUserActivity]>()
+        
+        self.allActivities = [UserActivity]()
+        self.activityList = Dictionary<String,[UserActivity]>()
     }
     
     func loadUserActivities(numberOfRecord: Int, completion: AmazonClientCompletition?){
+        
+        guard let _ = appDelegate.cartonboxUser else {
+            return
+        }
         
         self.allActivities.removeAll()
         self.activityList.removeAll()
@@ -31,11 +36,11 @@ class ActivityViewModel{
         queryExpression.limit = NSNumber(value: numberOfRecord)
         queryExpression.scanIndexForward = false
         
-        AmazonDynamoDBManager.shared.Query(CartonBoxUserActivity.self, expression: queryExpression) { (paginatedOuput) in
+        AmazonDynamoDBManager.shared.Query(UserActivity.self, expression: queryExpression) { (paginatedOuput) in
             
             if let po = paginatedOuput{
             
-                let items = po.items as! [CartonBoxUserActivity]
+                let items = po.items as! [UserActivity]
         
                 for activity in items{
                     self.allActivities.append(activity)
@@ -74,7 +79,7 @@ class ActivityViewModel{
         if todayActivity.count > 0{
             self.activityList["Today"] = todayActivity
         }else{
-            self.activityList["Today"] = [CartonBoxUserActivity]()
+            self.activityList["Today"] = [UserActivity]()
         }
         
         //Yesterday

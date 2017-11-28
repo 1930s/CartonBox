@@ -26,6 +26,8 @@ class ActivityController: BaseViewController {
         self.refresh.frame.size = CGSize(width: 16, height: 16)
         self.refresh.addTarget(self, action: #selector(ActivityController.reloadUserActivities), for: .valueChanged)
         
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        
         self.dtActivity.controller = self
         self.dtActivity.vm = vm
         

@@ -1,1 +1,36 @@
-{"UserAgent":"MobileHub/1.0","Version":"1.0","CredentialsProvider":{"CognitoIdentity":{"Default":{"PoolId":"ap-southeast-1:2c57cb07-9e71-4b43-a931-22666c05d277","Region":"ap-southeast-1"}}},"IdentityManager":{"Default":{}},"S3TransferUtility":{"Default":{"Bucket":"cartonbox-userfiles-mobilehub-1099671608","Region":"ap-southeast-1"}},"Cognito":{"Default":{"Region":"ap-southeast-1"}},"PinpointAnalytics":{"Default":{"AppId":"bb53aa4994ae4841b033cfbdc6186810","Region":"us-east-1"}},"PinpointTargeting":{"Default":{"Region":"us-east-1"}},"UserFileManager":{"Default":{"Bucket":"cartonbox-userfiles-mobilehub-1099671608","Region":"ap-southeast-1"}},"FacebookSignIn":{"AppId":"176173076266519"}}
+{
+    "UserAgent": "MobileHub/1.0",
+    "Version": "1.0",
+    "CredentialsProvider": {
+        "CognitoIdentity": {
+            "Default": {
+                "PoolId": "ap-southeast-1:94c56cd4-6e19-4015-9daa-899835db44e4",
+                "Region": "ap-southeast-1"
+            }
+        }
+    },
+    "IdentityManager": {
+        "Default": {}
+    },
+    "DynamoDBObjectMapper": {
+        "Default": {
+            "Region": "ap-southeast-1"
+        }
+    },
+    "PinpointAnalytics": {
+        "Default": {
+            "AppId": "9a43c4289d954543ae9fd1821d8406e6",
+            "Region": "us-east-1"
+        }
+    },
+    "PinpointTargeting": {
+        "Default": {
+            "Region": "us-east-1"
+        }
+    },
+    "FacebookSignIn": {
+        "AppId": "176173076266519",
+        "Permissions": "public_profile"
+    }
+}
+

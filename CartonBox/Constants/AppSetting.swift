@@ -8,22 +8,33 @@
 
 import Foundation
 import AWSCore
+import SnackKit
 
 typealias SuccessBlock = (Any?) -> ()
 typealias FailureBlock = (Error?) -> ()
 typealias CognitoBlock = (Error?) -> ()
 
-public struct AppSetting{
+public struct AWSConfiguration{
     
-    static let AWS_REGION = AWSRegionType.APSoutheast1
+    static var AWS_REGION = AWSRegionType.APSoutheast1
     
-    static let FACEBOOK_APP_ID:String = "176173076266519"
+    static var FacebookSignIn:String{
+        
+        get{
+            do {
+                let fbJson =  appDelegate.awsConfiguration["FacebookSignIn"]
+                let data = fbJson??.data(using: .utf8)
+                
+                if let json = try JSONSerialization.jsonObject(with: data!, options: []) as? [String:Any]{
+                    return json["AppId"] as! String
+                }
+            }catch let error as NSError{
+                print(error)
+            }
+            
+            return ""
+        }
+    }
     
-    static let COGNITO_IDENTITY_POOL:String = "ap-southeast-1:1e2d47fd-b934-4509-820b-577648d1fbb5"
-}
-
-public struct DynamoDB{
-    
-    static let CartonBoxUser = "cartonbox-mobilehub-705934583-CartonBoxUser"
-    
+    static var COGNITO_IDENTITY_POOL:String = "ap-southeast-1:94c56cd4-6e19-4015-9daa-899835db44e4"
 }

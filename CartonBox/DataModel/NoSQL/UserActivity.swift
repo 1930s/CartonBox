@@ -1,5 +1,5 @@
 //
-//  CartonBoxUserActivity.swift
+//  UserActivity.swift
 //  MySampleApp
 //
 //
@@ -16,11 +16,12 @@ import UIKit
 import AWSDynamoDB
 
 @objcMembers
-class CartonBoxUserActivity: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
+class UserActivity: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     
     var _userId: String?
     var _activityId: String?
     var _action: String?
+    var _active: NSNumber?
     var _createdOn: String?
     var _linkUrl: String?
     var _message: String?
@@ -29,7 +30,7 @@ class CartonBoxUserActivity: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     
     class func dynamoDBTableName() -> String {
 
-        return "cartonbox-mobilehub-705934583-CartonBoxUserActivity"
+        return "cartonbox-mobilehub-2074369928-UserActivity"
     }
     
     class func hashKeyAttribute() -> String {
@@ -47,6 +48,7 @@ class CartonBoxUserActivity: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
                "_userId" : "userId",
                "_activityId" : "activityId",
                "_action" : "action",
+               "_active" : "active",
                "_createdOn" : "createdOn",
                "_linkUrl" : "linkUrl",
                "_message" : "message",

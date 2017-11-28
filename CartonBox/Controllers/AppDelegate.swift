@@ -9,6 +9,8 @@
 import UIKit
 import FBSDKCoreKit
 import FBSDKLoginKit
+import AWSCognito
+import SnackKit
 
 let appDelegate = UIApplication.shared.delegate as! AppDelegate
 let sb: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
@@ -20,16 +22,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var isInitialized:Bool = false
     var loadingDisplay = sb.instantiateViewController(withIdentifier: loadingVC) as! LoadingController
     lazy var timer = Timer()
+    var awsConfiguration:JSON!
     
     public var facebookUser:FacebookUser?
     public var cognitoUser:CognitoUser?
-    public var cartonboxUser:CartonBoxUser?
+    public var cartonboxUser:User?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
+        self.awsConfiguration = FileIOHelper.readJSONFile(name: "awsconfiguration", type: "json")
+
         //Facebook delegate
         FBSDKProfile.enableUpdates(onAccessTokenChange: true)
-        
+
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
 
@@ -126,11 +131,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func loadCartonBoxUser(completionHandler:AmazonClientCompletition?){
         
-        AmazonDynamoDBManager.shared.GetItem(CartonBoxUser.self, hasKey: self.facebookUser!.userId, rangeKey: nil) { (result) in
+        AmazonDynamoDBManager.shared.GetItem(User.self, hasKey: self.facebookUser!.userId, rangeKey: nil) { (result) in
             
             if let _ =  result {
                 
-                self.cartonboxUser = result as? CartonBoxUser
+                self.cartonboxUser = result as? User
                 
                 completionHandler?(nil)
             }else{

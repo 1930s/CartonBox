@@ -13,7 +13,7 @@ class UserActivityHelper{
     
     static func CreateFacebookLoginActivity(success: @escaping SuccessBlock, failure: @escaping FailureBlock){
      
-        let activity = CartonBoxUserActivity()
+        let activity = UserActivity()
         
         activity?._activityId = UUID().uuidString
         activity?._userId = appDelegate.cartonboxUser?._userId
@@ -21,7 +21,8 @@ class UserActivityHelper{
         activity?._message = UserActivityMessageEnum.Login.rawValue
         activity?._action = "NA"
         activity?._linkUrl = "NA"
-        activity?._status = UserActivityStatusEnum.New.rawValue as NSNumber
+        activity?._status = NSNumber(value: UserActivityStatusEnum.New.rawValue)
+        activity?._active = NSNumber(value: true)
         activity?._createdOn = Date().now.toLocalString(DateFormat.dateTime)
         
         self.SaveUserActivity(activity!) { (error) in
@@ -36,7 +37,7 @@ class UserActivityHelper{
     
     static func CreateFacebookLogoutActivity(success: @escaping SuccessBlock,failure: @escaping FailureBlock){
         
-        let activity = CartonBoxUserActivity()
+        let activity = UserActivity()
         
         activity?._activityId = UUID().uuidString
         activity?._userId = appDelegate.cartonboxUser?._userId
@@ -57,7 +58,7 @@ class UserActivityHelper{
         }
     }
     
-    private static func SaveUserActivity(_ activity:CartonBoxUserActivity, completion:@escaping (Error?)->()){
+    private static func SaveUserActivity(_ activity:UserActivity, completion:@escaping (Error?)->()){
         
         AmazonDynamoDBManager.shared.SaveItem(activity) { (error) in
             

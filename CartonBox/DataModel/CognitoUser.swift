@@ -11,7 +11,7 @@ import AWSCore
 import AWSCognito
 import AWSAuthCore
 
-internal let cognitoSyncDataset = "userProfile"
+internal let cognitoSyncDataset = "userInfo"
 
 final class CognitoUser {
     

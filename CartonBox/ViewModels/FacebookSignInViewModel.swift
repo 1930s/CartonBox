@@ -43,10 +43,12 @@ class FacebookSignInViewModel{
             
             AmazonCognitoManager.shared.loginAmazonCognito(token: appDelegate.facebookUser!.tokenString, successBlock: { (result) in
                 
-                AmazonDynamoDBManager.shared.GetItem(CartonBoxUser.self, hasKey: appDelegate.facebookUser!.userId, rangeKey: nil, completionHandler: { (result) in
+                AmazonDynamoDBManager.shared.GetItem(User.self, hasKey: appDelegate.facebookUser!.userId, rangeKey: nil, completionHandler: { (result) in
                     
-                    if let user = result as? CartonBoxUser {
+                    if let user = result as? User {
                         appDelegate.cartonboxUser = user
+                    }else{
+                        appDelegate.cartonboxUser = User()
                     }
                     
                     self.updateCartonBoxUserProfile(completion: { (error) in
@@ -60,16 +62,16 @@ class FacebookSignInViewModel{
                     })
                 })
                 
+                UserActivityHelper.CreateFacebookLoginActivity(success: { (activity) in
+                    
+                }) { (error) in
+                    //Log an error
+                }
+                
             }, andFailure: { (error) in
                 self.logoutFacebook()
                 failureBlock(error)
             })
-            
-            UserActivityHelper.CreateFacebookLoginActivity(success: { (activity) in
-                
-            }) { (error) in
-                //Log an error
-            }
         }
     }
     
@@ -91,7 +93,7 @@ class FacebookSignInViewModel{
         if let _ = appDelegate.cartonboxUser, let _ = appDelegate.cartonboxUser!._userId{
             appDelegate.cartonboxUser?._modifiedOn = Date().now.toLocalString(DateFormat.dateTime)
         }else{
-            appDelegate.cartonboxUser = CartonBoxUser()
+            appDelegate.cartonboxUser = User()
             appDelegate.cartonboxUser?._createdOn = Date().now.toLocalString(DateFormat.dateTime)
         }
         

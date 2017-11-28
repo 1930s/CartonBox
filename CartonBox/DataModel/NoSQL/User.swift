@@ -1,5 +1,5 @@
 //
-//  CartonBoxUser.swift
+//  User.swift
 //  MySampleApp
 //
 //
@@ -16,39 +16,43 @@ import UIKit
 import AWSDynamoDB
 
 @objcMembers
-class CartonBoxUser: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
+class User: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     
     var _userId: String?
-    var _userName: String?
+    var _active: NSNumber?
+    var _country: String?
+    var _createdOn: String?
     var _dob: String?
     var _email: String?
     var _gender: String?
     var _mobile: String?
-    var _country: String?
-    var _createdOn: String?
     var _modifiedOn: String?
-    var _active: NSNumber?
+    var _sourceProvider: String?
+    var _userName: String?
     
     class func dynamoDBTableName() -> String {
-        return DynamoDB.CartonBoxUser
+
+        return "cartonbox-mobilehub-2074369928-User"
     }
     
     class func hashKeyAttribute() -> String {
+
         return "_userId"
     }
     
     override class func jsonKeyPathsByPropertyKey() -> [AnyHashable: Any] {
         return [
                "_userId" : "userId",
-               "_userName" : "userName",
+               "_active" : "active",
+               "_country" : "country",
+               "_createdOn" : "createdOn",
                "_dob" : "dob",
                "_email" : "email",
                "_gender" : "gender",
                "_mobile" : "mobile",
-               "_country" : "country",
-               "_createdOn": "createdOn",
-               "_modifiedOn": "modifiedOn",
-               "_active": "active"
+               "_modifiedOn" : "modifiedOn",
+               "_sourceProvider" : "sourceProvider",
+               "_userName" : "userName",
         ]
     }
 }
