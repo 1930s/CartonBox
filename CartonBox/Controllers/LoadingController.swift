@@ -10,16 +10,21 @@ import UIKit
 
 class LoadingController: UIViewController {
 
+    @IBOutlet weak var vwLoading: UIView!
     @IBOutlet weak var indicatorLoading: UIActivityIndicatorView!
-    @IBOutlet weak var lblLoadingText: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.vwLoading.clipsToBounds = true
+        self.vwLoading.corner(rounding: UIRectCorner.allCorners)
+        
+        self.indicatorLoading.activityIndicatorViewStyle = .gray
+        self.indicatorLoading.clipsToBounds = true
+        self.indicatorLoading.color = UIColor.black
+        
         self.modalPresentationStyle = .overCurrentContext
         self.modalTransitionStyle = .crossDissolve
-        
-        self.indicatorLoading.color = UIColor.brown
     }
 
     override func didReceiveMemoryWarning() {
@@ -27,6 +32,7 @@ class LoadingController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    //MARK: - Methods
     func start(){
         
         indicatorLoading.startAnimating()

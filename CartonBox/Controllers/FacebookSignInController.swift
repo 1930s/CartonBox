@@ -20,14 +20,12 @@ class FacebookSignInController: BaseViewController {
     @IBOutlet weak var btnClose: UIButton!
     @IBOutlet weak var pgFacebookInfo: UIPageControl!
     
-    var viewModel: FacebookSignInViewModel!
+    var vm:FacebookSignInViewModel = FacebookSignInViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.viewModel = FacebookSignInViewModel()
-        
-        self.updateLoginScreenText()
+        self.setLoginInfo()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -39,6 +37,7 @@ class FacebookSignInController: BaseViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    //MARK: - Actions
     @IBAction func closeFacebookLogin(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
@@ -47,14 +46,14 @@ class FacebookSignInController: BaseViewController {
         
        super.isLoading { () -> Bool in
          
-            if self.viewModel.activeSession{
-                self.viewModel.logoutFacebook()
-                self.updateLoginScreenText()
+            if self.vm.activeSession{
+                self.vm.logoutFacebook()
+                self.setLoginInfo()
                 
             }else{
-                self.viewModel.loginFacebook(from: self, successBlock: { (result) in
+                self.vm.loginFacebook(from: self, successBlock: { (result) in
                     self.dismiss(animated: true, completion: nil)
-                    self.updateLoginScreenText()
+                    self.setLoginInfo()
                 }, andFailure: { (error) in
                     self.alert(title: "Login Failed", message: "Please try again")
                 })
@@ -64,6 +63,24 @@ class FacebookSignInController: BaseViewController {
         }
     }
     
+    //MARK: - Methods
+    fileprivate func setLoginInfo(){
+        
+        self.lblLoginInfo.text = self.vm.activeSession ?
+            "You already logged in" : "You are not logged in yet"
+        
+        self.btnLogin.layer.cornerRadius = CGFloat(20.0)
+        self.btnLogin.setTitle(self.vm.activeSession ?
+            "Logout Facebook" : "Login with Facebook", for: UIControlState.normal)
+        
+        if let _ = appDelegate.facebookUser{
+            self.btnClose.isHidden = appDelegate.facebookUser!.activeSession
+        }else{
+            btnClose.isHidden = false
+        }
+    }
+    
+    //MARK: - Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         let destination = segue.destination as! ContainerController
@@ -71,24 +88,4 @@ class FacebookSignInController: BaseViewController {
         destination.containerParent = self
     }
     
-}
-
-extension FacebookSignInController{
-    
-    func updateLoginScreenText(){
-        
-        self.btnLogin.layer.cornerRadius = CGFloat(20.0)
-        
-        self.lblLoginInfo.text = self.viewModel.activeSession ?
-            "You already logged in" : "You are not logged in yet"
-        
-        self.btnLogin.setTitle(self.viewModel.activeSession ?
-            "Logout Facebook" : "Login with Facebook", for: UIControlState.normal)
-        
-        if let _ = appDelegate.facebookUser, appDelegate.facebookUser!.activeSession{
-            self.btnClose.isHidden = false
-        }else{
-            self.btnClose.isHidden = true
-        }
-    }
 }

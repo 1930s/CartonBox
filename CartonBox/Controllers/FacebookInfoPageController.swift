@@ -23,14 +23,15 @@ class FacebookInfoPageController: UIPageViewController {
 
         self.dataSource = self
         self.delegate = self
-        
-        pageAssignment()
+
+        self.assignPages()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         
         if let first = self.pages.first {
             self.setViewControllers([first], direction: .forward, animated: false, completion: nil)
         }
-        
-        self.pgFacebookInfo?.numberOfPages = pages.count
     }
     
     override func didReceiveMemoryWarning() {
@@ -38,12 +39,15 @@ class FacebookInfoPageController: UIPageViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    
-    private func initPageController(_ name:String)->UIViewController{
-        return sb.instantiateViewController(withIdentifier: name)
-    }
-    
-    private func pageAssignment(){
+    //MARK: - Methods
+    fileprivate func assignPages(){
+        
+        func initPageController(_ name:String)->UIViewController{
+            return sb.instantiateViewController(withIdentifier: name)
+        }
+        
+        let fbPage1 = initPageController("FacebookInfo1") as! FacebookPageInfo1Controller
+        let fbPage2 = initPageController("FacebookInfo2") as! FacebookPageInfo2Controller
         
         if pages.count > 0 {
             for i in 0...self.pages.count-1{
@@ -53,26 +57,26 @@ class FacebookInfoPageController: UIPageViewController {
         }
         
         pages.removeAll()
+        pages.append(fbPage1)
+        pages.append(fbPage2)
         
-        let page1 = self.initPageController("FacebookInfo1") as! FacebookPageInfo1Controller
-        let page2 = self.initPageController("FacebookInfo2") as! FacebookPageInfo2Controller
+        self.pgFacebookInfo?.numberOfPages = pages.count
         
-        pages.append(page1)
-        pages.append(page2)
-        
-        startPagesSpining()
+        startPagesSpining(true)
     }
     
-    public func startPagesSpining(){
+    func startPagesSpining(_ started:Bool){
         
-        self.timer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(FacebookInfoPageController.shiftPage), userInfo: nil, repeats: true)
+        if started{
+            self.timer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(FacebookInfoPageController.shiftPage), userInfo: nil, repeats: true)
+        }else{
+            self.timer.invalidate()
+            self.timer = Timer()
+        }
+        
     }
     
-    public func stopPageSpining(){
-        self.timer.invalidate()
-        self.timer = Timer()
-    }
-    
+    //MARK: - Actions
     @objc private func shiftPage(){
         
         if self.currentPageIndex == 1{
@@ -90,6 +94,7 @@ class FacebookInfoPageController: UIPageViewController {
     }
 }
 
+//MARK: - Extension
 extension FacebookInfoPageController: UIPageViewControllerDataSource, UIPageViewControllerDelegate{
     
     override func setViewControllers(_ viewControllers: [UIViewController]?, direction: UIPageViewControllerNavigationDirection, animated: Bool, completion: ((Bool) -> Void)? = nil) {

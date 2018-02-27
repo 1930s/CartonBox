@@ -8,6 +8,7 @@
 
 import UIKit
 import FBSDKCoreKit
+import Bond
 import SnackKit
 
 class ProfileController: BaseViewController {
@@ -18,44 +19,26 @@ class ProfileController: BaseViewController {
     @IBOutlet var dtProfile: ProfileDataSource!
     @IBOutlet weak var btnSave: UIBarButtonItem!
     
-    var viewModel: ProfileViewModel!
-    var datePicker = sb.instantiateViewController(withIdentifier: ControllerName.DatePickerVC) as! DatePickerController
-    var genderPicker = sb.instantiateViewController(withIdentifier: ControllerName.CommonPicker) as! CommonPickerController
-    var countryPicker = sb.instantiateViewController(withIdentifier: ControllerName.CommonPicker) as! CommonPickerController
-
+    var vm:ProfileViewModel = ProfileViewModel()
+    let datePicker = sb.instantiateViewController(withIdentifier: ControllerName.DatePickerVC) as! DatePickerController
+    let genderPicker = sb.instantiateViewController(withIdentifier: ControllerName.CommonPicker) as! CommonPickerController
+    let countryPicker = sb.instantiateViewController(withIdentifier: ControllerName.CommonPicker) as! CommonPickerController
+    
+    let genders = Parameters.getGenderList()
+    let countries = Parameters.getAllCountries()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let dismissKeyboardTap = UITapGestureRecognizer(target: self, action: #selector(ProfileController.dismissViewController))
-    
-        self.viewModel = ProfileViewModel()
-
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        
+        initializePickers()
+        initializeTable()
+        
         self.vwFBUserProfile.profileID = appDelegate.facebookUser?.userId
         self.lblUserName.text = appDelegate.facebookUser?.userName ?? Message.Anonymous
         
-        self.navigationController?.navigationBar.prefersLargeTitles = true
-        
-        self.datePicker.delegate = self
-        
-        self.genderPicker.delegate = self
-        self.genderPicker.parameters = Parameters.getGenderList()
-        
-        self.countryPicker.delegate = self
-        self.countryPicker.parameters = Parameters.getAllCountries()
-        
-        self.dtProfile.controller = self
-        self.dtProfile.vw = self.viewModel
-        self.dtProfile.datePicker = self.datePicker
-        self.dtProfile.genderPicker = self.genderPicker
-        self.dtProfile.countryPicker = self.countryPicker
-        
-        self.tblProfileInfo.delegate = dtProfile
-        self.tblProfileInfo.dataSource = dtProfile
-        self.tblProfileInfo.register(UINib(nibName: profileInfoCell, bundle: nil), forCellReuseIdentifier: profileInfoCell)
-        self.tblProfileInfo.register(UINib(nibName: facebookCell, bundle: nil), forCellReuseIdentifier: facebookCell)
-       
-        dismissKeyboardTap.cancelsTouchesInView = false
-        self.tblProfileInfo.addGestureRecognizer(dismissKeyboardTap)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -72,6 +55,7 @@ class ProfileController: BaseViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    //MARK: - Override Base
     override func initScreenSetting() {
         self.vwFBUserProfile.circle()
         self.lblUserName.text = Message.Anonymous
@@ -92,90 +76,113 @@ class ProfileController: BaseViewController {
         self.tblProfileInfo.reloadData()
     }
     
+    //MARK: - Methods
+    fileprivate func bindViewModelInputs(){
+        
+        for i in 0..<5{
+            let cell = self.tblProfileInfo.cellForRow(at: IndexPath(row: i, section: 0)) as! ProfileInfoCell
+            
+            cell.txtInfo.reactive.text.observeNext(with: { (text) in
+                
+                switch i{
+                case 0:
+                    self.vm.user?._dob = cell.txtInfo.text
+                case 1:
+                    self.vm.user?._gender = cell.txtInfo.text
+                case 2:
+                    self.vm.user?._email = cell.txtInfo.text
+                case 3:
+                    self.vm.user?._mobile = cell.txtInfo.text
+                case 4:
+                    self.vm.user?._country = cell.txtInfo.text
+                default:
+                    break
+                }
+            })
+        }
+    }
+    
+    fileprivate func initializeTable() {
+        let dismissKeyboardTap = UITapGestureRecognizer(target: self, action: #selector(ProfileController.dismissViewController))
+        dismissKeyboardTap.cancelsTouchesInView = false
+        
+        self.dtProfile.controller = self
+        self.dtProfile.vm = self.vm
+        
+        self.tblProfileInfo.addGestureRecognizer(dismissKeyboardTap)
+        self.tblProfileInfo.separatorStyle = .none
+        self.tblProfileInfo.delegate = dtProfile
+        self.tblProfileInfo.dataSource = dtProfile
+        self.tblProfileInfo.register(UINib(nibName: profileInfoCell, bundle: nil), forCellReuseIdentifier: profileInfoCell)
+        self.tblProfileInfo.register(UINib(nibName: facebookCell, bundle: nil), forCellReuseIdentifier: facebookCell)
+        self.tblProfileInfo.register(UINib(nibName: mobileCell, bundle: nil), forCellReuseIdentifier: mobileCell)
+    }
+    
+    fileprivate func initializePickers() {
+        
+        datePicker.delegate = self
+        
+        genderPicker.delegate = self
+        genderPicker.parameters = genders
+        
+        countryPicker.delegate = self
+        countryPicker.parameters = countries
+    }
+    
+    //MARK: - Actions
     @objc func dismissViewController(){
         self.view.endEditing(true)
     }
     
-    @IBAction func onSaveProfileInfo(_ sender: Any) {
+    @IBAction func onSaveProfileInfo(_ sender: UIBarButtonItem) {
         
-        if !self.validateProfileInfo(){
+        let dob = self.tblProfileInfo.cellForRow(at: IndexPath(row: 0, section: 0)) as? ProfileInfoCell
+        let gender = self.tblProfileInfo.cellForRow(at: IndexPath(row: 1, section: 0)) as? ProfileInfoCell
+        let email = self.tblProfileInfo.cellForRow(at: IndexPath(row: 2, section: 0)) as? ProfileInfoCell
+        let mobile = self.tblProfileInfo.cellForRow(at: IndexPath(row: 3, section: 0)) as? MobileCell
+        let nationality = self.tblProfileInfo.cellForRow(at: IndexPath(row: 4, section: 0)) as? ProfileInfoCell
+        
+        guard let _ = dob, !dob!.txtInfo.text!.isEmpty else{
+            self.alert(title: Message.Warning, message: Message.InvalidDOB)
             return
         }
         
-        //dob
-        let dob = self.tblProfileInfo.cellForRow(at: IndexPath(row: 0, section: 0)) as? ProfileInfoCell
-        
-        //gender
-        let gender = self.tblProfileInfo.cellForRow(at: IndexPath(row: 1, section: 0)) as? ProfileInfoCell
-
-        //email
-        let email = self.tblProfileInfo.cellForRow(at: IndexPath(row: 2, section: 0)) as? ProfileInfoCell
+        guard let _ = gender, !gender!.txtInfo.text!.isEmpty else{
+            self.alert(title: Message.Warning, message: Message.InvalidGender)
+            return
+        }
         
         guard let _ = email, !email!.txtInfo.text!.isEmpty else{
             self.alert(title: Message.Warning, message: Message.InvalidEmail)
             return
         }
         
-        //mobile
-        let mobile = self.tblProfileInfo.cellForRow(at: IndexPath(row: 3, section: 0)) as? ProfileInfoCell
-        
         guard let _  = mobile , !mobile!.txtInfo.text!.isEmpty else{
             self.alert(title: Message.Warning, message: Message.InvalidMobile)
             return
         }
         
-        //country
-        let nationality = self.tblProfileInfo.cellForRow(at: IndexPath(row: 4, section: 0)) as? ProfileInfoCell
-        
-        if appDelegate.cartonboxUser == nil{
-            appDelegate.cartonboxUser = User()//UserProfile first time created
+        guard let _ = nationality , !nationality!.txtInfo.text!.isEmpty else{
+            self.alert(title: Message.Warning, message: Message.InvalidCountry)
+            return
         }
         
-        appDelegate.cartonboxUser?._gender = gender?.txtInfo.text!
-        appDelegate.cartonboxUser?._dob = dob?.txtInfo.text!
-        appDelegate.cartonboxUser?._email = email!.txtInfo.text!
-        appDelegate.cartonboxUser?._mobile = mobile!.txtInfo.text!
-        appDelegate.cartonboxUser?._country = nationality?.txtInfo.text!
-        appDelegate.cartonboxUser?._active = true
-        appDelegate.cartonboxUser?._modifiedOn = Date().now.toLocalString(DateFormat.dateTime)
-        
-        viewModel.saveUserInfo(appDelegate.cartonboxUser!) { (success, message) in
+        appDelegate.showLoading { (hideLoading) in
             
-            if success{
-                self.alert(title: Message.Info, message: message)
-            }else{
-                self.alert(title: Message.Error, message: message)
+            self.vm.saveUserInfo { (success, message) in
+                hideLoading()
+                self.alert(title: success ? Message.Info : Message.Warning, message: message)
             }
         }
-    }
-    
-    func validateProfileInfo()->Bool{
-     
-        var completed = true
-
-        for i in 0..<5{
-            let cell = self.tblProfileInfo.cellForRow(at: IndexPath(row: i, section: 0)) as! ProfileInfoCell
-            
-            if let txt = cell.txtInfo.text, txt.isEmpty{
-                completed = false
-                break
-            }
-        }
-        
-        if !completed{
-            self.alert(title: Message.Warning, message: Message.RequiredProfileInfo)
-        }
-        
-        return completed
     }
 }
 
+//MARK: - Extension
 extension ProfileController: DatePickerDelegate{
     
     func returnSelectedDate(_ selectedDate: String) {
         
-        let cell = self.tblProfileInfo.cellForRow(at:
-            IndexPath(row: viewModel.arrCell.index(of: "Birthday")!, section: 0)) as! ProfileInfoCell
+        let cell = self.tblProfileInfo.cellForRow(at: IndexPath(row: vm.arrCell.index(of: "Birthday")!, section: 0)) as! ProfileInfoCell
         
         cell.txtInfo.text = selectedDate
     }
@@ -183,23 +190,30 @@ extension ProfileController: DatePickerDelegate{
 
 extension ProfileController: CommonPickerDelegate{
     
-    func returnSelectedParameter(_ selectedParameter: String) {
-     
-        if Parameters.getGenderList().contains(selectedParameter){
-            
-            let cell = self.tblProfileInfo.cellForRow(at:
-                IndexPath(row: viewModel.arrCell.index(of: "Gender")!, section: 0)) as! ProfileInfoCell
-            
-            cell.txtInfo.text = selectedParameter
-            cell.imgIcon.image = UIImage(named: viewModel.getGenderCellInfo(gender: selectedParameter).iconName)
+    func returnSelectedParameter(_ parameter: String, dismissPicker: Bool) {
         
-        }else if Parameters.getAllCountries().contains(selectedParameter){
+        if Parameters.getGenderList().contains(parameter){
             
-            let cell = self.tblProfileInfo.cellForRow(at:
-                IndexPath(row: viewModel.arrCell.index(of: "Nationality")!, section: 0)) as! ProfileInfoCell
+            let genderCell = self.tblProfileInfo.cellForRow(at:
+                IndexPath(row: vm.arrCell.index(of: "Gender")!, section: 0)) as! ProfileInfoCell
             
-            cell.txtInfo.text = selectedParameter
-            cell.imgIcon.image = UIImage(named: viewModel.getUserCellInfo(type: "Nationality").iconName)
+            genderCell.txtInfo.text = parameter
+            genderCell.imgIcon.image = UIImage(named: vm.getGenderCellInfo(gender: parameter).iconName)
+            
+        }else if Parameters.getAllCountries().contains(parameter){
+            
+            let nationalityCell = self.tblProfileInfo.cellForRow(at:
+                IndexPath(row: vm.arrCell.index(of: "Nationality")!, section: 0)) as! ProfileInfoCell
+            let mobileCell = self.tblProfileInfo.cellForRow(at: IndexPath(row: vm.arrCell.index(of: "Mobile")!, section: 0)) as! MobileCell
+            
+            nationalityCell.txtInfo.text = parameter
+            nationalityCell.imgIcon.image = UIImage(named: vm.getUserCellInfo(type: "Nationality").iconName)
+            
+            mobileCell.lblMobileCountryCode.text = Parameters.getMobileCountryCode(parameter)
+        }
+        
+        if dismissPicker{
+            self.view.endEditing(true)
         }
     }
 }

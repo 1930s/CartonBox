@@ -14,6 +14,7 @@ class ApplicationTabController: UITabBarController {
         super.viewDidLoad()
 
         self.delegate = self
+        self.title = ""
     }
 
     override func didReceiveMemoryWarning() {
@@ -22,6 +23,7 @@ class ApplicationTabController: UITabBarController {
     }
 }
 
+//MARK: - Extension
 extension ApplicationTabController: UITabBarControllerDelegate{
     
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {

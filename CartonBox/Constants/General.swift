@@ -13,6 +13,10 @@ public struct ControllerName{
     static let CommonPicker = "CommonPickerVC"
     static let DatePickerVC = "DatePickerVC"
     static let ProfileVC = "ProfileVC"
+    static let SearchContactVC = "SearchContactVC"
+    static let PhotoViewerVC = "PhotoViewerVC"
+    static let PHPageViewVC  = "PHPageViewVC"
+    static let VideoViewerVC = "VideoViewerVC"
 }
 
 public struct Message{
@@ -23,15 +27,24 @@ public struct Message{
     static let Info = "Infomation"
     static let Warning = "Warning"
     static let Error = "Error"
+    static let TimeOut = "Time Out"
     
-    static let ReLogin = "Invalid User Info.Please re-login."
-    //static let IncompleteProfileInfo = "Your profile is incomplete. \nPlease fill in all info"
-    static let RequiredProfileInfo = "Application requires a complete profile. \nPlease fill in all info and save your profile"
-    static let InvalidDOB = "Please select your date of birth"
-    static let InvalidEmail = "Pleasse enter your email address \nE.g: cartonbox@mail.com"
-    static let InvalidMobile = "Pleasse enter your mobile number \nE.g: 0123456789"
-    static let InvalidGender = "Please select your gender"
-    static let InvalidCountry = "Please select your natinality"
+    static let SavedProfile = "Your profile have been successfully updated"
+    static let RequiredProfileInfo = "Application need your completed profile information to better identify your needs and serve you"
+    static let InvalidDOB = "Please select a date of birth"
+    static let InvalidEmail = "Pleasse enter a valid email address \nExample: cartonbox@mail.com"
+    static let InvalidMobile = "Pleasse enter a valid mobile number \nExample: +60 123456789"
+    static let InvalidGender = "Please select a gender"
+    static let InvalidCountry = "Please select a nationality"
+    static let NoInternetConnect = "No Internet Connection"
+    static let RequiredReceipent = "Please add one or many receipent(s)"
+    
+    static let NewBoxMandatory = "You must provide a title and one or many receipent(s)"
+    
+    static let CannotLoadVideo = "Cannot load video"
+    static let CannotLoadImage = "Cannot load image"
+
+    static let PhotoLoadTimeout = "Timeout loading photo from iCloud.Would you like to reload the photo?"
 }
 
 public struct DateFormat {
@@ -80,6 +93,22 @@ public struct Parameters{
     
     static func getGenderList()->[String]{
         return ["Male","Female"]
+    }
+    
+    static func getMobileCountryCode(_ country:String)->String{
+        
+        var countryCode = ""
+        
+        switch country {
+        case "Singapore":
+            countryCode = "+65"
+        case "Malaysia":
+            countryCode = "+60"
+        default:
+            countryCode = ""
+        }
+        
+        return countryCode
     }
 }
 

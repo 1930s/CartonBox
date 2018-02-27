@@ -9,14 +9,16 @@
 import UIKit
 
 protocol CommonPickerDelegate {
-    func returnSelectedParameter(_ selectedParameter:String)
+    func returnSelectedParameter(_ parameter:String, dismissPicker:Bool)
 }
 
 class CommonPickerController: UIViewController {
 
     @IBOutlet weak var dataPicker: UIPickerView!
-   
+    @IBOutlet weak var btnDone: UIButton!
+    
     var parameters:[String]?
+    var selectedIndex:Int?
     var delegate:CommonPickerDelegate?
     
     override func viewDidLoad() {
@@ -30,8 +32,24 @@ class CommonPickerController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    //MARK: - Actions
+    @IBAction func onDoneSelection(_ sender: Any) {
+        
+        let selectedRow = dataPicker.selectedRow(inComponent: 0)
+        let param = parameters![selectedRow]
+        
+        self.delegate?.returnSelectedParameter(param, dismissPicker: true)
+    }
+    
+    //MARK: - Methods
+    func setSelectedRow(selectedRowIndex:Int, inComponent componentIndex:Int){
+        
+        self.dataPicker.selectRow(selectedRowIndex, inComponent: componentIndex, animated: false)
+    }
 }
 
+//MARK: - Extension
 extension CommonPickerController : UIPickerViewDataSource, UIPickerViewDelegate{
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -56,6 +74,6 @@ extension CommonPickerController : UIPickerViewDataSource, UIPickerViewDelegate{
         let selectedRow = dataPicker.selectedRow(inComponent: component)
         let param = parameters![selectedRow]
         
-        self.delegate?.returnSelectedParameter(param)
+        self.delegate?.returnSelectedParameter(param, dismissPicker: false)
     }
 }

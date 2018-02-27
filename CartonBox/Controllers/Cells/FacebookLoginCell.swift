@@ -9,12 +9,10 @@
 import UIKit
 
 protocol FacebookCellDelegate {
-    
     func openFacebookLoginView()
 }
 
 let facebookCell = "FacebookCell"
-
 
 class FacebookCell: UITableViewCell {
 
@@ -23,7 +21,8 @@ class FacebookCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        self.btnLogout.layer.cornerRadius = CGFloat(20.0)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -32,7 +31,9 @@ class FacebookCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    //MARK: - Actions
     @IBAction func onPressLogout(_ sender: Any) {
         self.delegate?.openFacebookLoginView()
     }
+    
 }

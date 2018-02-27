@@ -11,6 +11,7 @@ import FBSDKCoreKit
 import FBSDKLoginKit
 import AWSCognito
 import SnackKit
+import AVFoundation
 
 let appDelegate = UIApplication.shared.delegate as! AppDelegate
 let sb: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
@@ -30,11 +31,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
+        let audioSession = AVAudioSession.sharedInstance()
+        
+        self.window?.makeKeyAndVisible()
+        self.window?.backgroundColor = UIColor.white
+        
         self.awsConfiguration = FileIOHelper.readJSONFile(name: "awsconfiguration", type: "json")
 
         //Facebook delegate
         FBSDKProfile.enableUpdates(onAccessTokenChange: true)
 
+        //Audio Session
+        do {
+            try audioSession.setCategory(AVAudioSessionCategoryPlayback)
+        }catch{
+            print("Setting category to AVAudioSessionCategoryPlayback failed.")
+        }
+        
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
 
@@ -55,7 +68,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface
+        
         applicationLoadFacebookSession()
     }
 
@@ -78,10 +92,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let _ = FBSDKAccessToken.current() {
         
             self.facebookUser = FacebookUser.currentUser()
-                        
-            self.timer = Timer.scheduledTimer(timeInterval: 90, target: self, selector: #selector(AppDelegate.dismissLoading), userInfo: nil, repeats: true)
             
-            window?.rootViewController?.present(self.loadingDisplay, animated: true, completion: {
+            showLoading(closure: { (hideLoading) in
                 
                 let group = DispatchGroup()
                 group.enter()
@@ -90,7 +102,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     self.loginAmazonCognito(completionHandler: { (error) in
                         
                         if let _ = error {
-                            //Todo: log error info
+                            //Todo: - log error info
                         }
                         
                         if let _ = self.cartonboxUser {
@@ -101,7 +113,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         self.loadCartonBoxUser(completionHandler: { (error) in
                             
                             if let _ = error {
-                                //Todo: log error info
+                                //Todo: - log error info
                             }
                             
                             group.leave()
@@ -111,12 +123,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
                 group.wait()
                 
-                self.dismissLoading()
+                hideLoading()
             })
         }
     }
     
-    func loginAmazonCognito(completionHandler:AmazonClientCompletition?){
+    fileprivate func loginAmazonCognito(completionHandler:AmazonClientCompletition?){
         
         AmazonCognitoManager.shared.loginAmazonCognito(token: self.facebookUser!.tokenString, successBlock: { (result) in
         
@@ -129,7 +141,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    func loadCartonBoxUser(completionHandler:AmazonClientCompletition?){
+    fileprivate func loadCartonBoxUser(completionHandler:AmazonClientCompletition?){
         
         AmazonDynamoDBManager.shared.GetItem(User.self, hasKey: self.facebookUser!.userId, rangeKey: nil) { (result) in
             
@@ -146,7 +158,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    @objc func dismissLoading(){
+    @objc func showLoading(closure: @escaping (_ hiding:@escaping()->Void)->Void){
+        
+        //loading auto hide after 5 minutes
+        self.timer = Timer.scheduledTimer(timeInterval: 300, target: self, selector: #selector(AppDelegate.hideLoading), userInfo: nil, repeats: true)
+        
+        window?.rootViewController?.present(self.loadingDisplay, animated: true, completion: {
+            closure({
+                self.hideLoading()
+            })
+        })
+    }
+
+    @objc func hideLoading(){
         
         self.loadingDisplay.dismiss(animated: true) {
             self.timer.invalidate()

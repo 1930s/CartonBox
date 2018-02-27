@@ -17,20 +17,15 @@ class DatePickerController: UIViewController {
 
     @IBOutlet weak var vwContainer: UIView!
     @IBOutlet weak var dtCalander: UIDatePicker!
+    @IBOutlet weak var btnDone: UIButton!
     
     var delegate:DatePickerDelegate?
-    var df:DateFormatter!
+    var dateFormatter:DateFormatter = DateFormatter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.df = DateFormatter()
-        self.df.dateFormat = DateFormat.dateBeautify
-
-        self.dtCalander.datePickerMode = .date
-        self.dtCalander.date = Date().now.add(years: -18)
-        self.dtCalander.minimumDate = Date().now.add(years: -80)
-        self.dtCalander.maximumDate =  Date().now.add(years: -5)
+        
+        initializeDatePicker()
     }
 
     override func didReceiveMemoryWarning() {
@@ -38,7 +33,24 @@ class DatePickerController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    //MARK: - Actions
+    @IBAction func onDoneSelection(_ sender: Any) {
+        self.delegate?.returnSelectedDate(dateFormatter.string(from: dtCalander.date))
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     @IBAction func onPickerValueChanged(_ sender: Any) {
-        self.delegate?.returnSelectedDate(df.string(from: dtCalander.date))
+        self.delegate?.returnSelectedDate(dateFormatter.string(from: dtCalander.date))
+    }
+    
+    //MARK: - Methods
+    fileprivate func initializeDatePicker() {
+
+        self.dateFormatter.dateFormat = DateFormat.dateBeautify
+
+        self.dtCalander.datePickerMode = .date
+        self.dtCalander.date = Date().now.add(years: -18)
+        self.dtCalander.minimumDate = Date().now.add(years: -80)
+        self.dtCalander.maximumDate =  Date().now.add(years: -5)
     }
 }

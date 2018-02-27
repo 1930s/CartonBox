@@ -12,9 +12,9 @@ import SnackKit
 
 class ActivityDataSource : NSObject, UITableViewDataSource, UITableViewDelegate{
     
-    var controller:ActivityController!
     var vm:ActivityViewModel!
     
+    //MARK: - UITableViewDataSource
     func numberOfSections(in tableView: UITableView) -> Int {
         
         if Array(vm.activityList.keys).count > 0{
@@ -28,7 +28,7 @@ class ActivityDataSource : NSObject, UITableViewDataSource, UITableViewDelegate{
         
         if Array(vm.activityList.values).count > 0{
             
-            let key = Array(vm.activityList.keys)[section]
+            let _ = Array(vm.activityList.keys)[section]
             
             switch section{
             case 0:

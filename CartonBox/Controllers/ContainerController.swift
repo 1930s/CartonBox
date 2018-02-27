@@ -22,7 +22,7 @@ class ContainerController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    // MARK : Segue
+    // MARK: - Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if let destination = segue.destination as? FacebookInfoPageController{

@@ -12,17 +12,23 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" restorationIdentifier="FacebookCell" selectionStyle="default" indentationWidth="0.0" reuseIdentifier="FacebookCell" id="KGk-i7-Jjw" customClass="FacebookCell" customModule="CartonBox" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
+        <tableViewCell contentMode="scaleToFill" restorationIdentifier="FacebookCell" selectionStyle="none" indentationWidth="0.0" reuseIdentifier="FacebookCell" rowHeight="60" id="KGk-i7-Jjw" customClass="FacebookCell" customModule="CartonBox" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="54.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="59.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P5p-Gi-imr">
-                        <rect key="frame" x="16" y="12.5" width="288" height="29"/>
+                        <rect key="frame" x="60" y="11" width="200" height="38"/>
+                        <color key="backgroundColor" red="0.0" green="0.55045260379059846" blue="0.93865006345177671" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="200" id="6Ow-L1-BbO"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <state key="normal" title="Logout"/>
+                        <state key="normal" title="Logout">
+                            <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </state>
                         <connections>
                             <action selector="onPressLogout:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="YaZ-Rm-DUR"/>
                         </connections>
@@ -30,10 +36,11 @@
                 </subviews>
                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
-                    <constraint firstItem="P5p-Gi-imr" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="IUA-i2-KGR"/>
-                    <constraint firstItem="P5p-Gi-imr" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="O2i-6F-6Vv"/>
-                    <constraint firstItem="P5p-Gi-imr" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="Qfi-Xb-9MW"/>
-                    <constraint firstItem="P5p-Gi-imr" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="xDd-vA-2Kg"/>
+                    <constraint firstItem="P5p-Gi-imr" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="F8I-6x-ugC"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="P5p-Gi-imr" secondAttribute="trailing" constant="44" id="KVd-tY-AtB"/>
+                    <constraint firstItem="P5p-Gi-imr" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="PF3-gX-FaC"/>
+                    <constraint firstItem="P5p-Gi-imr" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="R2f-wI-B37"/>
+                    <constraint firstItem="P5p-Gi-imr" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="44" id="s79-si-Bev"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.54509803921568623" green="0.61568627450980395" blue="0.76470588235294112" alpha="1" colorSpace="calibratedRGB"/>
@@ -42,7 +49,7 @@
             <connections>
                 <outlet property="btnLogout" destination="P5p-Gi-imr" id="LE1-uW-bui"/>
             </connections>
-            <point key="canvasLocation" x="25" y="51.5"/>
+            <point key="canvasLocation" x="25" y="51"/>
         </tableViewCell>
     </objects>
 </document>

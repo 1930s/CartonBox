@@ -24,7 +24,7 @@ class BaseViewController: UIViewController {
 
         self.tabController = appDelegate.window!.rootViewController as! UITabBarController
         
-        setNotificationActions()
+        self.setNotificationActions()
         
         self.initScreenSetting()
     }
@@ -43,13 +43,11 @@ class BaseViewController: UIViewController {
         //Check Networking health
         if !NetworkHelper.isConnectedToNetwork(){
          
-            let ok = UIAlertAction(title: "Setting", style: .destructive, handler: { (action) in
+            let setting = UIAlertAction(title: "Setting", style: .destructive, handler: { (action) in
                 UIApplication.shared.open(AppUrl.settingUrl!, options: [:], completionHandler: nil)
             })
-            
-            let cancel = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-            
-            self.alert(title: "Error", message: "No internet connection found", style: .alert, actions: [ok,cancel])
+    
+            self.alert(title: Message.NoInternetConnect, message: "Please connect your device to internet", style: .alert, actions: [setting])
         }
     }
     
@@ -71,6 +69,7 @@ class BaseViewController: UIViewController {
         self.updateCognitoUserInfo(info: notification.userInfo as! [String : AnyObject])
     }
     
+    //MARK: - Methods
     public func initScreenSetting(){
         //override by subclass
     }
@@ -95,6 +94,7 @@ class BaseViewController: UIViewController {
     }
 }
 
+//MARK: - Extension
 extension BaseViewController{
     
     func setNotificationActions(){
