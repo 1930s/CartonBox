@@ -35,7 +35,6 @@ class ActivityController: BaseViewController {
     
     //MARK: - Actions
     @objc func reloadUserActivities(){
-        
         guard NetworkHelper.isConnectedToNetwork() else {
             return
         }
@@ -51,7 +50,6 @@ class ActivityController: BaseViewController {
     
     //MARK: - Methods
     fileprivate func initializeRefreshControl() {
-        
         refresh.tintColor = UIColor.lightGray
         refresh.frame.size = CGSize(width: 16, height: 16)
         refresh.addTarget(self, action: #selector(ActivityController.reloadUserActivities), for: .valueChanged)

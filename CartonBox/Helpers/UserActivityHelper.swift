@@ -12,7 +12,6 @@ import SnackKit
 class UserActivityHelper{
     
     static func CreateFacebookLoginActivity(success: @escaping SuccessBlock, failure: @escaping FailureBlock){
-     
         let activity = UserActivity()
         
         activity?._activityId = UUID().uuidString
@@ -26,7 +25,6 @@ class UserActivityHelper{
         activity?._createdOn = Date().now.toLocalString(DateFormat.dateTime)
         
         self.SaveUserActivity(activity!) { (error) in
-            
             if let _ = error {
                 failure(error!)
             }else{
@@ -36,7 +34,6 @@ class UserActivityHelper{
     }
     
     static func CreateFacebookLogoutActivity(success: @escaping SuccessBlock,failure: @escaping FailureBlock){
-        
         let activity = UserActivity()
         
         activity?._activityId = UUID().uuidString
@@ -49,7 +46,6 @@ class UserActivityHelper{
         activity?._createdOn = Date().now.toLocalString(DateFormat.dateTime)
         
         self.SaveUserActivity(activity!) { (error) in
-            
             if let _ = error {
                 failure(error!)
             }else{
@@ -59,9 +55,7 @@ class UserActivityHelper{
     }
     
     private static func SaveUserActivity(_ activity:UserActivity, completion:@escaping (Error?)->()){
-        
         AmazonDynamoDBManager.shared.SaveItem(activity) { (error) in
-            
             if let err = error{
                 completion(err)
             }else{

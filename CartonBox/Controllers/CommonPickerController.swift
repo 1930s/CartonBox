@@ -35,7 +35,6 @@ class CommonPickerController: UIViewController {
     
     //MARK: - Actions
     @IBAction func onDoneSelection(_ sender: Any) {
-        
         let selectedRow = dataPicker.selectedRow(inComponent: 0)
         let param = parameters![selectedRow]
         
@@ -44,7 +43,6 @@ class CommonPickerController: UIViewController {
     
     //MARK: - Methods
     func setSelectedRow(selectedRowIndex:Int, inComponent componentIndex:Int){
-        
         self.dataPicker.selectRow(selectedRowIndex, inComponent: componentIndex, animated: false)
     }
 }
@@ -57,7 +55,6 @@ extension CommonPickerController : UIPickerViewDataSource, UIPickerViewDelegate{
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        
         guard let p = parameters else {
             return 0
         }
@@ -70,7 +67,6 @@ extension CommonPickerController : UIPickerViewDataSource, UIPickerViewDelegate{
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        
         let selectedRow = dataPicker.selectedRow(inComponent: component)
         let param = parameters![selectedRow]
         

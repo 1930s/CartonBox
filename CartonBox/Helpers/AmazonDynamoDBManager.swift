@@ -28,7 +28,6 @@ class AmazonDynamoDBManager : PAmazonDynamoDBManager{
     var mapper: AWSDynamoDBObjectMapper
     
     class var shared: AmazonDynamoDBManager {
-        
         struct Static {
             static var instance: AmazonDynamoDBManager? = nil
         }
@@ -45,11 +44,10 @@ class AmazonDynamoDBManager : PAmazonDynamoDBManager{
     }
     
     func GetItem(_ model: AnyClass, hasKey: String, rangeKey: String?, completionHandler: @escaping (AnyObject?) -> ()) {
-
         mapper.load(model, hashKey: hasKey, rangeKey: rangeKey).continueWith { (task:AWSTask<AnyObject>!)  -> Any? in
 
             if let _ = task.error as NSError? {
-                //Todo:Log an error
+                print(task.error!)
                 completionHandler(nil)
             }else{
                 completionHandler(task?.result)
@@ -60,7 +58,6 @@ class AmazonDynamoDBManager : PAmazonDynamoDBManager{
     }
 
     func SaveItem(_ model: AWSDynamoDBModeling & AWSDynamoDBObjectModel, completionHandler:AmazonClientCompletition?) {
-
         mapper.save(model).continueWith { (task:AWSTask<AnyObject>!) -> Any? in
             DispatchQueue.main.async(execute: {
                 if let error = task.error as NSError? {
@@ -74,7 +71,6 @@ class AmazonDynamoDBManager : PAmazonDynamoDBManager{
     }
 
     func DeleteItem(_ model: AWSDynamoDBModeling & AWSDynamoDBObjectModel, completionHandler:AmazonClientCompletition?) {
-        
         mapper.remove(model, completionHandler: { (error:Error?) in
             DispatchQueue.main.async(execute: {
                 completionHandler?(error)
@@ -83,7 +79,6 @@ class AmazonDynamoDBManager : PAmazonDynamoDBManager{
     }
     
     func Scan(_ model: AnyClass, expression: AWSDynamoDBScanExpression, completionHandler: AmazonDynamoDBPaginatedOutput?) {
-        
         mapper.scan(model, expression: expression).continueWith(block: { (task:AWSTask<AWSDynamoDBPaginatedOutput>) -> Any? in
             DispatchQueue.main.async(execute: {
                 if let _ = task.error as NSError? {
@@ -97,7 +92,6 @@ class AmazonDynamoDBManager : PAmazonDynamoDBManager{
     }
     
     func Query(_ model:AnyClass, expression:AWSDynamoDBQueryExpression, completionHandler:@escaping (AWSDynamoDBPaginatedOutput?)->()){
-        
         mapper.query(model, expression: expression).continueWith(block: { (task:AWSTask<AWSDynamoDBPaginatedOutput>) -> Any? in
             
             DispatchQueue.main.async(execute: {

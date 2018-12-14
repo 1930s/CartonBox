@@ -34,7 +34,6 @@ class PhotoLibraryDataSource: NSObject, UICollectionViewProtocol, UICollectionVi
     
     //MARK: - UICollectionViewDataSource
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        
         guard photos != nil else{
             return 0
         }
@@ -43,18 +42,16 @@ class PhotoLibraryDataSource: NSObject, UICollectionViewProtocol, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
         return photos.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         let row = indexPath.row
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: photoThumbnailCell, for: indexPath) as! PhotoThumbnailCell
         let asset = photos[row]
         let options = PHAssetRequestOptions.GetPHImageRequestOptions(mode: .fastFormat, isSynchronous: true, resizeMode: .none, allowNetworkAccess: true)
         
-        if let _ = controller.vm.selectedPhotos.index(of: asset){
+        if let _ = controller.vm.indexAsset(of: asset){
             cell.selectedPHAsset = true
         }else{
             cell.selectedPHAsset = false
@@ -72,7 +69,6 @@ class PhotoLibraryDataSource: NSObject, UICollectionViewProtocol, UICollectionVi
     
     //MARK: - UICollectionViewDelegate    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
         return controller.cellSize
     }
 }

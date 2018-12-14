@@ -16,7 +16,6 @@ class PHPageViewController: UIPageViewController, UIPageViewControllerDelegate {
     var videoLibrary:VideoLibraryController!
     var pages: [UIViewController]!
     var selectedAssetIndex:Int!
-    
     var cacheOptions:PHImageRequestOptions = PHAssetRequestOptions.GetPHImageRequestOptions(mode: .highQualityFormat, isSynchronous: true, resizeMode: .none, allowNetworkAccess: true)
     var cacheAssets:[PHAsset] = []
     var firstLoad:Bool = true
@@ -42,7 +41,6 @@ class PHPageViewController: UIPageViewController, UIPageViewControllerDelegate {
 extension PHPageViewController: UIPageViewControllerDataSource {
     
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-
         self.firstLoad = false
     }
     
@@ -57,7 +55,6 @@ extension PHPageViewController: UIPageViewControllerDataSource {
     
     func pageViewController(_ pageViewController: UIPageViewController,
                             viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        
         guard let viewControllerIndex = pages.index(of: viewController) else {
             return nil
         }
@@ -74,7 +71,6 @@ extension PHPageViewController: UIPageViewControllerDataSource {
     
     func pageViewController(_ pageViewController: UIPageViewController,
                             viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        
         guard let viewControllerIndex = pages.index(of: viewController) else {
             return nil
         }
@@ -87,5 +83,4 @@ extension PHPageViewController: UIPageViewControllerDataSource {
         
         return pages[nextIndex]
     }
-    
 }

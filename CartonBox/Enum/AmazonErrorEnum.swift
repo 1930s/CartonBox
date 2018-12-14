@@ -9,7 +9,6 @@
 import Foundation
 
 enum AmazonErrorDomain : String{
-    
     case AWSCognitoErrorDomain = "com.amazon.cognito.AWSCognitoErrorDomain";
     case AWSDynamoDBErrorDomain = "com.amazon.dynamodb.AWSDynamoDBErrorDomain"
     case AWSS3ErrorDomain = "com.amazon.s3.AWSS3ErrorDomain"
@@ -18,7 +17,6 @@ enum AmazonErrorDomain : String{
 
 //error code: 2000
 enum DynamoDBError: Int{
-    
     case nullModel = 2000
     case getItemFailed = 2001
     case saveItemFailed = 2002
@@ -29,7 +27,6 @@ enum DynamoDBError: Int{
 
 //error code : 3000
 enum CognitoError: Int{
-    
     case cognitoLoginFailed = 3000
     case cognitoGetIdentityFailed = 30001
     case cognitoSyncDataFailed = 30002

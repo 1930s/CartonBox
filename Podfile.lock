@@ -1,0 +1,98 @@
+PODS:
+  - AWSAuthCore (2.6.33):
+    - AWSCore (= 2.6.33)
+  - AWSAuthUI (2.6.33):
+    - AWSAuthCore (= 2.6.33)
+    - AWSCore (= 2.6.33)
+  - AWSCognito (2.6.33):
+    - AWSCore (= 2.6.33)
+  - AWSCognitoIdentityProvider (2.6.33):
+    - AWSCognitoIdentityProviderASF (= 1.0.1)
+    - AWSCore (= 2.6.33)
+  - AWSCognitoIdentityProviderASF (1.0.1)
+  - AWSCore (2.6.33)
+  - AWSDynamoDB (2.6.33):
+    - AWSCore (= 2.6.33)
+  - AWSFacebookSignIn (2.6.33):
+    - AWSAuthCore (= 2.6.33)
+    - FBSDKCoreKit (~> 4.0)
+    - FBSDKLoginKit (~> 4.0)
+  - AWSLambda (2.6.33):
+    - AWSCore (= 2.6.33)
+  - AWSRekognition (2.6.33):
+    - AWSCore (= 2.6.33)
+  - AWSS3 (2.6.33):
+    - AWSCore (= 2.6.33)
+  - AWSSimpleDB (2.6.33):
+    - AWSCore (= 2.6.33)
+  - AWSSNS (2.6.33):
+    - AWSCore (= 2.6.33)
+  - AWSSQS (2.6.33):
+    - AWSCore (= 2.6.33)
+  - Bolts (1.9.0):
+    - Bolts/AppLinks (= 1.9.0)
+    - Bolts/Tasks (= 1.9.0)
+  - Bolts/AppLinks (1.9.0):
+    - Bolts/Tasks
+  - Bolts/Tasks (1.9.0)
+  - Bond (6.10.2):
+    - Differ (~> 1.3)
+    - ReactiveKit (~> 3.9)
+  - Differ (1.3.0)
+  - FBSDKCoreKit (4.38.0):
+    - Bolts (~> 1.9)
+  - FBSDKLoginKit (4.38.0):
+    - FBSDKCoreKit
+  - Player (0.8.4)
+  - ReactiveKit (3.9.7)
+  - UICKeyChainStore (2.1.2)
+  - XLPagerTabStrip (8.1.0)
+
+DEPENDENCIES:
+  - AWSAuthCore
+  - AWSAuthUI
+  - AWSCognito
+  - AWSCognitoIdentityProvider
+  - AWSDynamoDB
+  - AWSFacebookSignIn
+  - AWSLambda
+  - AWSRekognition
+  - AWSS3
+  - AWSSimpleDB
+  - AWSSNS
+  - AWSSQS
+  - Bond
+  - FBSDKCoreKit
+  - FBSDKLoginKit
+  - Player (~> 0.8.0)
+  - UICKeyChainStore
+  - XLPagerTabStrip
+
+SPEC CHECKSUMS:
+  AWSAuthCore: 349738e72c5ecbdd6fcf9f153ae01842dd90a725
+  AWSAuthUI: bb86d2b23527631b8dd6f659700cb3b5d91027a2
+  AWSCognito: 0d7106509da503589ea14ee468fa85cb7fab65ad
+  AWSCognitoIdentityProvider: 97c10594444863772447c9a056b17aff487552f3
+  AWSCognitoIdentityProviderASF: f94f1a502e72ef3d0a1de93e10bf7a79c8698118
+  AWSCore: ed83f7e36fb6c0211b04a439d8e564aa23bfe37d
+  AWSDynamoDB: 0d80a73da558d1f231f35b525e3cfcbed4260028
+  AWSFacebookSignIn: a225342a24171d98ad76e7ec5e0f00fb06fa9b16
+  AWSLambda: 98983697da6437c7fad7eb53e029c984fd1fe8ff
+  AWSRekognition: dfb045645f53f0f49536c681d90b9cc59fc84045
+  AWSS3: 6ead43a48f625609390881227cea17e066eab465
+  AWSSimpleDB: bdd2f45afbc7d5aaccc490b514cb96854d90129e
+  AWSSNS: 4d5e8350461a931127d3a21f4f1be5380d694da7
+  AWSSQS: 271d52041fd3403277ef24e0b484f84ba8cc313e
+  Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
+  Bond: 5c9d854fb14d3268496ccaf9b7ccd8428ec1609c
+  Differ: 9fcee7602542d7c6484ce05a0faec1c11258ed63
+  FBSDKCoreKit: 2ab7fdbf600dc6b628ba7a49aa29d357a7b4c74e
+  FBSDKLoginKit: 634fa27e72e33620eb6389253337342c03d4a407
+  Player: e45514e9e5fb8ff18f50eb2ba6f84dac9b6a0024
+  ReactiveKit: 5f4c440715d671901c382ae6b42ed3337ce4699b
+  UICKeyChainStore: 85db518bb1d294366d15ec9b92a416c4e670518f
+  XLPagerTabStrip: 22d4c58200d7c105e0e407ab6bfd01a5d85014be
+
+PODFILE CHECKSUM: 31379da447e6255514157ace3fd0ea94ed115a7f
+
+COCOAPODS: 1.3.1

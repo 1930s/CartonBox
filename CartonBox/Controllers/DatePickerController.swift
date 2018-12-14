@@ -45,7 +45,6 @@ class DatePickerController: UIViewController {
     
     //MARK: - Methods
     fileprivate func initializeDatePicker() {
-
         self.dateFormatter.dateFormat = DateFormat.dateBeautify
 
         self.dtCalander.datePickerMode = .date

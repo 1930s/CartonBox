@@ -43,13 +43,10 @@ class FacebookSignInController: BaseViewController {
     }
     
     @IBAction func loginWithFacebook(_ sender: Any) {
-        
        super.isLoading { () -> Bool in
-         
             if self.vm.activeSession{
                 self.vm.logoutFacebook()
                 self.setLoginInfo()
-                
             }else{
                 self.vm.loginFacebook(from: self, successBlock: { (result) in
                     self.dismiss(animated: true, completion: nil)
@@ -65,13 +62,12 @@ class FacebookSignInController: BaseViewController {
     
     //MARK: - Methods
     fileprivate func setLoginInfo(){
-        
         self.lblLoginInfo.text = self.vm.activeSession ?
             "You already logged in" : "You are not logged in yet"
         
         self.btnLogin.layer.cornerRadius = CGFloat(20.0)
         self.btnLogin.setTitle(self.vm.activeSession ?
-            "Logout Facebook" : "Login with Facebook", for: UIControlState.normal)
+            "Logout Facebook" : "Login with Facebook", for: UIControl.State.normal)
         
         if let _ = appDelegate.facebookUser{
             self.btnClose.isHidden = appDelegate.facebookUser!.activeSession
@@ -82,7 +78,6 @@ class FacebookSignInController: BaseViewController {
     
     //MARK: - Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
         let destination = segue.destination as! ContainerController
         
         destination.containerParent = self

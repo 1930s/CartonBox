@@ -28,6 +28,7 @@ class ReceipentController: UIViewController {
         self.tblReceipent.register(UINib(nibName: noActivityCell, bundle:nil), forCellReuseIdentifier: noActivityCell)
         self.tblReceipent.register(UINib(nibName: receipentHeaderCell, bundle:nil), forHeaderFooterViewReuseIdentifier: receipentHeaderCell)
         self.tblReceipent.tableFooterView = UIView(frame: CGRect.zero)
+        self.tblReceipent.allowsMultipleSelectionDuringEditing = false
     }
     
     override func viewDidLoad() {
@@ -43,7 +44,6 @@ class ReceipentController: UIViewController {
     
     //MARK: - Actions
     @IBAction func searchContact(_ sender: Any) {
- 
         let searchContactVC = sb.instantiateViewController(withIdentifier: ControllerName.SearchContactVC) as! SearchContactsController
         
         searchContactVC.delegate = self
@@ -53,10 +53,9 @@ class ReceipentController: UIViewController {
     }
     
     @IBAction func addQuickReceipent(_ sender: Any) {
-        
         var alertController:UIAlertController!
-        
         let emailTextField = UITextField()
+        
         emailTextField.keyboardType = .emailAddress
 
         let ok = UIAlertAction(title: "Add", style: .default) { (action) in
@@ -80,11 +79,10 @@ class ReceipentController: UIViewController {
     
     //MARK: - Methods
     func reloadReceipentList(){
-        
-        if self.vm.receipents.count == 0 && self.tblReceipent.numberOfSections > 0 && self.tblReceipent.numberOfRows(inSection: 0) > 0{
-            self.tblReceipent.removeSections(at: [0])
-        }else{
+        if self.vm.receipents.count > 0{
             self.tblReceipent.reloadSections(at: [0])
+        }else if self.tblReceipent.numberOfSections > 0 && self.tblReceipent.numberOfRows(inSection: 0) > 0{
+            self.tblReceipent.removeSections(at: [0])
         }
     }
 }

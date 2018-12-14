@@ -18,11 +18,12 @@ class BaseViewController: UIViewController {
     lazy var loadingDisplay = sb.instantiateViewController(withIdentifier: loadingVC) as! LoadingController
     
     var tabController:UITabBarController!
+    var isInternetAccess: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.tabController = appDelegate.window!.rootViewController as! UITabBarController
+        self.tabController = appDelegate.window!.rootViewController as? UITabBarController
         
         self.setNotificationActions()
         
@@ -30,7 +31,13 @@ class BaseViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-
+        //Check Networking health
+        self.checkNetworkHealth()
+        
+        guard self.isInternetAccess else {
+            return
+        }
+        
         //Show facebook login if session is expired
         guard let _ = appDelegate.facebookUser, appDelegate.facebookUser!.activeSession else{
             
@@ -38,16 +45,6 @@ class BaseViewController: UIViewController {
                 self.present(self.facebookSigIn, animated: true, completion: nil)
             })
             return
-        }
-        
-        //Check Networking health
-        if !NetworkHelper.isConnectedToNetwork(){
-         
-            let setting = UIAlertAction(title: "Setting", style: .destructive, handler: { (action) in
-                UIApplication.shared.open(AppUrl.settingUrl!, options: [:], completionHandler: nil)
-            })
-    
-            self.alert(title: Message.NoInternetConnect, message: "Please connect your device to internet", style: .alert, actions: [setting])
         }
     }
     
@@ -82,14 +79,42 @@ class BaseViewController: UIViewController {
         //override by subclass
     }
     
+    public func enterForeground(){
+        //override by subclass
+    }
+    
     public func isLoading(_ closure:@escaping ()->Bool){
-        
         self.loadingDisplay.modalPresentationStyle = .overCurrentContext
         
         self.present(self.loadingDisplay, animated: true) {
             if closure(){
                 self.loadingDisplay.dismiss(animated: true, completion: nil)
             }
+        }
+    }
+    
+    @objc fileprivate func willEnterForeground(){
+        self.checkNetworkHealth()
+        
+        guard self.isInternetAccess else {
+            return
+        }
+        
+        self.enterForeground()
+    }
+    
+    fileprivate func checkNetworkHealth(){
+        if !NetworkHelper.isConnectedToNetwork(){
+            
+            let setting = UIAlertAction(title: "Setting", style: .destructive, handler: { (action) in
+                UIApplication.shared.open(AppUrl.settingUrl!, options: [:], completionHandler: nil)
+            })
+            
+            self.alert(title: Message.NoInternetConnect, message: Message.ConnectDeviceToInternet, style: .alert, actions: [setting])
+            
+            isInternetAccess = false
+        }else{
+            isInternetAccess = true
         }
     }
 }
@@ -103,5 +128,7 @@ extension BaseViewController{
         
         //Cognito User info has been updated
         NotificationCenter.default.addObserver(self, selector: #selector(BaseViewController.CognitoUserProfileUpdate(notification:)), name: NSNotification.Name.AWSCognitoIdentityIdChanged, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(BaseViewController.willEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
     }
 }

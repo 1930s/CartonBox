@@ -10,9 +10,7 @@ import Foundation
 import Photos
 
 public struct PHAssetRequestOptions{
-
     static func GetPHImageRequestOptions(mode:PHImageRequestOptionsDeliveryMode,isSynchronous sync:Bool, resizeMode resize:PHImageRequestOptionsResizeMode, allowNetworkAccess access:Bool)->PHImageRequestOptions{
-        
         let options = PHImageRequestOptions()
         
         options.isSynchronous = sync
@@ -24,7 +22,6 @@ public struct PHAssetRequestOptions{
     }
     
     static func GetPHVideoRequestOptions(mode:PHVideoRequestOptionsDeliveryMode, allowNetworkAccess access:Bool)->PHVideoRequestOptions{
-        
         let options = PHVideoRequestOptions()
         
         options.isNetworkAccessAllowed = access

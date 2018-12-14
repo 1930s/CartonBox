@@ -10,10 +10,10 @@ import Foundation
 
 //error code : 0000
 enum ApplicationError: Int {
-    
     case NoConnection = 0001
     case Timeout15s = 0002
     case Timeout30s = 0003
     case LostFacebookSession = 0004
-    case UnknownErro = 9999
+    case ExceedMaxFileSize = 1001
+    case UnknownError = 9999
 }

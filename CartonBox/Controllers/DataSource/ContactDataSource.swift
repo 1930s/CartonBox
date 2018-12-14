@@ -19,7 +19,6 @@ class ContactDataSource: NSObject,UITableViewDataSource, UITableViewDelegate {
     
     //MARK: - UITableViewDataSource
     func numberOfSections(in tableView: UITableView) -> Int {
-        
         guard let _ = alphabets else{
             return 0
         }
@@ -28,17 +27,14 @@ class ContactDataSource: NSObject,UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         let key = self.alphabets![section]
         
         return self.filterContacts![key]!.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let row = indexPath.row
         let section = indexPath.section
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: contactEmailCell, for: indexPath) as! ContactEmailCell
         let key = self.alphabets![section]
         let contact:CNContact = self.filterContacts![key]![row]
@@ -65,7 +61,7 @@ class ContactDataSource: NSObject,UITableViewDataSource, UITableViewDelegate {
         cell.lblName.bold(displayName)
         cell.lblEmail.text = email
         cell.selectionStyle = .none
-        cell.accessoryType = self.selectedReceipents.contains(email) ? UITableViewCellAccessoryType.checkmark : UITableViewCellAccessoryType.none
+        cell.accessoryType = self.selectedReceipents.contains(email) ? UITableViewCell.AccessoryType.checkmark : UITableViewCell.AccessoryType.none
         
         return cell
     }
@@ -79,7 +75,6 @@ class ContactDataSource: NSObject,UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
         let cell = tableView.cellForRow(at: indexPath) as! ContactEmailCell
         let email = cell.lblEmail.text!
   
@@ -103,8 +98,7 @@ class ContactDataSource: NSObject,UITableViewDataSource, UITableViewDelegate {
     }
     
     // MARK: - Method
-    func initContactsWithEmail(){
-        
+    func initContactsWithEmail() -> Bool{
         var contacts:[CNContact] = []
         
         self.alphabets = []
@@ -117,30 +111,34 @@ class ContactDataSource: NSObject,UITableViewDataSource, UITableViewDelegate {
                     contacts.append(contact)
                 }
             }
-        }
-        
-        for contact in contacts{
-            //Get Alphabet
-            var char = ""
             
-            if !contact.familyName.isEmpty{
-                char = contact.familyName[1]
-            }else if !contact.givenName.isEmpty{
-                char = contact.givenName[1]
-            }else if !contact.middleName.isEmpty{
-                char = contact.middleName[1]
-            }else{
-                char = "#"
+            for contact in contacts{
+                //Get Alphabet
+                var char = ""
+                
+                if !contact.familyName.isEmpty{
+                    char = contact.familyName[1]
+                }else if !contact.givenName.isEmpty{
+                    char = contact.givenName[1]
+                }else if !contact.middleName.isEmpty{
+                    char = contact.middleName[1]
+                }else{
+                    char = "#"
+                }
+                
+                if !char.isEmpty && !self.alphabets.contains(char){
+                    self.alphabets.append(char)
+                    self.filterContacts[char] = []
+                }
+                
+                self.filterContacts[char]?.append(contact)
             }
             
-            if !char.isEmpty && !self.alphabets.contains(char){
-                self.alphabets.append(char)
-                self.filterContacts[char] = []
-            }
+            self.alphabets.sort(by: { $0 < $1})
             
-            self.filterContacts[char]?.append(contact)
+            return true
         }
         
-        self.alphabets.sort(by: { $0 < $1})
+        return false
     }
 }

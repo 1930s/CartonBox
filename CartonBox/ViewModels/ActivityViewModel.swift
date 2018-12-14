@@ -15,13 +15,11 @@ class ActivityViewModel{
     var activityList: Dictionary<String,[UserActivity]>!
     
     init() {
-        
         self.allActivities = [UserActivity]()
         self.activityList = Dictionary<String,[UserActivity]>()
     }
     
     func loadUserActivities(numberOfRecord: Int, completion: AmazonClientCompletition?){
-        
         guard let _ = appDelegate.cartonboxUser else {
             return
         }
@@ -37,9 +35,7 @@ class ActivityViewModel{
         queryExpression.scanIndexForward = false
         
         AmazonDynamoDBManager.shared.Query(UserActivity.self, expression: queryExpression) { (paginatedOuput) in
-            
             if let po = paginatedOuput{
-            
                 let items = po.items as! [UserActivity]
         
                 for activity in items{
@@ -48,7 +44,6 @@ class ActivityViewModel{
             }
             
             if self.allActivities.count > 0{
-                
                 self.allActivities.sort(by: { ( a1, a2) -> Bool in
                     return DateFormat.GetDate(from: a1._createdOn!)! > DateFormat.GetDate(from: a2._createdOn!)!
                 })
@@ -61,14 +56,12 @@ class ActivityViewModel{
     }
     
     private func groupingActivityData(){
-        
         let dateformatter = DateFormatter()
         dateformatter.dateFormat = "dd/MM/yyyy hh:mm:ss a"
         dateformatter.timeZone = NSTimeZone.local
 
         //Today
         let todayActivity = allActivities.filter { (data) -> Bool in
-            
             if let dt = dateformatter.date(from: data._createdOn!){
                 return Calendar.current.isDateInToday(dt)
             }
@@ -84,7 +77,6 @@ class ActivityViewModel{
         
         //Yesterday
         let yesterdayActivity = allActivities.filter { (data) -> Bool in
-            
             if let dt = dateformatter.date(from: data._createdOn!){
                 return Calendar.current.isDateInYesterday(dt)
             }
@@ -98,7 +90,6 @@ class ActivityViewModel{
 
         //Past
         let pastActivity = allActivities.filter { (data) -> Bool in
-
             if let dt = dateformatter.date(from: data._createdOn!){
                 return !Calendar.current.isDateInToday(dt) && !Calendar.current.isDateInYesterday(dt)
             }

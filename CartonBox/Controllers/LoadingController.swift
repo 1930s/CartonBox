@@ -19,7 +19,7 @@ class LoadingController: UIViewController {
         self.vwLoading.clipsToBounds = true
         self.vwLoading.corner(rounding: UIRectCorner.allCorners)
         
-        self.indicatorLoading.activityIndicatorViewStyle = .gray
+        self.indicatorLoading.style = .gray
         self.indicatorLoading.clipsToBounds = true
         self.indicatorLoading.color = UIColor.black
         
@@ -34,13 +34,11 @@ class LoadingController: UIViewController {
     
     //MARK: - Methods
     func start(){
-        
         indicatorLoading.startAnimating()
         UIApplication.shared.beginIgnoringInteractionEvents()
     }
     
     func stop(){
-        
         indicatorLoading.stopAnimating()
         UIApplication.shared.endIgnoringInteractionEvents()
     }

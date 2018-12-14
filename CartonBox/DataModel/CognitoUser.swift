@@ -52,7 +52,6 @@ extension CognitoUser {
     }
     
     static func currentUser(firstName: String? = nil, lastName: String? = nil) -> CognitoUser {
-        
         let dataset = AWSCognito(forKey: cognitoSyncKey).openOrCreateDataset(cognitoSyncDataset)
         let user = CognitoUser()
         

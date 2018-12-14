@@ -24,7 +24,7 @@ class SearchContactsController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let btnDone = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(SearchContactsController.onDoneSearchContact))
+        let btnDone = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.done, target: self, action: #selector(SearchContactsController.onDoneSearchContact))
         
         self.navigationItem.setRightBarButton(btnDone, animated: false)
         self.navigationItem.title = "Search Contacts"
@@ -47,7 +47,17 @@ class SearchContactsController: UIViewController{
     
     //MARK: - Methods
     fileprivate func initializeTable() {
-        self.dtContacts.initContactsWithEmail()
+        if(!self.dtContacts.initContactsWithEmail()){
+            let setting = UIAlertAction(title: "Setting", style: .destructive, handler: { (action) in
+                UIApplication.shared.open(AppUrl.settingUrl!, options: [:], completionHandler: nil)
+            })
+            
+            let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
+                self.navigationController?.popViewController(animated: true)
+            })
+            
+            self.alert(title: Message.AccessDenied, message: Message.AccessDeniedContact, style: .alert, actions: [setting, cancel])
+        }
         
         self.tblContacts.delegate = dtContacts
         self.tblContacts.dataSource = dtContacts

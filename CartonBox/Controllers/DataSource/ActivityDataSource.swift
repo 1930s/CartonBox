@@ -16,7 +16,6 @@ class ActivityDataSource : NSObject, UITableViewDataSource, UITableViewDelegate{
     
     //MARK: - UITableViewDataSource
     func numberOfSections(in tableView: UITableView) -> Int {
-        
         if Array(vm.activityList.keys).count > 0{
             return Array(vm.activityList.keys).count
         }
@@ -25,7 +24,6 @@ class ActivityDataSource : NSObject, UITableViewDataSource, UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         if Array(vm.activityList.values).count > 0{
             
             let _ = Array(vm.activityList.keys)[section]
@@ -46,10 +44,8 @@ class ActivityDataSource : NSObject, UITableViewDataSource, UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    
         let section = indexPath.section
         let row = indexPath.row
-
         var key = ""
         
         switch section{
@@ -64,15 +60,12 @@ class ActivityDataSource : NSObject, UITableViewDataSource, UITableViewDelegate{
         }
         
         if let data = vm.activityList[key], vm.activityList[key]!.count > 0 {
-            
             let activity = data[row]
             let createdOn = DateFormat.GetDate(from: activity._createdOn!)
             
             if let enumType = UserAcitvityEnum(rawValue: activity._type!){
-                
                 switch enumType{
                 case .FacebookLogin, .FacebookLogout:
-                    
                     let cell = tableView.dequeueReusableCell(withIdentifier: facebookActivityCell, for: indexPath) as! FacebookActivityCell
                     
                     cell.imgIcon.image = getIconImage(type: enumType)
@@ -105,9 +98,7 @@ class ActivityDataSource : NSObject, UITableViewDataSource, UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        
         if Array(vm.activityList.keys).count > 0{
-            
             var title = ""
             
             switch section{
@@ -128,7 +119,6 @@ class ActivityDataSource : NSObject, UITableViewDataSource, UITableViewDelegate{
     }
     
     private func getIconImage(type:UserAcitvityEnum)->UIImage{
-        
         switch  type {
         case .FacebookLogin:
             return UIImage(named: "Login")!

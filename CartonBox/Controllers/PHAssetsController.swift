@@ -14,7 +14,6 @@ class PHAssetsController: ButtonBarPagerTabStripViewController {
     var mediaViewModel: MediaFilesViewModel!
     
     override func viewDidLoad() {
-
         settings.style.buttonBarBackgroundColor = .white
         settings.style.buttonBarItemBackgroundColor = .white
         settings.style.selectedBarBackgroundColor = .lightGray
@@ -36,13 +35,11 @@ class PHAssetsController: ButtonBarPagerTabStripViewController {
     
     // MARK: - PagerTabStripDataSource
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
-        
         let photoLibraryPage = sb.instantiateViewController(withIdentifier: "PhotoLibraryVC") as! PhotoLibraryController
         let videoLibraryPage = sb.instantiateViewController(withIdentifier: "VideoLibraryVC") as! VideoLibraryController
         
         photoLibraryPage.vm = self.mediaViewModel
         videoLibraryPage.vm = self.mediaViewModel
-        
         
         return [photoLibraryPage,videoLibraryPage]
     }
@@ -50,6 +47,9 @@ class PHAssetsController: ButtonBarPagerTabStripViewController {
     // MARK: - Update title
     func updateIndicatorTitle(title:String){
         
+    }
+    
+    @objc func viewSelectedPHAssets(){
         
     }
 }

@@ -15,7 +15,6 @@ class VideoLibraryDataSource: NSObject, UICollectionViewProtocol, UICollectionVi
 
     @IBOutlet weak var controller:VideoLibraryController!
     
-    var selectedVideos:[PHAsset]!
     var videos:[PHAsset]!{
         didSet{
             DispatchQueue.main.async {
@@ -35,7 +34,6 @@ class VideoLibraryDataSource: NSObject, UICollectionViewProtocol, UICollectionVi
     
     //MARK: - UICollectionViewDataSource
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        
         guard videos != nil else{
             return 0
         }
@@ -44,25 +42,16 @@ class VideoLibraryDataSource: NSObject, UICollectionViewProtocol, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    
         return videos.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         let row = indexPath.row
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: videoThumbnailCell, for: indexPath) as! VideoThumbnailCell
         
         if let asset = videos?[row]{
-            
             let cellSize = CGSize(width: cell.frame.width, height: cell.frame.height)
             let options = PHImageRequestOptions()
-            
-            if let _ = selectedVideos.index(of: asset){
-                cell.selectedPHAsset = true
-            }else{
-                cell.selectedPHAsset = false
-            }
             
             options.isSynchronous = true
             options.isNetworkAccessAllowed = true
@@ -71,6 +60,13 @@ class VideoLibraryDataSource: NSObject, UICollectionViewProtocol, UICollectionVi
             
             cell.delegate = self.controller
             cell.asset = asset
+            cell.selectedPHAsset = false
+            
+            if let _ = controller.vm.indexAsset(of: asset){
+                cell.selectedPHAsset = true
+            }else{
+                cell.selectedPHAsset = false
+            }
             
             PHCacheManager.shared.fetchAssetImage(asset: asset, targetSize: cellSize, mode: .aspectFill, options: options, completion: { (image) in
                 cell.imgVideo.image = image
@@ -84,14 +80,12 @@ class VideoLibraryDataSource: NSObject, UICollectionViewProtocol, UICollectionVi
     
     //MARK: - UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
         let width = self.controller.collectionView!.frame.width/4
         
         return CGSize(width: width ,height: width)
     }
     
     fileprivate func stringFromTimeInterval(interval: TimeInterval) -> NSString {
-        
         let ti = NSInteger(interval)
         let seconds = ti % 60
         let minutes = (ti / 60) % 60

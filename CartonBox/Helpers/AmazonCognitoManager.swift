@@ -30,7 +30,6 @@ final class AmazonCognitoManager {
     }
     
     class var shared: AmazonCognitoManager {
-        
         struct Static {
             static var instance: AmazonCognitoManager? = nil
         }
@@ -43,7 +42,6 @@ final class AmazonCognitoManager {
     }
     
     init() {
-        
         self.keyChain = UICKeyChainStore(service: Bundle.main.bundleIdentifier!)
         self.customIdentityProvider = CustomIdentityProvider(tokens: nil)
   
@@ -80,7 +78,6 @@ final class AmazonCognitoManager {
     
     // Removes all associated session and cleans keychain
     func clearAll() {
-        
         let cognito = AWSCognito(forKey: cognitoSyncKey)
         
         cognito.wipe()
@@ -128,11 +125,9 @@ final class AmazonCognitoManager {
     }
     
     func loginAmazonCognito(token:String, successBlock: @escaping SuccessBlock, andFailure failureBlock: @escaping FailureBlock){
-        
         let fbSession = FBSessionProvider()
         
         AmazonCognitoManager.shared.login(sessionProvider: fbSession) { (error) in
-            
             guard error == nil else{
                 AmazonCognitoManager.shared.clearAll()
                 failureBlock(error! as NSError)
@@ -141,7 +136,6 @@ final class AmazonCognitoManager {
             
             // Save & Sync user profile from CognitoSync storage
             CognitoUser.sync(completition: { (error) in
-                
                 guard error == nil else {
                     failureBlock(nil)
                     return

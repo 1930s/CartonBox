@@ -82,22 +82,26 @@ class PhotoViewerController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     @IBAction func doubleTap(_ sender: Any) {
-        
         guard !self.showLoading else {
             return
         }
         
         if let page = self.pvController as? PHPageViewController{
-            
             if let photoLibrary = page.photoLibrary{
                 let vm = photoLibrary.vm
                 
-                if let _ = vm?.selectedPhotos.index(of: asset){
-                    self.animateUnselectedPhoto()
+                if let _ = vm?.indexAsset(of: asset){
                     photoLibrary.onUnSelectedAsset(self.asset)
+                    self.animateUnselectedPhoto()
                 }else{
-                    self.animateSelectedPhoto()
-                    photoLibrary.onSelectedAsset(self.asset)
+                    photoLibrary.onSelectedAsset(asset, promptErrorIfAny: false, success: { (done) in
+                        self.animateSelectedPhoto()
+                    }) { (error) in
+                        if let _ = error{
+                            let errMessage = ApplicationErrorHandler.retrieveApplicationErrorMessage(code: (error! as NSError).code)
+                            self.alert(title: Message.Error, message: errMessage)
+                        }
+                    }
                 }
             }
         }
@@ -105,7 +109,6 @@ class PhotoViewerController: UIViewController, UIGestureRecognizerDelegate {
     
     //MARK: - Methods
     fileprivate func addGestures() {
-        
         let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(PhotoViewerController.doubleTap))
         let swipeDownGesture = UISwipeGestureRecognizer(target: self, action: #selector(PhotoViewerController.swipeBottom))
         
@@ -121,7 +124,6 @@ class PhotoViewerController: UIViewController, UIGestureRecognizerDelegate {
     
     
     fileprivate func retrieveImageLocation(){
-        
         if let location = self.asset.location{
             LocationManager.shared.retrieveLocationAddress(location: location, completion: { (address) in
                 
@@ -133,20 +135,18 @@ class PhotoViewerController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     private func dismissPhotoViewer(){
-        
         let transition: CATransition = CATransition()
         transition.duration = 0.5
-        transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-        transition.type = kCATransitionFade
-        transition.subtype = kCATransitionFromBottom
+        transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+        transition.type = CATransitionType.fade
+        transition.subtype = CATransitionSubtype.fromBottom
         
         self.view.window?.layer.add(transition, forKey: nil)
         
         self.dismiss(animated: true, completion: nil)
     }
     
-    private func displayImage(animationOptions:UIViewAnimationOptions){
-
+    private func displayImage(animationOptions:UIView.AnimationOptions){
         var _fetched:Bool = true
         
         self.timer = Timer.scheduledTimer(timeInterval: 300, target: self, selector: #selector(PhotoViewerController.timeout), userInfo: nil, repeats: false)
@@ -163,7 +163,7 @@ class PhotoViewerController: UIViewController, UIGestureRecognizerDelegate {
         }
         
         if let pg = self.pvController as? PHPageViewController, let vm = pg.photoLibrary.vm{
-            self.imgSelected.isHidden = vm.selectedPhotos.index(of: asset) == nil ? true : false
+            self.imgSelected.isHidden = vm.indexAsset(of: asset) == nil ? true : false
         }
         
         PHCacheManager.shared.startCachingPHAssets([self.asset], targetSize: self.imageSize, contentMode: .aspectFit, options: self.imageOptions)
@@ -184,7 +184,7 @@ class PhotoViewerController: UIViewController, UIGestureRecognizerDelegate {
                     CGFloat(self.imageSize.height) : CGFloat(img.cgImage!.height)
                 self.staticImageHeight = self.constPhotoHeight.constant
                 
-                UIView.animate(withDuration: 0.4, delay: 0, options: [UIViewAnimationOptions.allowUserInteraction], animations: {
+                UIView.animate(withDuration: 0.4, delay: 0, options: [UIView.AnimationOptions.allowUserInteraction], animations: {
                
                     self.imgPhoto.image = img
                 }, completion: nil)
@@ -196,7 +196,6 @@ class PhotoViewerController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     @objc private func timeout(){
-    
         self.timer.invalidate()
         
         let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
@@ -212,7 +211,6 @@ class PhotoViewerController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     private func animateUserTapAction(){
-        
         UIView.animate(withDuration: 0.3, delay: 0, options: .allowUserInteraction, animations: {
             self.imgPopup.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
             self.imgPopup.alpha = 1.0

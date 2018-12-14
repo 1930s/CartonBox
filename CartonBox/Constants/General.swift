@@ -28,6 +28,7 @@ public struct Message{
     static let Warning = "Warning"
     static let Error = "Error"
     static let TimeOut = "Time Out"
+    static let AccessDenied = "Access Denied"
     
     static let SavedProfile = "Your profile have been successfully updated"
     static let RequiredProfileInfo = "Application need your completed profile information to better identify your needs and serve you"
@@ -38,13 +39,26 @@ public struct Message{
     static let InvalidCountry = "Please select a nationality"
     static let NoInternetConnect = "No Internet Connection"
     static let RequiredReceipent = "Please add one or many receipent(s)"
+    static let ConnectDeviceToInternet = "Please connect your device to internet"
     
-    static let NewBoxMandatory = "You must provide a title and one or many receipent(s)"
+    static let PasscodeLength = "Password must contain at least 4 characters"
+    static let EnterPasscode = "Please enter a passcode"
+    static let EnterConfirmPasscode = "Confirm passcode must be same as passcode"
+    
+    static let NewBoxMandatory = "Please provide a title and one ore more receipent and select your media files."
+    static let ResetNewBox = "Are you confirm to reset your new box ?"
+    static let AddPasscodeNewBox = "Enter a passcode to protect your new box."
     
     static let CannotLoadVideo = "Cannot load video"
     static let CannotLoadImage = "Cannot load image"
 
     static let PhotoLoadTimeout = "Timeout loading photo from iCloud.Would you like to reload the photo?"
+    
+    static let ExceedMaxFileSize = "Selected file exceeds the maximum file size"
+    
+    static let AccessDeniedContact = "Allow application to access your phone contacts ?"
+    
+    static let AccessDeniedPhotoLibrary = "Allow applciation to access your photo library ?"
 }
 
 public struct DateFormat {
@@ -114,6 +128,6 @@ public struct Parameters{
 
 public struct AppUrl{
     
-    static let settingUrl = URL(string: UIApplicationOpenSettingsURLString)
+    static let settingUrl = URL(string: UIApplication.openSettingsURLString)
 }
 

@@ -15,11 +15,9 @@ typealias FailureBlock = (Error?) -> ()
 typealias CognitoBlock = (Error?) -> ()
 
 public struct AWSConfiguration{
-    
     static var AWS_REGION = AWSRegionType.APSoutheast1
     
     static var CognitoIdentityPoolId:String {
-        
         get{
             let credential =  appDelegate.awsConfiguration["CredentialsProvider"] as! JSON
             let cognitoIdentity = credential["CognitoIdentity"] as! JSON
@@ -30,7 +28,6 @@ public struct AWSConfiguration{
     }
     
     static var FacebookAppId:String{
-        
         get{
             let fbJson =  appDelegate.awsConfiguration["FacebookSignIn"] as! JSON
             let appId = fbJson["AppId"] as! String

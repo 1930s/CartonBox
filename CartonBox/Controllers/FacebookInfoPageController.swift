@@ -14,7 +14,6 @@ class FacebookInfoPageController: UIPageViewController {
     var pages: [UIViewController] = []
     var currentPageIndex:Int = 0
     lazy var timer:Timer = Timer()
-    
     var scrollView: UIScrollView?
     var pgFacebookInfo:UIPageControl?
     
@@ -28,7 +27,6 @@ class FacebookInfoPageController: UIPageViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
         if let first = self.pages.first {
             self.setViewControllers([first], direction: .forward, animated: false, completion: nil)
         }
@@ -41,7 +39,6 @@ class FacebookInfoPageController: UIPageViewController {
     
     //MARK: - Methods
     fileprivate func assignPages(){
-        
         func initPageController(_ name:String)->UIViewController{
             return sb.instantiateViewController(withIdentifier: name)
         }
@@ -51,8 +48,8 @@ class FacebookInfoPageController: UIPageViewController {
         
         if pages.count > 0 {
             for i in 0...self.pages.count-1{
-                pages[i].willMove(toParentViewController: nil)
-                pages[i].removeFromParentViewController()
+                pages[i].willMove(toParent: nil)
+                pages[i].removeFromParent()
             }
         }
         
@@ -66,7 +63,6 @@ class FacebookInfoPageController: UIPageViewController {
     }
     
     func startPagesSpining(_ started:Bool){
-        
         if started{
             self.timer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(FacebookInfoPageController.shiftPage), userInfo: nil, repeats: true)
         }else{
@@ -78,15 +74,11 @@ class FacebookInfoPageController: UIPageViewController {
     
     //MARK: - Actions
     @objc private func shiftPage(){
-        
         if self.currentPageIndex == 1{
-            
             self.setViewControllers([self.pages[0]], direction: .reverse, animated: true, completion: { (completion) in
                 self.currentPageIndex = 0
             })
-            
         }else{
-            
             self.setViewControllers([self.pages[1]], direction: .forward, animated: true, completion: { (completion) in
                 self.currentPageIndex = 1
             })
@@ -97,8 +89,7 @@ class FacebookInfoPageController: UIPageViewController {
 //MARK: - Extension
 extension FacebookInfoPageController: UIPageViewControllerDataSource, UIPageViewControllerDelegate{
     
-    override func setViewControllers(_ viewControllers: [UIViewController]?, direction: UIPageViewControllerNavigationDirection, animated: Bool, completion: ((Bool) -> Void)? = nil) {
-        
+    override func setViewControllers(_ viewControllers: [UIViewController]?, direction: UIPageViewController.NavigationDirection, animated: Bool, completion: ((Bool) -> Void)? = nil) {
         if let vw = viewControllers{
             self.pgFacebookInfo?.currentPage = pages.index(of: vw[0])!
         }
@@ -107,7 +98,6 @@ extension FacebookInfoPageController: UIPageViewControllerDataSource, UIPageView
     }
 
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-    
         self.pgFacebookInfo?.currentPage = self.currentPageIndex
     }
     
@@ -116,7 +106,6 @@ extension FacebookInfoPageController: UIPageViewControllerDataSource, UIPageView
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        
         guard let viewControllerIndex = pages.index(of: viewController) else {
             return nil
         }
@@ -139,7 +128,6 @@ extension FacebookInfoPageController: UIPageViewControllerDataSource, UIPageView
     
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        
         guard let viewControllerIndex = pages.index(of: viewController) else {
             return nil
         }

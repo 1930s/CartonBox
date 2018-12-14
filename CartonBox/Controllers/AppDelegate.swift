@@ -29,8 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     public var cognitoUser:CognitoUser?
     public var cartonboxUser:User?
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         let audioSession = AVAudioSession.sharedInstance()
         
         self.window?.makeKeyAndVisible()
@@ -43,7 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         //Audio Session
         do {
-            try audioSession.setCategory(AVAudioSessionCategoryPlayback)
+            try audioSession.setCategory(AVAudioSession.Category.playback, mode: AVAudioSession.Mode.moviePlayback, options: AVAudioSession.CategoryOptions.allowAirPlay)
         }catch{
             print("Setting category to AVAudioSessionCategoryPlayback failed.")
         }
@@ -77,8 +76,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         return FBSDKApplicationDelegate.sharedInstance().application(app, open: url, sourceApplication: options[.sourceApplication] as! String!, annotation: options[.annotation])
     }
     
@@ -88,9 +86,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     //MARK: - Private Action
     func applicationLoadFacebookSession(){
-        
         if let _ = FBSDKAccessToken.current() {
-        
             self.facebookUser = FacebookUser.currentUser()
             
             showLoading(closure: { (hideLoading) in
@@ -102,7 +98,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     self.loginAmazonCognito(completionHandler: { (error) in
                         
                         if let _ = error {
-                            //Todo: - log error info
+                            print(error!.localizedDescription)
                         }
                         
                         if let _ = self.cartonboxUser {
@@ -113,7 +109,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         self.loadCartonBoxUser(completionHandler: { (error) in
                             
                             if let _ = error {
-                                //Todo: - log error info
+                                print(error!.localizedDescription)
                             }
                             
                             group.leave()
@@ -129,12 +125,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     fileprivate func loginAmazonCognito(completionHandler:AmazonClientCompletition?){
-        
         AmazonCognitoManager.shared.loginAmazonCognito(token: self.facebookUser!.tokenString, successBlock: { (result) in
-        
             completionHandler?(nil)
         }) { (error) in
-            
             let _error = NSError(domain: AmazonErrorDomain.AWSCognitoErrorDomain.rawValue, code: CognitoError.cognitoLoginFailed.rawValue, userInfo: nil)
             
             completionHandler?(_error)
@@ -144,22 +137,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     fileprivate func loadCartonBoxUser(completionHandler:AmazonClientCompletition?){
         
         AmazonDynamoDBManager.shared.GetItem(User.self, hasKey: self.facebookUser!.userId, rangeKey: nil) { (result) in
-            
             if let _ =  result {
-                
                 self.cartonboxUser = result as? User
-                
                 completionHandler?(nil)
             }else{
-                let _error = NSError(domain: AmazonErrorDomain.AWSDynamoDBErrorDomain.rawValue, code: DynamoDBError.deleteItemFailed.rawValue, userInfo: nil)
-                
+                let _error = NSError(domain: AmazonErrorDomain.AWSDynamoDBErrorDomain.rawValue, code: DynamoDBError.getItemFailed.rawValue, userInfo: nil)
                 completionHandler?(_error)
             }
         }
     }
     
     @objc func showLoading(closure: @escaping (_ hiding:@escaping()->Void)->Void){
-        
         //loading auto hide after 5 minutes
         self.timer = Timer.scheduledTimer(timeInterval: 300, target: self, selector: #selector(AppDelegate.hideLoading), userInfo: nil, repeats: true)
         
@@ -171,7 +159,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     @objc func hideLoading(){
-        
         self.loadingDisplay.dismiss(animated: true) {
             self.timer.invalidate()
             self.timer = Timer()

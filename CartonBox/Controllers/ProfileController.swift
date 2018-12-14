@@ -45,7 +45,7 @@ class ProfileController: BaseViewController {
         super.viewWillAppear(animated)
         
         guard let _ = appDelegate.cartonboxUser else{
-            self.alert(title: Message.Warning, message: Message.RequiredProfileInfo)
+            self.alert(title: Message.Info, message: Message.RequiredProfileInfo)
             return
         }
     }
@@ -62,7 +62,6 @@ class ProfileController: BaseViewController {
     }
     
     override func updateFacebookUserInfo(info: [String : AnyObject]) {
-        
         if info.keys.first == FB_SDK_PROFILE_NEW{
             self.vwFBUserProfile.profileID = appDelegate.facebookUser!.userId
             self.lblUserName.text = appDelegate.facebookUser!.userName
@@ -76,9 +75,15 @@ class ProfileController: BaseViewController {
         self.tblProfileInfo.reloadData()
     }
     
+    override func enterForeground() {
+        self.vwFBUserProfile.profileID = appDelegate.facebookUser?.userId
+        self.lblUserName.text = appDelegate.facebookUser?.userName ?? Message.Anonymous
+        
+        self.tblProfileInfo.reloadData()
+    }
+    
     //MARK: - Methods
     fileprivate func bindViewModelInputs(){
-        
         for i in 0..<5{
             let cell = self.tblProfileInfo.cellForRow(at: IndexPath(row: i, section: 0)) as! ProfileInfoCell
             
@@ -119,7 +124,6 @@ class ProfileController: BaseViewController {
     }
     
     fileprivate func initializePickers() {
-        
         datePicker.delegate = self
         
         genderPicker.delegate = self
@@ -135,7 +139,6 @@ class ProfileController: BaseViewController {
     }
     
     @IBAction func onSaveProfileInfo(_ sender: UIBarButtonItem) {
-        
         let dob = self.tblProfileInfo.cellForRow(at: IndexPath(row: 0, section: 0)) as? ProfileInfoCell
         let gender = self.tblProfileInfo.cellForRow(at: IndexPath(row: 1, section: 0)) as? ProfileInfoCell
         let email = self.tblProfileInfo.cellForRow(at: IndexPath(row: 2, section: 0)) as? ProfileInfoCell
@@ -181,7 +184,6 @@ class ProfileController: BaseViewController {
 extension ProfileController: DatePickerDelegate{
     
     func returnSelectedDate(_ selectedDate: String) {
-        
         let cell = self.tblProfileInfo.cellForRow(at: IndexPath(row: vm.arrCell.index(of: "Birthday")!, section: 0)) as! ProfileInfoCell
         
         cell.txtInfo.text = selectedDate
@@ -191,9 +193,7 @@ extension ProfileController: DatePickerDelegate{
 extension ProfileController: CommonPickerDelegate{
     
     func returnSelectedParameter(_ parameter: String, dismissPicker: Bool) {
-        
         if Parameters.getGenderList().contains(parameter){
-            
             let genderCell = self.tblProfileInfo.cellForRow(at:
                 IndexPath(row: vm.arrCell.index(of: "Gender")!, section: 0)) as! ProfileInfoCell
             
@@ -201,7 +201,6 @@ extension ProfileController: CommonPickerDelegate{
             genderCell.imgIcon.image = UIImage(named: vm.getGenderCellInfo(gender: parameter).iconName)
             
         }else if Parameters.getAllCountries().contains(parameter){
-            
             let nationalityCell = self.tblProfileInfo.cellForRow(at:
                 IndexPath(row: vm.arrCell.index(of: "Nationality")!, section: 0)) as! ProfileInfoCell
             let mobileCell = self.tblProfileInfo.cellForRow(at: IndexPath(row: vm.arrCell.index(of: "Mobile")!, section: 0)) as! MobileCell
@@ -221,7 +220,6 @@ extension ProfileController: CommonPickerDelegate{
 extension ProfileController: FacebookCellDelegate{
     
     func openFacebookLoginView() {
-        
         UIView.animate(withDuration: 1.5, animations: {
             self.present(super.facebookSigIn, animated: true, completion: nil)
         })
@@ -231,10 +229,8 @@ extension ProfileController: FacebookCellDelegate{
 extension ProfileController: UITextFieldDelegate{
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        
         //Email
         if textField.tag == 3 {
-         
             if !RegExpHelper.test(textField.text!, pattern: RegExp.Email){
                 
                 textField.text = ""
@@ -245,7 +241,6 @@ extension ProfileController: UITextFieldDelegate{
         
         //Mobile
         if textField.tag == 4{
-            
             if !RegExpHelper.test(textField.text!, pattern: RegExp.Phone){
                 
                 textField.text = ""
@@ -256,7 +251,6 @@ extension ProfileController: UITextFieldDelegate{
         
         //Nationality
         if textField.tag == 5{
-            
             if let txt = textField.text, txt.isEmpty{
                 
                 textField.text = ""

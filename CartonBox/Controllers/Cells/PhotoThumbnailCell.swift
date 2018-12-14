@@ -13,7 +13,7 @@ import SnackKit
 let photoThumbnailCell = "PhotoThumbnailCell"
 
 protocol PhotoThumbnailCellProtocol {
-    func onSelectedAsset(_ asset:PHAsset)
+    func onSelectedAsset(_ asset:PHAsset, promptErrorIfAny:Bool, success:SuccessBlock?, failure:FailureBlock?)
     func onUnSelectedAsset(_ asset:PHAsset)
     func onViewSelectedAsset(_ asset:PHAsset)
 }
@@ -26,7 +26,6 @@ class PhotoThumbnailCell: UICollectionViewCell {
     var asset:PHAsset!
     var selectedPHAsset:Bool!{
         didSet{
-            
             UIView.transition(with: self.imgSelected, duration: 0.5, options: .transitionCrossDissolve, animations: {
                 self.imgSelected.isHidden = !self.selectedPHAsset
             }, completion: nil)
@@ -44,18 +43,19 @@ class PhotoThumbnailCell: UICollectionViewCell {
 
     //MARK: - Actions
     @objc func onSelectedImage(){
-       
-        self.selectedPHAsset = !selectedPHAsset
         
-        if selectedPHAsset{
-            self.delegate?.onSelectedAsset(self.asset)
+        if !selectedPHAsset{
+            self.delegate?.onSelectedAsset(asset, promptErrorIfAny: true, success: { (done) in
+                self.selectedPHAsset = !self.selectedPHAsset
+            }, failure: { (error) in
+                self.selectedPHAsset = false
+            })
         }else{
             self.delegate?.onUnSelectedAsset(self.asset)
         }
     }
     
     @objc func viewSelectImage(){
-        
         self.selectedPHAsset = selectedPHAsset ? selectedPHAsset : false
         self.delegate?.onViewSelectedAsset(self.asset)
     }

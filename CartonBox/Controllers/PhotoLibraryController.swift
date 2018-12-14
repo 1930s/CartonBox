@@ -60,7 +60,23 @@ class PhotoLibraryController: UICollectionViewController {
     }
     
     fileprivate func initPhotoLibrary(){
-    
+        
+        let status = PHCacheManager.shared.requestAuthorization().status
+        
+        if(status == PHAuthorizationStatus.denied || status == PHAuthorizationStatus.restricted){
+            let setting = UIAlertAction(title: "Setting", style: .destructive, handler: { (action) in
+                UIApplication.shared.open(AppUrl.settingUrl!, options: [:], completionHandler: nil)
+            })
+            
+            let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
+                self.navigationController?.popViewController(animated: true)
+            })
+            
+            self.pagerTab?.alert(title: Message.AccessDenied, message: Message.AccessDeniedPhotoLibrary, style: .alert, actions: [setting, cancel])
+            
+            return
+        }
+        
         appDelegate.showLoading { (hideLoading) in
             
             PHCacheManager.shared.resetCachedAssets()
@@ -100,7 +116,6 @@ class PhotoLibraryController: UICollectionViewController {
     }
 
     func updateThumbnailCell(_ index:Int,selected:Bool){
-        
         let indexPath = NSIndexPath(row: index, section: 0)
         
         self.collectionView?.reloadItems(at: [indexPath as IndexPath])
@@ -118,33 +133,45 @@ extension PhotoLibraryController : IndicatorInfoProvider{
 //MARK: - Extension
 extension PhotoLibraryController : PhotoThumbnailCellProtocol{
     
-    func onSelectedAsset(_ asset: PHAsset) {
-        
-        self.vm.selectedPhotos.append(asset)
-        
-        if let index = self.vm.photos?.index(of: asset){
-            self.updateThumbnailCell(index, selected: true)
+    func onSelectedAsset(_ asset: PHAsset, promptErrorIfAny: Bool, success successCallBack: SuccessBlock?,
+                         failure failureCallBack: FailureBlock?) {
+        if self.vm.appendPhotoAsset(asset) {
+            if let index = self.vm.photos.index(of: asset){
+                self.updateThumbnailCell(index, selected: true)
+                successCallBack?(true)
+            }
+        }else{
+            if promptErrorIfAny{
+                alert(title: Message.Error, message: Message.ExceedMaxFileSize)
+            }else{
+                let error = NSError(domain: "", code: ApplicationError.ExceedMaxFileSize.rawValue, userInfo: nil)
+                failureCallBack?(error)
+            }
+            
+            if let index = self.vm.photos.index(of: asset){
+                self.updateThumbnailCell(index, selected: false)
+            }
         }
     }
     
     func onUnSelectedAsset(_ asset: PHAsset) {
-        
-        if let r = self.vm.selectedPhotos.index(of: asset){
-            self.vm.selectedPhotos.remove(at: r)
+        if let r = self.vm.indexAsset(of: asset){
+            self.vm.selectedPHAsset.remove(at: r)
         }
         
-        if let index = self.vm.photos?.index(of: asset){
+        if let index = self.vm.photos.index(of: asset){
             self.updateThumbnailCell(index, selected: true)
         }
     }
     
     func onViewSelectedAsset(_ asset: PHAsset) {
-        
         if let index = vm.photos.index(of: asset){
             pageViewer.selectedAssetIndex = index
         }
         
-        self.present(pageViewer, animated: true, completion: nil)
+        if !pageViewer.isBeingPresented{
+            self.present(pageViewer, animated: true, completion: nil)
+        }
     }
 }
 

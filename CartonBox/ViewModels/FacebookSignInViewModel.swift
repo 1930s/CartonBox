@@ -28,11 +28,9 @@ class FacebookSignInViewModel{
     }
     
     func loginFacebook(from controller:UIViewController, successBlock: @escaping SuccessBlock, andFailure failureBlock: @escaping FailureBlock){
-        
         let facebookReadPermissions = ["public_profile", "email"]
 
         self.fb.logIn(withReadPermissions: facebookReadPermissions, from: controller) { (result, error) in
-            
             guard let _ = result?.token.tokenString, error == nil else {
                 self.logoutFacebook()
                 failureBlock(error as NSError?)
@@ -42,7 +40,6 @@ class FacebookSignInViewModel{
             appDelegate.facebookUser = FacebookUser.currentUser()
             
             AmazonCognitoManager.shared.loginAmazonCognito(token: appDelegate.facebookUser!.tokenString, successBlock: { (result) in
-                
                 AmazonDynamoDBManager.shared.GetItem(User.self, hasKey: appDelegate.facebookUser!.userId, rangeKey: nil, completionHandler: { (result) in
                     
                     if let user = result as? User {
@@ -52,7 +49,6 @@ class FacebookSignInViewModel{
                     }
                     
                     self.updateCartonBoxUserProfile(completion: { (error) in
-                        
                         if let _ = error{
                             self.logoutFacebook()
                             failureBlock(error)
@@ -76,7 +72,6 @@ class FacebookSignInViewModel{
     }
     
     func logoutFacebook(){
-        
         self.fb.logOut()
         appDelegate.facebookUser = nil
         appDelegate.cognitoUser = nil
@@ -89,7 +84,6 @@ class FacebookSignInViewModel{
     }
     
     private func updateCartonBoxUserProfile(completion: AmazonClientCompletition?){
-        
         if let _ = appDelegate.cartonboxUser, let _ = appDelegate.cartonboxUser!._userId{
             appDelegate.cartonboxUser?._modifiedOn = Date().now.toLocalString(DateFormat.dateTime)
         }else{

@@ -10,9 +10,15 @@ import UIKit
 
 let segueForBoxContent = "SegueForBoxContent"
 
-class BoxContainerController: UIViewController,UINavigationBarDelegate {
+protocol BoxContainerDelegate {
+    func selectedMediaAsset(_ selectedAsset:[PHAssetMedia])
+    
+}
 
-    var vm:MediaFilesViewModel!
+class BoxContainerController: UIViewController,UINavigationBarDelegate {
+    
+    var vm:MediaFilesViewModel = MediaFilesViewModel()
+    var delegate:BoxContainerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,9 +41,7 @@ class BoxContainerController: UIViewController,UINavigationBarDelegate {
     
     //MARK: - Actions
     @objc func popToNewBoxController(){
-        
-        if let vm = self.vm, (vm.selectedPhotos.count > 0 || vm.selectedPhotos.count > 0){
-            
+        if vm.selectedPHAsset.count > 0{
             let ok = UIAlertAction(title: "Back", style: .destructive, handler: { (action) in
                 self.navigationController?.popViewController(animated: true)
             })
@@ -53,6 +57,10 @@ class BoxContainerController: UIViewController,UINavigationBarDelegate {
     }
     
     @objc func donePHAssetsSelection(){
+        if self.vm.selectedPHAsset.count > 0{
+            self.delegate?.selectedMediaAsset(self.vm.selectedPHAsset)
+        }
+        
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -61,20 +69,17 @@ class BoxContainerController: UIViewController,UINavigationBarDelegate {
         let btnDone = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(BoxContainerController.donePHAssetsSelection))
         let btnBack = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(BoxContainerController.popToNewBoxController))
         
-        self.navigationItem.setLeftBarButton(btnBack, animated: false)
-        self.navigationItem.setRightBarButton(btnDone, animated: false)
+        self.navigationItem.setLeftBarButton(btnBack, animated: true)
+        
+        self.navigationItem.setRightBarButton(btnDone, animated: true)
     }
 
     //MARK: - Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
         if let identifier = segue.identifier{
-         
             if identifier == segueForBoxContent{
                 let destinationVC = segue.destination as! PHAssetsController
-                
-                self.vm = MediaFilesViewModel()
-                
+
                 destinationVC.mediaViewModel = self.vm
             }
         }

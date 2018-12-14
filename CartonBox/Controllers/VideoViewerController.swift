@@ -21,11 +21,13 @@ class VideoViewerController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var lblLoading: UILabel!
     @IBOutlet weak var indicatorLoading: UIActivityIndicatorView!
     @IBOutlet weak var btnPlay: UIButton!
+    @IBOutlet weak var btnMute: UIButton!
+    @IBOutlet weak var pgrPlaying: UIProgressView!
     
     var pvController:UIViewController?
     var asset:PHAsset!
     var tag:Int!
-    var player:Player = Player()
+    lazy var player:Player = Player()
     var showLoading:Bool!{
         didSet{
             if showLoading{
@@ -41,13 +43,13 @@ class VideoViewerController: UIViewController, UIGestureRecognizerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+       
         self.btnPlay.setImage(UIImage(named: self.player.autoplay ? "Pause" : "Play"), for: .normal)
+        self.btnMute.setImage(UIImage(named: self.player.muted ? "Mute" : "Volume"), for: .normal)
+        self.pgrPlaying.setProgress(0, animated: false)
         
         addGestures()
         initPlayer()
-        
-        self.showLoading = false
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -60,6 +62,7 @@ class VideoViewerController: UIViewController, UIGestureRecognizerDelegate {
         super.viewWillDisappear(animated)
         
         self.player.stop()
+        self.player.removeFromParent()
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -68,14 +71,18 @@ class VideoViewerController: UIViewController, UIGestureRecognizerDelegate {
 
     // MARK: - Actions
     @IBAction func onPlay(_ sender: Any) {
-   
         if self.player.playbackState == .playing{
-            self.btnPlay.setImage(UIImage(named: "Pause"), for: .normal)
+            self.btnPlay.setImage(UIImage(named: "Play"), for: .normal)
             self.player.pause()
         }else{
-            self.btnPlay.setImage(UIImage(named: "Play"), for: .normal)
+            self.btnPlay.setImage(UIImage(named: "Pause"), for: .normal)
             self.player.playFromCurrentTime()
         }
+    }
+    
+    @IBAction func onMute(_ sender: Any) {
+        self.player.muted = !self.player.muted
+        self.btnMute.setImage(UIImage(named: self.player.muted ? "Mute" : "Volume"), for: .normal)
     }
     
     @IBAction func onClose(_ sender: Any) {
@@ -83,8 +90,7 @@ class VideoViewerController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     @IBAction func doubleTap(_ sender: Any){
-        
-        guard !showLoading else {
+        guard let _ = self.showLoading, !self.showLoading else {
             return
         }
         
@@ -93,12 +99,18 @@ class VideoViewerController: UIViewController, UIGestureRecognizerDelegate {
             if let videoLibrary = page.videoLibrary{
                 let vm = videoLibrary.vm
                 
-                if let _ = vm?.selectedVideos.index(of: asset){
-                    self.animateUnselectedVideo()
+                if let _ = vm?.indexAsset(of: asset){
                     videoLibrary.onUnSelectedAsset(self.asset)
+                    self.animateUnselectedVideo()
                 }else{
-                    self.animateSelectedVideo()
-                    videoLibrary.onSelectedAsset(self.asset)
+                    videoLibrary.onSelectedAsset(asset, promptErrorIfAny: false, success: { (done) in
+                        self.animateSelectedVideo()
+                    }) { (error) in
+                        if let _ = error{
+                            let errMessage = ApplicationErrorHandler.retrieveApplicationErrorMessage(code: (error! as NSError).code)
+                            self.alert(title: Message.Error, message: errMessage)
+                        }
+                    }
                 }
             }
         }
@@ -110,18 +122,22 @@ class VideoViewerController: UIViewController, UIGestureRecognizerDelegate {
     
     // MARK : - Methods
     fileprivate func initPlayer() {
-        
         self.player.playbackDelegate = self
         self.player.playbackDelegate = self
         self.player.view.frame = self.view.bounds
         
-        self.addChildViewController(self.player)
+        self.addChild(self.player)
         self.vwVideo.addSubview(self.player.view)
         
-        self.vwVideo.sendSubview(toBack: self.player.view)
-        self.vwVideo.bringSubview(toFront: self.imgPopup)
+        self.vwVideo.sendSubviewToBack(self.player.view)
+        self.vwVideo.bringSubviewToFront(self.imgPopup)
         
-        self.player.didMove(toParentViewController: self)
+        self.player.didMove(toParent: self)
+        
+        self.btnMute.isHidden = true
+        self.btnPlay.isHidden = true
+        self.imgSelected.isHidden = true
+        self.pgrPlaying.isHidden = true
     }
     
     fileprivate func addGestures() {
@@ -139,31 +155,35 @@ class VideoViewerController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     private func loadVideo(){
-        
-        let options = PHAssetRequestOptions.GetPHVideoRequestOptions(mode: .automatic, allowNetworkAccess: true)
-        
-        if let pg = self.pvController as? PHPageViewController, let vm = pg.videoLibrary.vm{
-            self.imgSelected.isHidden = vm.selectedVideos.index(of: asset) == nil ? true : false
-        }
-        
-        PHCacheManager.shared.fetchAssetVideo(asset: self.asset, options: options) { (avAsset) in
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.background).async {
+            let options = PHAssetRequestOptions.GetPHVideoRequestOptions(mode: .fastFormat, allowNetworkAccess: true)
             
-            if let videoUrl = avAsset?.url{
-                self.player.url = videoUrl
-                self.player.playFromBeginning()
-            }else{
-                self.alert(title: Message.Error, message: Message.CannotLoadVideo)
+            if let pg = self.pvController as? PHPageViewController, let vm = pg.videoLibrary.vm{
+                self.imgSelected.isHidden = vm.indexAsset(of: self.asset) == nil ? true : false
+            }
+            
+            PHCacheManager.shared.fetchAssetVideo(asset: self.asset, options: options) { (avAsset) in
+                if let videoUrl = avAsset?.url{
+                    self.player.url = videoUrl
+                    self.player.playFromBeginning()
+                }else{
+                    self.alert(title: Message.Error, message: Message.CannotLoadVideo)
+                }
             }
         }
+        
+        self.btnMute.isHidden = false
+        self.btnPlay.isHidden = false
+        self.pgrPlaying.isHidden = false
+        self.showLoading = false
     }
     
     private func dismissVideoViewer(){
-        
         let transition: CATransition = CATransition()
         transition.duration = 0.5
-        transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-        transition.type = kCATransitionFade
-        transition.subtype = kCATransitionFromBottom
+        transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+        transition.type = CATransitionType.fade
+        transition.subtype = CATransitionSubtype.fromBottom
         
         self.view.window?.layer.add(transition, forKey: nil)
         
@@ -171,7 +191,6 @@ class VideoViewerController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     private func animateUserTapAction(){
-        
         UIView.animate(withDuration: 0.3, delay: 0, options: .allowUserInteraction, animations: {
             self.imgPopup.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
             self.imgPopup.alpha = 1.0
@@ -215,12 +234,11 @@ extension VideoViewerController: PlayerPlaybackDelegate {
     
     public func playerCurrentTimeDidChange(_ player: Player) {
         let fraction = Double(player.currentTime) / Double(player.maximumDuration)
-    
-        //self._playbackViewController?.setProgress(progress: CGFloat(fraction), animated: true)
+        
+        self.pgrPlaying.setProgress(Float(Double(round(1000*fraction)/1000)), animated: true)
     }
     
     public func playerPlaybackWillLoop(_ player: Player) {
-        //self._playbackViewController?.reset()
+        self.pgrPlaying.reset()
     }
-    
 }

@@ -13,7 +13,6 @@ typealias ProfileCellInfo = (tag:Int, iconName:String, data:String?, placeholder
 class ProfileViewModel{
     
     var user:User?{
-        
         return appDelegate.cartonboxUser
     }
     
@@ -24,7 +23,6 @@ class ProfileViewModel{
     }
     
     func getUserCellInfo(type:String)->ProfileCellInfo{
-        
         switch type {
         case "Birthday":
             return (1,"DOB",self.user?._dob, "Select your Birthday date")
@@ -42,7 +40,6 @@ class ProfileViewModel{
     }
     
     func getGenderCellInfo(gender:String?) -> ProfileCellInfo{
-        
         var iconName:String = "Unknown"
         
         if let g = gender {
@@ -60,9 +57,7 @@ class ProfileViewModel{
     }
     
     func saveUserInfo(completion:@escaping (Bool,String)->()){
- 
         AmazonDynamoDBManager.shared.SaveItem(self.user!) { (error:Error?) in
-            
             if let _ = error{
                 completion(false, error!.infoMessage!)
             }else{
